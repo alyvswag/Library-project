@@ -9,6 +9,7 @@
     <include file="migrations/1.0/1.0.1-create-users-table.xml"/>
     <include file="/migrations/1.0/1.0.2-drop-column-books-table.xml"/>
     <include file="/migrations/1.0/1.0.3-drop-constraint-books-table.xml"/>
+    <include file="/migrations/1.0/1.0.4-add-column-books-table.xml"/>
     
 
 </databaseChangeLog>

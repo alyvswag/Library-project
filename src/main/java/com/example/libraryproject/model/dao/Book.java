@@ -27,7 +27,6 @@ public class Book extends Base {
     Author author;
     @Column(name = "name")
     String name;
-
     @Column(name = "price")
     BigDecimal price;
     @Column(name = "description")

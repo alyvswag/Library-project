@@ -8,3 +8,4 @@ spring :
     password: talib123
   liquibase:
     change-log: classpath:migrations/changelog-master.xml
+    enabled: true
