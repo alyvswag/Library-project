@@ -1,0 +1,20 @@
+package com.example.libraryproject.repository;
+
+import com.example.libraryproject.model.dao.Author;
+import com.example.libraryproject.model.dao.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public  interface BookRepository  extends JpaRepository<Book, Long> {
+    @Query("SELECT b FROM Book b WHERE b.id = :id AND b.isActive = true")
+    Optional<Book> findBookById(@Param("id") long id);
+
+    @Query(" SELECT b FROM Book b where b.isActive = true ")
+    List<Book> findAllBook();
+}

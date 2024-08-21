@@ -2,6 +2,7 @@ package com.example.libraryproject.model.dto.request.create;
 
 
 import com.example.libraryproject.enums.Genre;
+import com.example.libraryproject.enums.Language;
 import com.example.libraryproject.model.dao.Author;
 import com.example.libraryproject.model.dao.Publisher;
 import lombok.AccessLevel;
@@ -25,6 +26,7 @@ public class BookRequestCreate {
     String description;
     // todo: genre request geldikde string gelecek sen ona diqqet ele
     Genre genre;
+    Language language;
     Integer pages;
     LocalDate publicationDate;
 }

@@ -34,6 +34,7 @@ public class Book extends Base {
     @Column(name = "genre")
     @Enumerated(EnumType.STRING)
     Genre genre;
+    @Enumerated(EnumType.STRING)
     @Column(name = "language")
     Language language;
     @Column(name = "paged")
@@ -42,4 +43,6 @@ public class Book extends Base {
     LocalDate publicationDate;
     @Column(name = "is_active")
     Boolean isActive;
+    @OneToOne(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private QuantityBook quantityBook;
 }

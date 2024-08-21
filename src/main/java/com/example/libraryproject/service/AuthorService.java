@@ -31,7 +31,7 @@ public class AuthorService {
 
     public void updateAuthor(Long id , AuthorRequestUpdate authorRequest) {
         Author authorEntity = authorRepository.findAuthorById(id)
-                .orElseThrow(() -> new RuntimeException("Author not found"));
+                .orElseThrow(() -> new RuntimeException("Author not found")); // todo: oz exception classin
 
         authorEntity.setName(authorRequest.getName() == null ? authorEntity.getName() : authorRequest.getName());
         authorEntity.setSurname(authorRequest.getSurname() == null ? authorEntity.getSurname() : authorRequest.getSurname());

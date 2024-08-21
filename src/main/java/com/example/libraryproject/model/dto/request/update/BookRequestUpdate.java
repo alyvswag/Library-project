@@ -2,6 +2,7 @@ package com.example.libraryproject.model.dto.request.update;
 
 
 import com.example.libraryproject.enums.Genre;
+import com.example.libraryproject.enums.Language;
 import com.example.libraryproject.model.dao.Author;
 import com.example.libraryproject.model.dao.Publisher;
 import lombok.AccessLevel;
@@ -24,6 +25,7 @@ public class BookRequestUpdate {
     BigDecimal price;
     String description;
     Genre genre;
+    Language language;
     Integer pages;
     LocalDate publicationDate;
 }

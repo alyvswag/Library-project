@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  db:
+    container_name: postgres-db-end
+    image: postgres:12.20-bullseye
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=talib123
+    ports:
+      - '5432:5432'
+    volumes:
+      - ../../docker-volumes/postgres-db-end:/var/lib/postgresql/data
