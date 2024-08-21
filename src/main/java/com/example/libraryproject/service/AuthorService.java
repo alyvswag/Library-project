@@ -1,27 +1,28 @@
 package com.example.libraryproject.service;
 
 import com.example.libraryproject.mapper.AuthorMapper;
+import com.example.libraryproject.mapper.BookMapper;
 import com.example.libraryproject.model.dao.Author;
+import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dto.request.create.AuthorRequestCreate;
 import com.example.libraryproject.model.dto.request.update.AuthorRequestUpdate;
 import com.example.libraryproject.model.dto.response.AuthorResponse;
-import com.example.libraryproject.repository.AuhtorRepository;
+import com.example.libraryproject.repository.AuthorRepository;
+import com.example.libraryproject.repository.BookRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class AuthorService {
     final AuthorMapper authorMapper;
-    final AuhtorRepository authorRepository;
+    final AuthorRepository authorRepository;
 
     public void addAuthor(AuthorRequestCreate author) {
         Author authorEntity = authorMapper.toEntity(author);
@@ -66,6 +67,8 @@ public class AuthorService {
     public List<AuthorResponse> getAuthorByName(String name) {
         return authorMapper.toResponse(authorRepository.findAuthorByName(name));
     }
+
+
 
     //
     public Author findById(Long id) {

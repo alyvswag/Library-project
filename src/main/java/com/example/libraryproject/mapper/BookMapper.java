@@ -6,8 +6,6 @@ import com.example.libraryproject.model.dao.Publisher;
 import com.example.libraryproject.model.dto.request.create.BookRequestCreate;
 import com.example.libraryproject.model.dto.request.update.BookRequestUpdate;
 import com.example.libraryproject.model.dto.response.BookResponse;
-import com.example.libraryproject.repository.AuhtorRepository;
-import com.example.libraryproject.repository.PublisherRepository;
 import com.example.libraryproject.service.AuthorService;
 import com.example.libraryproject.service.PublisherService;
 import org.mapstruct.Context;

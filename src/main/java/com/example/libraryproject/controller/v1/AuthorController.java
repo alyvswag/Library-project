@@ -1,9 +1,9 @@
 package com.example.libraryproject.controller.v1;
 
-import com.example.libraryproject.model.dao.Author;
 import com.example.libraryproject.model.dto.request.create.AuthorRequestCreate;
 import com.example.libraryproject.model.dto.request.update.AuthorRequestUpdate;
 import com.example.libraryproject.model.dto.response.AuthorResponse;
+import com.example.libraryproject.model.dto.response.BookResponse;
 import com.example.libraryproject.service.AuthorService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -45,4 +45,5 @@ public class AuthorController {
     public List<AuthorResponse> getAuthorByName(@PathVariable("name") String name) {
         return authorService.getAuthorByName(name);
     }
+
 }

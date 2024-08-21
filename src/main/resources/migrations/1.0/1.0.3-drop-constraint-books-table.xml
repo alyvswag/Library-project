@@ -8,6 +8,9 @@
     <changeSet author="talibaliyev" id="dropConstraint">
         <dropNotNullConstraint tableName="books" columnName="publisher_id"/>
     </changeSet>
+    <changeSet author="talibaliyev" id="dropConstraint2">
+        <dropNotNullConstraint tableName="books" columnName="author_id"/>
+    </changeSet>
 
 
 </databaseChangeLog>
