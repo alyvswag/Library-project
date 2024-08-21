@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PublisherRepository extends JpaRepository<Publisher, Integer> {
+public interface PublisherRepository extends JpaRepository<Publisher, Long> {
     @Query("SELECT p FROM Publisher p WHERE p.id = :id AND p.isActive = true")
     Optional<Publisher> findPublisherById(@Param("id") long id);
 

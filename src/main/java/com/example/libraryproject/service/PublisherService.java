@@ -46,5 +46,11 @@ public class PublisherService {
 
     }
 
+    //
+
+    public Publisher findById(Long id) {
+        return id==null? null : publisherRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Publisher not found"));
+    }
 
 }

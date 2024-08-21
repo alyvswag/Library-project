@@ -8,6 +8,7 @@ import com.example.libraryproject.service.AuthorService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
 public class AuthorController {
     final AuthorService authorService;
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/add")
     public void createAuthor(@RequestBody AuthorRequestCreate author) {
         authorService.addAuthor(author);

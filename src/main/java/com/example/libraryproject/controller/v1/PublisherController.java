@@ -8,6 +8,7 @@ import com.example.libraryproject.service.PublisherService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class PublisherController {
     final PublisherService publisherService;
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/add")
     public void addPublisher(@RequestBody PublisherRequestCreate publisher) {
         publisherService.addPublisher(publisher);

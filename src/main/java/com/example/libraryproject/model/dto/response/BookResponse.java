@@ -19,8 +19,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookResponse {
-    Publisher publisher;
-    Author author;
+    PublisherResponse publisher;
+    AuthorResponse author;
     String name;
     BigDecimal price;
     String description;

@@ -19,8 +19,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookRequestCreate {
-    Publisher publisher;
-    Author author;
+    Long publisherId;
+    Long  authorId;
     String name;
     BigDecimal price;
     String description;
@@ -29,4 +29,5 @@ public class BookRequestCreate {
     Language language;
     Integer pages;
     LocalDate publicationDate;
+    Integer quantity;
 }

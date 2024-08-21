@@ -19,10 +19,10 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "books")
 public class Book extends Base {
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "publisher_id", referencedColumnName = "id")
     Publisher publisher;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     Author author;
     @Column(name = "name")
@@ -37,7 +37,7 @@ public class Book extends Base {
     @Enumerated(EnumType.STRING)
     @Column(name = "language")
     Language language;
-    @Column(name = "paged")
+    @Column(name = "pages")
     Integer pages;
     @Column(name = "publication_date")
     LocalDate publicationDate;

@@ -14,12 +14,7 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "quantity")
 public class QuantityBook  extends Base {
-
-    @OneToOne(
-            mappedBy = "book",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
-    )
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     Book book;
     @Column(name ="quantity")

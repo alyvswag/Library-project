@@ -22,6 +22,8 @@ import java.util.List;
 public class BookService {
     final BookMapper bookMapper;
     final BookRepository bookRepository;
+    final AuthorService authorService;
+    final PublisherService publisherService;
 
     public void addBook(BookRequestCreate book) {
         Book bookEntity = bookMapper.toEntity(book);
@@ -35,8 +37,8 @@ public class BookService {
                 ()->new RuntimeException("Book not found")
         );
 
-        bookEntity.setPublisher(bookEntity.getPublisher()==null ? bookEntity.getPublisher() : bookRequest.getPublisher());
-        bookEntity.setAuthor(bookEntity.getAuthor()==null ? bookEntity.getAuthor() : bookRequest.getAuthor());
+        bookEntity.setPublisher(bookEntity.getPublisher()==null ? bookEntity.getPublisher() : publisherService.findById(bookRequest.getPublisherId()));
+        bookEntity.setAuthor(bookEntity.getAuthor()==null ? bookEntity.getAuthor() : authorService.findById(bookRequest.getAuthorId()));
         bookEntity.setName(bookEntity.getName()==null ? bookEntity.getName() : bookRequest.getName());
         bookEntity.setPrice(bookEntity.getPrice()==null ? bookEntity.getPrice() : bookRequest.getPrice());
         bookEntity.setDescription(bookEntity.getDescription()==null ? bookEntity.getDescription() : bookRequest.getDescription());

@@ -67,5 +67,11 @@ public class AuthorService {
         return authorMapper.toResponse(authorRepository.findAuthorByName(name));
     }
 
+    //
+    public Author findById(Long id) {
+        return authorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Author not found"));
+    }
+
 
 }
