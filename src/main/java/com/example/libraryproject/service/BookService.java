@@ -1,12 +1,11 @@
 package com.example.libraryproject.service;
 
 import com.example.libraryproject.mapper.BookMapper;
-import com.example.libraryproject.model.dao.Author;
 import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dto.request.create.BookRequestCreate;
 import com.example.libraryproject.model.dto.request.update.BookRequestUpdate;
-import com.example.libraryproject.model.dto.response.AuthorResponse;
-import com.example.libraryproject.model.dto.response.BookResponse;
+import com.example.libraryproject.model.dto.response.admin.BookAdminResponse;
+import com.example.libraryproject.model.dto.response.user.BookUserResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -60,12 +59,12 @@ public class BookService {
         bookRepository.save(bookEntity);
     }
 
-    public BookResponse getBookById(Long id) {
+    public BookAdminResponse getBookById(Long id) {
         Book bookEntity  = bookRepository.findBookById(id)
                 .orElseThrow(() -> new RuntimeException("Book not found"));
         return bookMapper.toResponse(bookEntity);
     }
-    public List<BookResponse> getAllBooks() {
+    public List<BookAdminResponse> getAllBooks() {
             return  bookMapper.toResponse(bookRepository.findAllBook());
     }
 

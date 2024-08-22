@@ -2,7 +2,8 @@ package com.example.libraryproject.service;
 
 import com.example.libraryproject.mapper.BookMapper;
 import com.example.libraryproject.model.dao.Book;
-import com.example.libraryproject.model.dto.response.BookResponse;
+import com.example.libraryproject.model.dto.response.admin.BookAdminResponse;
+import com.example.libraryproject.model.dto.response.user.BookUserResponse;
 import com.example.libraryproject.repository.AuthorRepository;
 import com.example.libraryproject.repository.BookRepository;
 import lombok.AccessLevel;
@@ -27,7 +28,7 @@ public class AuthorManagingService {
         bookRepository.save(bookEntity);
     }
 
-    public List<BookResponse> getBooksByAuthorId(Long authorId) {
+    public List<BookAdminResponse> getBooksByAuthorId(Long authorId) {
         List<Book> books = authorRepository.findBooksByAuthor(authorId);
         return bookMapper.toResponse(books);
     }

@@ -6,6 +6,7 @@ import com.example.libraryproject.model.dao.Publisher;
 import com.example.libraryproject.model.dto.request.create.PublisherRequestCreate;
 import com.example.libraryproject.model.dto.request.update.AuthorRequestUpdate;
 import com.example.libraryproject.model.dto.request.update.PublisherRequestUpdate;
+import com.example.libraryproject.model.dto.response.admin.PublisherAdminResponse;
 import com.example.libraryproject.repository.PublisherRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -45,6 +47,10 @@ public class PublisherService {
         publisherRepository.save(publisherEntity);
 
     }
+    public List<PublisherAdminResponse> getAllPublishers(){
+        return publisherMapper.toResponse(publisherRepository.findAllPublisher());
+    }
+
 
     //
 
@@ -52,5 +58,6 @@ public class PublisherService {
         return id==null? null : publisherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Publisher not found"));
     }
+
 
 }

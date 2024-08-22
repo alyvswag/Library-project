@@ -1,7 +1,8 @@
 package com.example.libraryproject.controller.v1;
 
 
-import com.example.libraryproject.model.dto.response.BookResponse;
+import com.example.libraryproject.model.dto.response.admin.BookAdminResponse;
+import com.example.libraryproject.model.dto.response.user.BookUserResponse;
 import com.example.libraryproject.service.AuthorManagingService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class AuthorManaging {
     }
 
     @GetMapping("/getBooksByAuthor")
-    public List<BookResponse> getBooksByAuthor(@RequestParam("authorId") Long authorId) {
+    public List<BookAdminResponse> getBooksByAuthor(@RequestParam("authorId") Long authorId) {
         return authorManagingService.getBooksByAuthorId(authorId);
     }
 }

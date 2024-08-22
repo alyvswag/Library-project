@@ -5,7 +5,8 @@ import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dao.Publisher;
 import com.example.libraryproject.model.dto.request.create.BookRequestCreate;
 import com.example.libraryproject.model.dto.request.update.BookRequestUpdate;
-import com.example.libraryproject.model.dto.response.BookResponse;
+import com.example.libraryproject.model.dto.response.admin.BookAdminResponse;
+import com.example.libraryproject.model.dto.response.user.BookUserResponse;
 import com.example.libraryproject.service.AuthorService;
 import com.example.libraryproject.service.PublisherService;
 import org.mapstruct.Context;
@@ -33,10 +34,10 @@ public interface BookMapper {
         return publisherService.findById(publisherId);
     }
 
-    BookResponse toResponse(Book book);
+    BookAdminResponse toResponse(Book book);
 
     @Mapping(target = "author", source = "authorId")
     @Mapping(target = "publisher", source = "publisherId")
-    List<BookResponse> toResponse(List<Book> books);
+    List<BookAdminResponse> toResponse(List<Book> books);
 
 }

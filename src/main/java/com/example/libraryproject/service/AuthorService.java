@@ -1,14 +1,12 @@
 package com.example.libraryproject.service;
 
 import com.example.libraryproject.mapper.AuthorMapper;
-import com.example.libraryproject.mapper.BookMapper;
 import com.example.libraryproject.model.dao.Author;
-import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dto.request.create.AuthorRequestCreate;
 import com.example.libraryproject.model.dto.request.update.AuthorRequestUpdate;
-import com.example.libraryproject.model.dto.response.AuthorResponse;
+import com.example.libraryproject.model.dto.response.admin.AuthorAdminResponse;
+import com.example.libraryproject.model.dto.response.user.AuthorUserResponse;
 import com.example.libraryproject.repository.AuthorRepository;
-import com.example.libraryproject.repository.BookRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -52,20 +50,28 @@ public class AuthorService {
 
     }
 
-    public AuthorResponse getAuthorById(Long id) {
+    public AuthorAdminResponse getAuthorById(Long id) {
         Author authorEntity = authorRepository.findAuthorById(id)
                 .orElseThrow(() -> new RuntimeException("Author not found"));
+        //Todo : sexsi exception classlar
 
         return authorMapper.toResponse(authorEntity);
 
     }
 
-    public List<AuthorResponse> getAllAuthors(){
+    public List<AuthorAdminResponse> getAllAuthors(){
         return  authorMapper.toResponse(authorRepository.findAllAuthor());
     }
 
-    public List<AuthorResponse> getAuthorByName(String name) {
-        return authorMapper.toResponse(authorRepository.findAuthorByName(name));
+    public List<AuthorAdminResponse> getAuthorByName(String name) {
+        List<Author> authorEntity = authorRepository.findAuthorByName(name);
+        if(authorEntity.isEmpty()){
+            throw new RuntimeException("Author not found");
+        }
+        //Todo : sexsi exception classlar
+
+        return authorMapper.toResponse(authorEntity);
+
     }
 
 

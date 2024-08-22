@@ -36,9 +36,9 @@ public class Author extends Base {
 //                "name='" + name + '\'' +
 //                ", surname='" + surname + '\'' +
 //                ", description='" + description + '\'' +
+//                ", books=" + books +
 //                ", isActive=" + isActive +
 //                '}';
-//
 //    }
 
     //one - author many kitab

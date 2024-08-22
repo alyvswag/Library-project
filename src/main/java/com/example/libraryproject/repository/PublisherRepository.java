@@ -2,11 +2,13 @@ package com.example.libraryproject.repository;
 
 import com.example.libraryproject.model.dao.Author;
 import com.example.libraryproject.model.dao.Publisher;
+import com.example.libraryproject.model.dto.response.admin.PublisherAdminResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,4 +19,5 @@ public interface PublisherRepository extends JpaRepository<Publisher, Long> {
 
     @Query(" SELECT p FROM Publisher p where p.isActive = true ")
     List<Publisher> findAllPublisher();
+
 }

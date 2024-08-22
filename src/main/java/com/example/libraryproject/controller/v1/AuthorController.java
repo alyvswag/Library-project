@@ -1,9 +1,10 @@
 package com.example.libraryproject.controller.v1;
 
+import com.example.libraryproject.model.dao.Author;
 import com.example.libraryproject.model.dto.request.create.AuthorRequestCreate;
 import com.example.libraryproject.model.dto.request.update.AuthorRequestUpdate;
-import com.example.libraryproject.model.dto.response.AuthorResponse;
-import com.example.libraryproject.model.dto.response.BookResponse;
+import com.example.libraryproject.model.dto.response.admin.AuthorAdminResponse;
+import com.example.libraryproject.model.dto.response.user.AuthorUserResponse;
 import com.example.libraryproject.service.AuthorService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -34,15 +35,15 @@ public class AuthorController {
         authorService.deleteAuthor(id);
     }
     @GetMapping("/getAuthorById/{id}")
-    public AuthorResponse getAuthorById(@PathVariable("id") Long id) {
+    public AuthorAdminResponse getAuthorById(@PathVariable("id") Long id) {
         return authorService.getAuthorById(id);
     }
     @GetMapping("/getAllAuthors")
-    public List<AuthorResponse> getAllAuthors() {
+    public List<AuthorAdminResponse> getAllAuthors() {
         return authorService.getAllAuthors();
     }
     @GetMapping("/getAuthorByName/{name}")
-    public List<AuthorResponse> getAuthorByName(@PathVariable("name") String name) {
+    public List<AuthorAdminResponse> getAuthorByName(@PathVariable("name") String name) {
         return authorService.getAuthorByName(name);
     }
 
