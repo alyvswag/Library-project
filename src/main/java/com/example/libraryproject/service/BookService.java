@@ -2,6 +2,7 @@ package com.example.libraryproject.service;
 
 import com.example.libraryproject.mapper.BookMapper;
 import com.example.libraryproject.model.dao.Book;
+import com.example.libraryproject.model.dao.QuantityBook;
 import com.example.libraryproject.model.dto.request.create.BookRequestCreate;
 import com.example.libraryproject.model.dto.request.update.BookRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.BookAdminResponse;
@@ -26,6 +27,8 @@ public class BookService {
 
     public void addBook(BookRequestCreate book) {
         Book bookEntity = bookMapper.toEntity(book);
+        QuantityBook quantityBook = new QuantityBook(bookEntity,book.getQuantity());
+        bookEntity.setQuantityBook(quantityBook);
         bookEntity.setIsActive(true);
         bookRepository.save(bookEntity);
     }
@@ -38,7 +41,7 @@ public class BookService {
 
         bookEntity.setPublisher(bookEntity.getPublisher()==null ? bookEntity.getPublisher() : publisherService.findById(bookRequest.getPublisherId()));
         bookEntity.setAuthor(bookEntity.getAuthor()==null ? bookEntity.getAuthor() : authorService.findById(bookRequest.getAuthorId()));
-        bookEntity.setName(bookEntity.getName()==null ? bookEntity.getName() : bookRequest.getName());
+        bookEntity.setBookName(bookEntity.getBookName()==null ? bookEntity.getBookName() : bookRequest.getBookName());
         bookEntity.setPrice(bookEntity.getPrice()==null ? bookEntity.getPrice() : bookRequest.getPrice());
         bookEntity.setDescription(bookEntity.getDescription()==null ? bookEntity.getDescription() : bookRequest.getDescription());
         bookEntity.setGenre(bookEntity.getGenre()==null ? bookEntity.getGenre() : bookRequest.getGenre());

@@ -21,7 +21,7 @@ import java.time.LocalDate;
 public class BookRequestCreate {
     Long publisherId;
     Long  authorId;
-    String name;
+    String bookName;
     BigDecimal price;
     String description;
     // todo: genre request geldikde string gelecek sen ona diqqet ele

@@ -23,12 +23,12 @@ public class GlobalExceptionHandler {
 //    }
     // todo : ya global yada sexsi exception class ataciq heleki global ataciq
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, String>> handleGenericException(RuntimeException ex, WebRequest request) {
-        Map<String, String> response = new HashMap<>();
-        response.put("error", "Something went wrong. Please try again later.");
-        response.put("details", ex.getMessage());
-
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<Map<String, String>> handleGenericException(RuntimeException ex, WebRequest request) {
+//        Map<String, String> response = new HashMap<>();
+//        response.put("error", "Something went wrong. Please try again later.");
+//        response.put("details", ex.getMessage());
+//
+//        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+//    }
 }

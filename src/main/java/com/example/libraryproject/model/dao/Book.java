@@ -26,7 +26,7 @@ public class Book extends Base {
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     Author author;
     @Column(name = "name")
-    String name;
+    String bookName;
     @Column(name = "price")
     BigDecimal price;
     @Column(name = "description")
@@ -45,4 +45,5 @@ public class Book extends Base {
     Boolean isActive;
     @OneToOne(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private QuantityBook quantityBook;
+
 }

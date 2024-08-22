@@ -21,7 +21,7 @@ import java.time.LocalDate;
 public class BookRequestUpdate {
     Long publisherId;
     Long authorId;
-    String name;
+    String bookName;
     BigDecimal price;
     String description;
     Genre genre;

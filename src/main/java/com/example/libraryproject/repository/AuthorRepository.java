@@ -18,7 +18,7 @@ public interface AuthorRepository extends JpaRepository<Author,Long> {
     @Query(" SELECT a FROM Author a where a.isActive = true ")
     List<Author>  findAllAuthor();
 
-    @Query("SELECT a FROM Author a WHERE a.name LIKE %:name%")
+    @Query("SELECT a FROM Author a WHERE a.authorName LIKE %:name%")
     List<Author> findAuthorByName(@Param("name") String name);
 
     @Query("Select b from Book b where b.author.id = :authorId")

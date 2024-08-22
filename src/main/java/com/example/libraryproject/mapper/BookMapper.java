@@ -40,4 +40,9 @@ public interface BookMapper {
     @Mapping(target = "publisher", source = "publisherId")
     List<BookAdminResponse> toResponse(List<Book> books);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    List<BookUserResponse> toResponseUser(List<Book> books);
+
 }

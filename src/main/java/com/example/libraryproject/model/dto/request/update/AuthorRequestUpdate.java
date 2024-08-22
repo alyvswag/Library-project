@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 public class AuthorRequestUpdate {
 
-    String name;
-    String surname;
+    String authorName;
+    String authorSurname;
     String description;
 }

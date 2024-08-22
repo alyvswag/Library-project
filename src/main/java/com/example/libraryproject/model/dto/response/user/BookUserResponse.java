@@ -19,7 +19,7 @@ import java.time.LocalDate;
 public class BookUserResponse {
     PublisherUserResponse publisher;
     AuthorUserResponse author;
-    String name;
+    String bookName;
     BigDecimal price;
     String description;
     Genre genre;

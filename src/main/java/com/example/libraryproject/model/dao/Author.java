@@ -16,9 +16,9 @@ import java.util.List;
 @Table(name = "authors")
 public class Author extends Base {
     @Column(name = "name")
-    String name;
+    String authorName;
     @Column(name = "surname")
-    String surname;
+    String authorSurname;
     @Column(name = "description")
     String description;
     @OneToMany(

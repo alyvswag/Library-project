@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthorRequestCreate {
-    String name;
-    String surname;
+    String authorName;
+    String authorSurname;
     String description;
 }
