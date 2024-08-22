@@ -7,13 +7,16 @@ import lombok.experimental.FieldDefaults;
 
 import java.sql.Timestamp;
 
-@EqualsAndHashCode(callSuper = true)
+
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthorAdminResponse extends AuthorUserResponse {
+public class AuthorAdminResponse {
     Long id;
+    String authorName;
+    String authorSurname;
+    String description;
     Timestamp createdAt;
     Timestamp updatedAt;
 }

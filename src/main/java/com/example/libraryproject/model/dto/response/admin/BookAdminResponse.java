@@ -19,6 +19,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookAdminResponse  {
+    //burda inheritance etmek olardi ama mapperde ignore istifade etmeyim deye istfade etmedim
     Long id;
     PublisherUserResponse publisher;
     AuthorUserResponse author;
