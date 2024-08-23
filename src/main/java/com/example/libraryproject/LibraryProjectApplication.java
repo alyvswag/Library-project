@@ -13,5 +13,5 @@ public class LibraryProjectApplication {
         SpringApplication.run(LibraryProjectApplication.class, args);
     }
 }
-//todo: men bezi yerlerde bosluq gondermek evezine runtime exception atirdim bu olmaz elece bosluq gonderecik buna diqqet ele
+//todo: nc , demek bosluq gonderilmesin gonderilen sey yoxlanilsin , eger bosdusa message olaraq telebe uygun olmuyan icra
 // todo: yeni janrlar elave et

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.example.libraryproject.repository.BookRepository;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,26 +28,26 @@ public class BookService {
 
     public void addBook(BookRequestCreate book) {
         Book bookEntity = bookMapper.toEntity(book);
-        QuantityBook quantityBook = new QuantityBook(bookEntity,book.getQuantity());
+        QuantityBook quantityBook = new QuantityBook(bookEntity, book.getQuantity());
         bookEntity.setQuantityBook(quantityBook);
         bookEntity.setIsActive(true);
         bookRepository.save(bookEntity);
     }
 
-    public void updateBook(Long id , BookRequestUpdate bookRequest) {
+    public void updateBook(Long id, BookRequestUpdate bookRequest) {
         Book bookEntity = bookRepository.findBookById(id)
                 .orElseThrow(
-                ()->new RuntimeException("Book not found")
-        );
+                        () -> new RuntimeException("Book not found")
+                );
 
 
-        bookEntity.setBookName(bookEntity.getBookName()==null ? bookEntity.getBookName() : bookRequest.getBookName());
-        bookEntity.setPrice(bookEntity.getPrice()==null ? bookEntity.getPrice() : bookRequest.getPrice());
-        bookEntity.setDescription(bookEntity.getDescription()==null ? bookEntity.getDescription() : bookRequest.getDescription());
-        bookEntity.setGenre(bookEntity.getGenre()==null ? bookEntity.getGenre() : bookRequest.getGenre());
-        bookEntity.setLanguage(bookEntity.getLanguage()==null ? bookEntity.getLanguage() : bookRequest.getLanguage());
-        bookEntity.setPages(bookEntity.getPages()==null ? bookEntity.getPages(): bookRequest.getPages());
-        bookEntity.setPublicationDate(bookEntity.getPublicationDate()==null ? bookEntity.getPublicationDate() : bookRequest.getPublicationDate());
+        bookEntity.setBookName(bookEntity.getBookName() == null ? bookEntity.getBookName() : bookRequest.getBookName());
+        bookEntity.setPrice(bookEntity.getPrice() == null ? bookEntity.getPrice() : bookRequest.getPrice());
+        bookEntity.setDescription(bookEntity.getDescription() == null ? bookEntity.getDescription() : bookRequest.getDescription());
+        bookEntity.setGenre(bookEntity.getGenre() == null ? bookEntity.getGenre() : bookRequest.getGenre());
+        bookEntity.setLanguage(bookEntity.getLanguage() == null ? bookEntity.getLanguage() : bookRequest.getLanguage());
+        bookEntity.setPages(bookEntity.getPages() == null ? bookEntity.getPages() : bookRequest.getPages());
+        bookEntity.setPublicationDate(bookEntity.getPublicationDate() == null ? bookEntity.getPublicationDate() : bookRequest.getPublicationDate());
         bookEntity.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
         bookRepository.save(bookEntity);
 
@@ -62,12 +63,30 @@ public class BookService {
     }
 
     public BookAdminResponse getBookById(Long id) {
-        Book bookEntity  = bookRepository.findBookById(id)
+        Book bookEntity = bookRepository.findBookById(id)
                 .orElseThrow(() -> new RuntimeException("Book not found"));
+        checkAuthor(bookEntity);
         return bookMapper.toResponse(bookEntity);
     }
+
     public List<BookAdminResponse> getAllBooks() {
-            return  bookMapper.toResponse(bookRepository.findAllBook());
+        List<Book> bookEntityList = bookRepository.findAllBook();
+        for (Book bookEntity : bookEntityList) {
+            checkAuthor(bookEntity);
+        }
+        return bookMapper.toResponse(bookEntityList);
     }
+
+
+    // private methods
+    private void checkAuthor(Book bookEntity) {
+        if (bookEntity.getAuthor() != null) {
+             if (!bookEntity.getAuthor().getIsActive()) {
+                bookEntity.setAuthor(null);
+                bookRepository.save(bookEntity);
+            }
+        }
+    }
+
 
 }

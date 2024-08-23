@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   db:
-    container_name: postgres-db-end
+    container_name: postgres-db
     image: postgres:12.20-bullseye
     restart: always
     environment:
@@ -10,4 +10,4 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ../../docker-volumes/postgres-db-end:/var/lib/postgresql/data
+      - ../../docker-volumes/postgres-db:/var/lib/postgresql/data

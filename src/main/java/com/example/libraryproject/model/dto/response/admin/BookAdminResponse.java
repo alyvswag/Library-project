@@ -23,7 +23,6 @@ public class BookAdminResponse  {
     Long id;
     PublisherAdminResponse publisher;
     AuthorAdminResponse author;
-    // todo : burda user yox adminresponse saxla
     String bookName;
     BigDecimal price;
     String description;

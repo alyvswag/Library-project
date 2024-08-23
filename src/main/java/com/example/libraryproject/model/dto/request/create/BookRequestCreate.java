@@ -24,7 +24,6 @@ public class BookRequestCreate {
     String bookName;
     BigDecimal price;
     String description;
-    // todo: genre request geldikde string gelecek sen ona diqqet ele
     Genre genre;
     Language language;
     Integer pages;
