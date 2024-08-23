@@ -23,6 +23,7 @@ public  interface BookRepository  extends JpaRepository<Book, Long>  {
 
     @Query("SELECT b FROM Book b WHERE b.isActive = true AND ( b.bookName LIKE %:searchWords% or b.author.authorName LIKE %:searchWords%) ")
     List<Book> searchBook(@Param("searchWords") String searchWords);
+    //todo : axtari tekce muellif adina gore yox soyadina gorede edilsin
 
 
 }

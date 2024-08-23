@@ -19,8 +19,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookRequestUpdate {
-    Long publisherId;
-    Long authorId;
     String bookName;
     BigDecimal price;
     String description;

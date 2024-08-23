@@ -22,9 +22,6 @@ public interface BookMapper {
     @Mapping(target = "publisher", source = "publisherId")
     Book toEntity(BookRequestCreate bookRequestCreate);
 
-    @Mapping(target = "author", source = "authorId")
-    @Mapping(target = "publisher", source = "publisherId")
-    Book toEntity(BookRequestUpdate bookRequestUpdate);
 
     default Author mapAuthor(Long authorId, @Context AuthorService authorService) {
         return authorService.findById(authorId);
@@ -43,6 +40,5 @@ public interface BookMapper {
     @Mapping(target = "author", source = "authorId")
     @Mapping(target = "publisher", source = "publisherId")
     List<BookUserResponse> toResponseUser(List<Book> books);
-
 
 }

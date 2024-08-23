@@ -39,8 +39,7 @@ public class BookService {
                 ()->new RuntimeException("Book not found")
         );
 
-        bookEntity.setPublisher(bookEntity.getPublisher()==null ? bookEntity.getPublisher() : publisherService.findById(bookRequest.getPublisherId()));
-        bookEntity.setAuthor(bookEntity.getAuthor()==null ? bookEntity.getAuthor() : authorService.findById(bookRequest.getAuthorId()));
+
         bookEntity.setBookName(bookEntity.getBookName()==null ? bookEntity.getBookName() : bookRequest.getBookName());
         bookEntity.setPrice(bookEntity.getPrice()==null ? bookEntity.getPrice() : bookRequest.getPrice());
         bookEntity.setDescription(bookEntity.getDescription()==null ? bookEntity.getDescription() : bookRequest.getDescription());

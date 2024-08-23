@@ -21,8 +21,9 @@ import java.time.LocalDate;
 public class BookAdminResponse  {
     //burda inheritance etmek olardi ama mapperde ignore istifade etmeyim deye istfade etmedim
     Long id;
-    PublisherUserResponse publisher;
-    AuthorUserResponse author;
+    PublisherAdminResponse publisher;
+    AuthorAdminResponse author;
+    // todo : burda user yox adminresponse saxla
     String bookName;
     BigDecimal price;
     String description;

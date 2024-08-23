@@ -2,19 +2,10 @@ package com.example.libraryproject.service;
 
 import com.example.libraryproject.mapper.AuthorMapper;
 import com.example.libraryproject.model.dao.Author;
-import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dto.request.create.AuthorRequestCreate;
-import com.example.libraryproject.model.dto.request.filter.BookRequestFilter;
 import com.example.libraryproject.model.dto.request.update.AuthorRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.AuthorAdminResponse;
-import com.example.libraryproject.model.dto.response.user.AuthorUserResponse;
-import com.example.libraryproject.model.dto.response.user.BookUserResponse;
 import com.example.libraryproject.repository.AuthorRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -74,11 +65,7 @@ public class AuthorService {
 
     public List<AuthorAdminResponse> getAuthorByName(String name) {
         List<Author> authorEntity = authorRepository.findAuthorByName(name);
-        if(authorEntity.isEmpty()){
-            throw new RuntimeException("Author not found");
-        }
         //Todo : sexsi exception classlar
-
         return authorMapper.toResponse(authorEntity);
 
     }

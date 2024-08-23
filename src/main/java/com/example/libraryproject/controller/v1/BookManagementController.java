@@ -28,7 +28,7 @@ public class BookManagementController {
     }
 
 
-    @GetMapping("/filterBooks")
+    @PostMapping("/filterBooks")
     public List<BookUserResponse> filterBooks(@RequestBody BookRequestFilter bookRequest) {
         return bookManagementService.filterBooks(bookRequest);
     }

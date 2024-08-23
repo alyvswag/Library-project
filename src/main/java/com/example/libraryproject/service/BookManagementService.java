@@ -45,7 +45,6 @@ public class BookManagementService {
         CriteriaQuery<Book> query = cb.createQuery(Book.class);
         List<Predicate> predicates = new ArrayList<>();
         Root<Book> root = query.from(Book.class);
-        BigDecimal decimal = BigDecimal.valueOf(0);
         if (bookRequest.getMinPrice() != null) {
             predicates.add(cb.greaterThanOrEqualTo(root.get("price"), bookRequest.getMinPrice()));
         }
@@ -71,7 +70,6 @@ public class BookManagementService {
         );
         TypedQuery<Book> typedQuery = em.createQuery(query);
         return bookMapper.toResponseUser(typedQuery.getResultList());
-
     }
 
     public List<QuantityBookAdminResponse> getBookInventory() {
