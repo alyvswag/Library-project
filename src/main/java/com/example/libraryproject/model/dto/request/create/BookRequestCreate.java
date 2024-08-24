@@ -1,10 +1,8 @@
 package com.example.libraryproject.model.dto.request.create;
 
 
-import com.example.libraryproject.enums.Genre;
-import com.example.libraryproject.enums.Language;
-import com.example.libraryproject.model.dao.Author;
-import com.example.libraryproject.model.dao.Publisher;
+import com.example.libraryproject.enums.book.Genre;
+import com.example.libraryproject.enums.book.Language;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

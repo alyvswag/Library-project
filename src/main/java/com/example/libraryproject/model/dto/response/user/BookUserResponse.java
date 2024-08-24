@@ -1,8 +1,9 @@
 package com.example.libraryproject.model.dto.response.user;
 
 
-import com.example.libraryproject.enums.Genre;
-import com.example.libraryproject.enums.Language;
+import com.example.libraryproject.enums.book.Genre;
+import com.example.libraryproject.enums.book.Language;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BookUserResponse {
     PublisherUserResponse publisher;
     AuthorUserResponse author;

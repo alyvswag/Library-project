@@ -1,11 +1,9 @@
 package com.example.libraryproject.model.dto.response.admin;
 
 
-import com.example.libraryproject.enums.Genre;
-import com.example.libraryproject.enums.Language;
-import com.example.libraryproject.model.dto.response.user.AuthorUserResponse;
-import com.example.libraryproject.model.dto.response.user.BookUserResponse;
-import com.example.libraryproject.model.dto.response.user.PublisherUserResponse;
+import com.example.libraryproject.enums.book.Genre;
+import com.example.libraryproject.enums.book.Language;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -18,6 +16,8 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Builder
 public class BookAdminResponse  {
     //burda inheritance etmek olardi ama mapperde ignore istifade etmeyim deye istfade etmedim
     Long id;
