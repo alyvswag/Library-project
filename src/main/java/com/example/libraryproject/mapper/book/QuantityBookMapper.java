@@ -2,8 +2,8 @@ package com.example.libraryproject.mapper.book;
 
 import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dao.QuantityBook;
-import com.example.libraryproject.model.dto.response.admin.BookAdminResponse;
-import com.example.libraryproject.model.dto.response.admin.QuantityBookAdminResponse;
+import com.example.libraryproject.model.dto.response.admin.BookResponseAdmin;
+import com.example.libraryproject.model.dto.response.admin.QuantityBookResponseAdmin;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -11,17 +11,17 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface QuantityBookMapper {
-    List<QuantityBookAdminResponse> toResponse(List<QuantityBook> quantityBook);
+    List<QuantityBookResponseAdmin> toResponse(List<QuantityBook> quantityBook);
 
-    @Mapping(source = "book", target = "bookAdminResponse")
-    QuantityBookAdminResponse toQuantityBookAdminResponse(QuantityBook quantityBook);
+    @Mapping(source = "book", target = "bookResponseAdmin")
+    QuantityBookResponseAdmin toQuantityBookAdminResponse(QuantityBook quantityBook);
 
-    @Mapping(source = "book", target = "bookAdminResponse")
-    default BookAdminResponse mapBookToAdminResponse(Book book) {
+    @Mapping(source = "book", target = "bookResponseAdmin")
+    default BookResponseAdmin mapBookToAdminResponse(Book book) {
         if (book == null) {
             return null;
         }
-        return BookAdminResponse.builder()
+        return BookResponseAdmin.builder()
                 .id(book.getId())
                 .bookName(book.getBookName())
                 .price(book.getPrice())

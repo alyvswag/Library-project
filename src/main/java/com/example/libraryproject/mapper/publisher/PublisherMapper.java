@@ -3,7 +3,7 @@ package com.example.libraryproject.mapper.publisher;
 import com.example.libraryproject.model.dao.Publisher;
 import com.example.libraryproject.model.dto.request.create.PublisherRequestCreate;
 import com.example.libraryproject.model.dto.request.update.PublisherRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.PublisherAdminResponse;
+import com.example.libraryproject.model.dto.response.admin.PublisherResponseAdmin;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -12,5 +12,5 @@ import java.util.List;
 public interface PublisherMapper {
     Publisher toEntity(PublisherRequestCreate publisher);
     Publisher toEntity(PublisherRequestUpdate publisher);
-    List<PublisherAdminResponse> toResponse(List<Publisher> publishers);
+    List<PublisherResponseAdmin> toResponse(List<Publisher> publishers);
 }

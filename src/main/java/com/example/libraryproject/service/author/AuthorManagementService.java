@@ -4,7 +4,7 @@ import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.book.BookMapper;
 import com.example.libraryproject.model.dao.Author;
 import com.example.libraryproject.model.dao.Book;
-import com.example.libraryproject.model.dto.response.admin.BookAdminResponse;
+import com.example.libraryproject.model.dto.response.admin.BookResponseAdmin;
 import com.example.libraryproject.repository.author.AuthorRepository;
 import com.example.libraryproject.repository.book.BookRepository;
 import lombok.AccessLevel;
@@ -37,7 +37,7 @@ public class AuthorManagementService {
     }
 
 
-    public List<BookAdminResponse> getBooksByAuthorId(Long authorId) {
+    public List<BookResponseAdmin> getBooksByAuthorId(Long authorId) {
         authorService.getAuthorById(authorId);
         List<Book> books = authorRepository.findBooksByAuthor(authorId)
                 .filter(book -> !book.isEmpty())

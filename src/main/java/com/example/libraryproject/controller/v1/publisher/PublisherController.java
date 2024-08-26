@@ -3,7 +3,7 @@ package com.example.libraryproject.controller.v1.publisher;
 
 import com.example.libraryproject.model.dto.request.create.PublisherRequestCreate;
 import com.example.libraryproject.model.dto.request.update.PublisherRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.PublisherAdminResponse;
+import com.example.libraryproject.model.dto.response.admin.PublisherResponseAdmin;
 import com.example.libraryproject.model.dto.response.base.BaseResponse;
 import com.example.libraryproject.service.publisher.PublisherService;
 import lombok.AccessLevel;
@@ -41,7 +41,7 @@ public class PublisherController {
     }
 
     @GetMapping("/getAllPublishers")
-    public BaseResponse<List<PublisherAdminResponse>> getAllPublishers() {
+    public BaseResponse<List<PublisherResponseAdmin>> getAllPublishers() {
         return BaseResponse.success(publisherService.getAllPublishers());
     }
 

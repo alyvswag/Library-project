@@ -1,8 +1,8 @@
 package com.example.libraryproject.model.dto.request.create;
 
 
-import com.example.libraryproject.enums.book.Genre;
-import com.example.libraryproject.enums.book.Language;
+import com.example.libraryproject.model.enums.book.Genre;
+import com.example.libraryproject.model.enums.book.Language;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

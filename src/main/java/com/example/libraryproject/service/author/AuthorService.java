@@ -5,7 +5,7 @@ import com.example.libraryproject.mapper.author.AuthorMapper;
 import com.example.libraryproject.model.dao.Author;
 import com.example.libraryproject.model.dto.request.create.AuthorRequestCreate;
 import com.example.libraryproject.model.dto.request.update.AuthorRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.AuthorAdminResponse;
+import com.example.libraryproject.model.dto.response.admin.AuthorResponseAdmin;
 import com.example.libraryproject.repository.author.AuthorRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -51,7 +51,7 @@ public class AuthorService {
 
     }
 
-    public AuthorAdminResponse getAuthorById(Long id) {
+    public AuthorResponseAdmin getAuthorById(Long id) {
         Author authorEntity = authorRepository.findAuthorById(id)
                 .orElseThrow(() -> BaseException.notFound(Author.class.getSimpleName(), "author", String.valueOf(id)));
 
@@ -59,12 +59,12 @@ public class AuthorService {
 
     }
 
-    public List<AuthorAdminResponse> getAllAuthors() {
+    public List<AuthorResponseAdmin> getAllAuthors() {
         return authorMapper.toResponse(authorRepository.findAllAuthor());
         // fikrimce burda exception atmaga deymez mence her zaman cedvelde melumat olacaq
     }
 
-    public List<AuthorAdminResponse> getAuthorByName(String name) {
+    public List<AuthorResponseAdmin> getAuthorByName(String name) {
         List<Author> authorEntities = authorRepository.findAuthorByName(name)
                 .filter(authors -> !authors.isEmpty())
                 .orElseThrow(() -> BaseException.notFound(Author.class.getSimpleName(), "author", name));

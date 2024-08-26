@@ -6,8 +6,8 @@ import com.example.libraryproject.mapper.book.QuantityBookMapper;
 import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dto.request.filter.BookRequestFilter;
 
-import com.example.libraryproject.model.dto.response.admin.QuantityBookAdminResponse;
-import com.example.libraryproject.model.dto.response.user.BookUserResponse;
+import com.example.libraryproject.model.dto.response.admin.QuantityBookResponseAdmin;
+import com.example.libraryproject.model.dto.response.user.BookResponseUser;
 import com.example.libraryproject.repository.book.BookRepository;
 import com.example.libraryproject.repository.book.QuantityBookRepository;
 import jakarta.persistence.EntityManager;
@@ -34,11 +34,11 @@ public class BookManagementService {
     final QuantityBookRepository quantityBookRepository;
     final QuantityBookMapper quantityBookMapper;
 
-    public List<BookUserResponse> searchBooks(String searchWord) {
+    public List<BookResponseUser> searchBooks(String searchWord) {
         return bookMapper.toResponseUser(bookRepository.searchBook(searchWord));
     }
 
-    public List<BookUserResponse> filterBooks(BookRequestFilter bookRequest) {
+    public List<BookResponseUser> filterBooks(BookRequestFilter bookRequest) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Book> query = cb.createQuery(Book.class);
         List<Predicate> predicates = new ArrayList<>();
@@ -69,7 +69,7 @@ public class BookManagementService {
         return bookMapper.toResponseUser(typedQuery.getResultList());
     }
 
-    public List<QuantityBookAdminResponse> getBookInventory() {
+    public List<QuantityBookResponseAdmin> getBookInventory() {
         return quantityBookMapper.toResponse(quantityBookRepository.findAll());
     }
 

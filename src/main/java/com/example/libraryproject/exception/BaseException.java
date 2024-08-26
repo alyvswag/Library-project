@@ -2,13 +2,14 @@ package com.example.libraryproject.exception;
 
 import com.example.libraryproject.model.dto.response.base.ResponseMessages;
 
-import static com.example.libraryproject.enums.response.ErrorResponseMessages.*;
-
 import com.example.libraryproject.exception.types.NotFoundExceptionType;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Map;
+
+import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.NOT_FOUND;
+import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.UNEXPECTED;
 
 
 @EqualsAndHashCode(callSuper = true)

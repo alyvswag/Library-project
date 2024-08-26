@@ -8,7 +8,7 @@ import com.example.libraryproject.model.dao.Publisher;
 import com.example.libraryproject.model.dao.QuantityBook;
 import com.example.libraryproject.model.dto.request.create.BookRequestCreate;
 import com.example.libraryproject.model.dto.request.update.BookRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.BookAdminResponse;
+import com.example.libraryproject.model.dto.response.admin.BookResponseAdmin;
 import com.example.libraryproject.service.publisher.PublisherService;
 import com.example.libraryproject.service.author.AuthorService;
 import lombok.AccessLevel;
@@ -34,7 +34,7 @@ public class BookService {
         checkAuthorAndPublisher(bookEntity);
         QuantityBook quantityBook = new QuantityBook(bookEntity, book.getQuantity());
         bookEntity.setQuantityBook(quantityBook);
-        bookEntity.setIsActive(true);
+        bookEntity.setIsActive(true);//todo : mapping target constant yaza bilirsin
         bookRepository.save(bookEntity);
     }
 
@@ -43,7 +43,8 @@ public class BookService {
                 .orElseThrow(
                         () -> BaseException.notFound(Book.class.getSimpleName(), "book", String.valueOf(id))
                 );
-
+        //todo: bunu arasdirmaq lazmdi
+        // demek request gelen update modelin update olunacaq bookentitye mapp elemek lazmdi.
         bookEntity.setBookName(bookEntity.getBookName() == null ? bookEntity.getBookName() : bookRequest.getBookName());
         bookEntity.setPrice(bookEntity.getPrice() == null ? bookEntity.getPrice() : bookRequest.getPrice());
         bookEntity.setDescription(bookEntity.getDescription() == null ? bookEntity.getDescription() : bookRequest.getDescription());
@@ -66,7 +67,7 @@ public class BookService {
         bookRepository.save(bookEntity);
     }
 
-    public BookAdminResponse getBookById(Long id) {
+    public BookResponseAdmin getBookById(Long id) {
         Book bookEntity = bookRepository.findBookById(id)
                 .orElseThrow(
                         () -> BaseException.notFound(Book.class.getSimpleName(), "book", String.valueOf(id))
@@ -75,7 +76,7 @@ public class BookService {
         return bookMapper.toResponse(bookEntity);
     }
 
-    public List<BookAdminResponse> getAllBooks() {
+    public List<BookResponseAdmin> getAllBooks() {
         List<Book> bookEntityList = bookRepository.findAllBook();
         for (Book bookEntity : bookEntityList) {
             checkAuthor(bookEntity);

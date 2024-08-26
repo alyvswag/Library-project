@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 
-import static com.example.libraryproject.enums.response.ErrorResponseMessages.NOT_FOUND;
-import static com.example.libraryproject.enums.response.SuccessResponseMessages.CREATED;
-import static com.example.libraryproject.enums.response.SuccessResponseMessages.SUCCESS;
+import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.NOT_FOUND;
+import static com.example.libraryproject.model.enums.response.SuccessResponseMessages.CREATED;
+import static com.example.libraryproject.model.enums.response.SuccessResponseMessages.SUCCESS;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -82,5 +82,7 @@ public class BaseResponse<T> {
                 .httpStatus(ex.getResponseMessages().httpStatus())
                 .build();
     }
+
+
 
 }
