@@ -25,5 +25,4 @@ public class Base {
     Timestamp createdAt;
     @Column(name = "updated_at")
     Timestamp updatedAt;
-
 }

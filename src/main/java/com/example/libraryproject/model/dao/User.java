@@ -2,14 +2,13 @@ package com.example.libraryproject.model.dao;
 
 import com.example.libraryproject.model.dao.entity.Base;
 import com.example.libraryproject.model.enums.user.Status;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -17,6 +16,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "users")
 public class User extends Base {
     @Column(name = "name")
     String name;
@@ -25,9 +25,14 @@ public class User extends Base {
     @Column(name = "email", unique = true)
     String email;
     @Column(name = "password")
-    transient String password;
-    @Column(name = "login_time")
-    Timestamp loginTime;
+    String password;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_role", // Cədvəl adı
+            joinColumns = @JoinColumn(name = "user_id"), // Bu sinifin sütunu
+            inverseJoinColumns = @JoinColumn(name = "role_id") // Əlaqəli sinifin sütunu
+    )
+    List<Role> roles;
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     Status status;

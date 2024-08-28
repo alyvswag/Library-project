@@ -9,3 +9,19 @@ spring :
   liquibase:
     change-log: classpath:migrations/changelog-master.xml
     enabled: true
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: anonymous1user587@gmail.com
+#    password: talib123
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest

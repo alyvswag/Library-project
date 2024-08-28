@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="newUsersTable(second)" author="talibaliyev">
+        <createTable tableName="users">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(20)">
+                <constraints nullable="false" />
+            </column>
+            <column name="surname" type="varchar(20)">
+                <constraints nullable="false" />
+            </column>
+            <column name="email" type="varchar(20)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="login_time" type="timestamp"/>
+            <column name="status" type="varchar(10)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="createRoleTable" author="talibaliyev">
+        <createTable tableName="roles">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="role-name" type="varchar(20)">
+                <constraints nullable="false" />
+            </column>
+            <column name="is_active" type="boolean" defaultValue="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="talibaliyev" id="dropColumnUsersTable">
+        <dropColumn  tableName="users">
+            <column name="role"/>
+        </dropColumn>
+    </changeSet>
+    <changeSet author="talibaliyev" id="addColumnUsersTable">
+        <addColumn tableName="users">
+            <column name="role_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint
+                baseColumnNames="role_id"
+                baseTableName="users"
+                constraintName="fk_users_roles"
+                referencedTableName="roles"
+                referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="updateColumnUsersTable" author="your_name">
+        <renameColumn tableName="roles" oldColumnName="role-name" newColumnName="role_name" columnDataType="varchar(10)"/>
+    </changeSet>
+    <changeSet id="createUserRoleTable" author="talibaliyev">
+        <createTable tableName="user_role">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="role_id" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="is_active" type="boolean" defaultValue="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="user_role"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_user_role_users"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="user_role"
+                                 baseColumnNames="role_id"
+                                 constraintName="fk_user_role_roles"
+                                 referencedTableName="roles"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet author="talibaliyev" id="dropColumLoginTimeUsersTable">
+        <dropColumn  tableName="users">
+            <column name="login_time"/>
+        </dropColumn>
+    </changeSet>
+    <changeSet author="talibaliyev" id="dropColumRoleIdUsersTable">
+        <dropColumn  tableName="users">
+            <column name="role_id"/>
+        </dropColumn>
+    </changeSet>
+    <changeSet id="modifyEmailColumnType" author="talibaliyev">
+        <modifyDataType tableName="users" columnName="email" newDataType="varchar(50)"/>
+    </changeSet>
+
+
+</databaseChangeLog>

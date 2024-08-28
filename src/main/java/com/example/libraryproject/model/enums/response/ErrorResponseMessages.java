@@ -10,11 +10,15 @@ import org.springframework.http.HttpStatus;
 @FieldDefaults(makeFinal = true ,level = AccessLevel.PRIVATE)
 public enum ErrorResponseMessages implements ResponseMessages {
     UNEXPECTED("unexpected", "Unexpected error.", HttpStatus.INTERNAL_SERVER_ERROR),
-    NOT_FOUND("not_found_%s", "The requested %s model with %s was not found.", HttpStatus.NOT_FOUND);
+    NOT_FOUND("not_found_%s", "The requested %s model with %s was not found.", HttpStatus.NOT_FOUND),
+    EMAIL_ALREADY_REGISTERED("email_already_registered", "Email already registered", HttpStatus.CONFLICT),;
+
 
     String key;
     String message;
     HttpStatus httpStatus;
+
+
     @Override
     public String key() {
         return key;

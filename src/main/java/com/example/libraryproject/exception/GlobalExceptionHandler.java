@@ -24,12 +24,12 @@ public class GlobalExceptionHandler {
     // Yəni, hansı cavabı verəcəyini, hansı status kodu ilə verəcəyini və
     // hansı məlumatı göndərəcəyini buradan müəyyən edirsən.
 
-    @ExceptionHandler(SQLException.class)
-    public ResponseEntity<Map<String, String>> handleSqlException(SQLException ex) {
-        Map<String, String> response = new HashMap<>();
-        response.put("error", ex.getMessage().split("Ayrıntı:")[0]);
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler(SQLException.class)
+//    public ResponseEntity<Map<String, String>> handleSqlException(SQLException ex) {
+//        Map<String, String> response = new HashMap<>();
+//        response.put("error", ex.getMessage().split("Ayrıntı:")[0]);
+//        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
     // todo : ya global yada sexsi exception class ataciq heleki global ataciq
 
 //    @ExceptionHandler(Exception.class)
