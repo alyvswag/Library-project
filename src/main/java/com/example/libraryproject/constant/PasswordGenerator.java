@@ -1,7 +1,10 @@
 package com.example.libraryproject.constant;
 
+import org.springframework.stereotype.Component;
+
 import java.security.SecureRandom;
 
+@Component
 public class PasswordGenerator {
     private static final String LOWER = "abcdefghijklmnopqrstuvwxyz";
     private static final String UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

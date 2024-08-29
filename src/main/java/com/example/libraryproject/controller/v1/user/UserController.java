@@ -1,6 +1,5 @@
 package com.example.libraryproject.controller.v1.user;
 
-import com.example.libraryproject.model.dao.User;
 import com.example.libraryproject.model.dto.request.create.AdminRequestCreate;
 import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.UserResponseAdmin;
@@ -57,4 +56,5 @@ public class UserController {
         userService.deactivateUser(id);
         return BaseResponse.success();
     }
+
 }
