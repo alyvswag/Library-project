@@ -36,7 +36,6 @@ public class AuthorManagementService {
         bookRepository.save(bookEntity);
     }
 
-
     public List<BookResponseAdmin> getBooksByAuthorId(Long authorId) {
         authorService.getAuthorById(authorId);
         List<Book> books = authorRepository.findBooksByAuthor(authorId)

@@ -4,31 +4,28 @@ package com.example.libraryproject.service.user;
 import com.example.libraryproject.constant.PasswordGenerator;
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.user.UserMapper;
-import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dao.Role;
 import com.example.libraryproject.model.dao.User;
 import com.example.libraryproject.model.dao.UserRole;
 import com.example.libraryproject.model.dto.request.create.AdminRequestCreate;
-import com.example.libraryproject.model.dto.request.create.UserRequestCreate;
 import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.UserResponseAdmin;
 import com.example.libraryproject.model.enums.user.RoleName;
-import com.example.libraryproject.model.enums.user.Status;
+import com.example.libraryproject.rabbitmq.EmailProducer;
+import com.example.libraryproject.rabbitmq.MailService;
 import com.example.libraryproject.repository.user.RoleRepository;
 import com.example.libraryproject.repository.user.UserRepository;
 import com.example.libraryproject.repository.user.UserRoleRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-
 import org.springframework.stereotype.Service;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.EMAIL_ALREADY_REGISTERED;
+import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.INVALID_EMAIL_FORMAT;
 import static com.example.libraryproject.model.enums.user.RoleName.ADMIN;
 import static com.example.libraryproject.model.enums.user.Status.DELETED;
 import static com.example.libraryproject.model.enums.user.Status.INACTIVE;
@@ -43,27 +40,21 @@ public class UserService {
     final RoleRepository roleRepository;
     final UserMapper userMapper;
     final MailService mailService;
-    final RabbitTemplate rabbitTemplate;
-
+    final EmailProducer emailProducer;
 //    final BCryptPasswordEncoder passwordEncoder;
-    public void addUser(AdminRequestCreate adminRequestCreate) {
-        //1: email yoxlama
-        throwIf(userRepository.findUserByEmail(adminRequestCreate.getEmail())::isEmpty, BaseException.of(EMAIL_ALREADY_REGISTERED));
-        //2: admin ucun default passsword generate etmek
+    public void addUser(AdminRequestCreate adminRequestCreate,RoleName roleName)  {
+        throwIf(() -> !isValidEmailAddress(adminRequestCreate.getEmail()), BaseException.of(INVALID_EMAIL_FORMAT));
+        throwIf(
+                () -> userRepository.findUserByEmail(adminRequestCreate.getEmail()).isPresent(),
+                BaseException.of(EMAIL_ALREADY_REGISTERED)
+        );
         User user = userMapper.toEntity(adminRequestCreate);
         String password = PasswordGenerator.generatePassword();
-        user.setPassword(password);
-        mailService.sendMail(user.getEmail(), password);
-//        user.setPassword(passwordEncoder.encode(password));
-        //3: passwordun gmaile gonderilmesi rabbitmq ve prosesin tamamlanmasi
-        //.....
-//        emailProducer.sendEmailMessage(user.getEmail(), password);
-        //4: role teyin edilmesi
+        emailProducer.sendEmailMessage(user.getEmail(),password);
+        user.setPassword(password);// todo: security tetbiq ederken passwordu encode edib bazaya yaz
         List<Role> roles = new ArrayList<>();
-        roles.add(roleRepository.findRole(ADMIN));
+        roles.add(roleRepository.findRole(roleName));
         user.setRoles(roles);
-        //5: bazaya insert
-        System.out.println(password);
         userRepository.save(user);
     }
 
@@ -127,6 +118,12 @@ public class UserService {
         }
         return users;
     }
+    private  boolean isValidEmailAddress(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pat = Pattern.compile(emailRegex);
+        return email != null && pat.matcher(email).matches();
+    }
+
 
 
 }

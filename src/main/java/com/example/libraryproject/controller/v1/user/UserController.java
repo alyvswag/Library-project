@@ -20,9 +20,9 @@ import java.util.List;
 public class UserController {
    final  UserService userService;
 
-    @PostMapping("/addUser")
-    public BaseResponse<Void> addUser(@RequestBody AdminRequestCreate adminRequestCreate) {
-        userService.addUser(adminRequestCreate);
+    @PostMapping("/addUser/{roleName}")
+    public BaseResponse<Void> addUser(@RequestBody AdminRequestCreate adminRequestCreate,@PathVariable RoleName roleName) {
+        userService.addUser(adminRequestCreate,roleName);
         return BaseResponse.success();
     }
     @PutMapping("/updateUser/{id}")

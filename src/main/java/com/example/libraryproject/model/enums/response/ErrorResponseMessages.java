@@ -11,8 +11,8 @@ import org.springframework.http.HttpStatus;
 public enum ErrorResponseMessages implements ResponseMessages {
     UNEXPECTED("unexpected", "Unexpected error.", HttpStatus.INTERNAL_SERVER_ERROR),
     NOT_FOUND("not_found_%s", "The requested %s model with %s was not found.", HttpStatus.NOT_FOUND),
-    EMAIL_ALREADY_REGISTERED("email_already_registered", "Email already registered", HttpStatus.CONFLICT),;
-
+    EMAIL_ALREADY_REGISTERED("email_already_registered", "Email already registered", HttpStatus.CONFLICT),
+    INVALID_EMAIL_FORMAT("invalid_email_format", "Email format is invalid", HttpStatus.BAD_REQUEST);
 
     String key;
     String message;

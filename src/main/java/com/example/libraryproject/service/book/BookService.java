@@ -43,16 +43,8 @@ public class BookService {
                 .orElseThrow(
                         () -> BaseException.notFound(Book.class.getSimpleName(), "book", String.valueOf(id))
                 );
-        //todo: bunu arasdirmaq lazmdi
-        // demek request gelen update modelin update olunacaq bookentitye mapp elemek lazmdi.
-        bookEntity.setBookName(bookEntity.getBookName() == null ? bookEntity.getBookName() : bookRequest.getBookName());
-        bookEntity.setPrice(bookEntity.getPrice() == null ? bookEntity.getPrice() : bookRequest.getPrice());
-        bookEntity.setDescription(bookEntity.getDescription() == null ? bookEntity.getDescription() : bookRequest.getDescription());
-        bookEntity.setGenre(bookEntity.getGenre() == null ? bookEntity.getGenre() : bookRequest.getGenre());
-        bookEntity.setLanguage(bookEntity.getLanguage() == null ? bookEntity.getLanguage() : bookRequest.getLanguage());
-        bookEntity.setPages(bookEntity.getPages() == null ? bookEntity.getPages() : bookRequest.getPages());
-        bookEntity.setPublicationDate(bookEntity.getPublicationDate() == null ? bookEntity.getPublicationDate() : bookRequest.getPublicationDate());
-        bookEntity.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+
+        bookMapper.updateBookFromDto(bookRequest, bookEntity);
         bookRepository.save(bookEntity);
     }
 

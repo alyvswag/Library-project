@@ -4,17 +4,16 @@ import com.example.libraryproject.model.dao.Author;
 import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dao.Publisher;
 import com.example.libraryproject.model.dto.request.create.BookRequestCreate;
+import com.example.libraryproject.model.dto.request.update.BookRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.BookResponseAdmin;
 import com.example.libraryproject.model.dto.response.user.BookResponseUser;
 import com.example.libraryproject.service.author.AuthorService;
 import com.example.libraryproject.service.publisher.PublisherService;
-import org.mapstruct.Context;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring" , uses = {AuthorService.class, PublisherService.class})
+@Mapper(componentModel = "spring" , uses = {AuthorService.class, PublisherService.class},nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface BookMapper {
 
     @Mapping(target = "author", source = "authorId")
@@ -39,5 +38,7 @@ public interface BookMapper {
     @Mapping(target = "author", source = "authorId")
     @Mapping(target = "publisher", source = "publisherId")
     List<BookResponseUser> toResponseUser(List<Book> books);
+
+    void updateBookFromDto(BookRequestUpdate dto, @MappingTarget Book book);
 
 }

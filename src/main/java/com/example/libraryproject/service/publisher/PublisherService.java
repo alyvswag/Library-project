@@ -32,8 +32,7 @@ public class PublisherService {
         Publisher publisherEntity = publisherRepository.findPublisherById(id)
                 .orElseThrow(() -> BaseException.notFound(Publisher.class.getSimpleName(), "publisher", String.valueOf(id)));
 
-        publisherEntity.setPublisherName(publisherRequest.getPublisherName() == null ? publisherEntity.getPublisherName() : publisherRequest.getPublisherName());
-        publisherEntity.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        publisherMapper.updatePublisherFromDto(publisherRequest, publisherEntity);
         publisherRepository.save(publisherEntity);
     }
 
@@ -46,15 +45,15 @@ public class PublisherService {
         publisherRepository.save(publisherEntity);
 
     }
-    public List<PublisherResponseAdmin> getAllPublishers(){
+
+    public List<PublisherResponseAdmin> getAllPublishers() {
         return publisherMapper.toResponse(publisherRepository.findAllPublisher());
     }
-
 
     //
 
     public Publisher findById(Long id) {
-        return id==null? null : publisherRepository.findById(id)
+        return id == null ? null : publisherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Publisher not found"));
     }
 

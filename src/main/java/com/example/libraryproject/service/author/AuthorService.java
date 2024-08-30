@@ -32,13 +32,8 @@ public class AuthorService {
     public void updateAuthor(Long id, AuthorRequestUpdate authorRequest) {
         Author authorEntity = authorRepository.findAuthorById(id)
                 .orElseThrow(() -> BaseException.notFound(Author.class.getSimpleName(), "author", String.valueOf(id)));
-
-        authorEntity.setAuthorName(authorRequest.getAuthorName() == null ? authorEntity.getAuthorName() : authorRequest.getAuthorName());
-        authorEntity.setAuthorSurname(authorRequest.getAuthorSurname() == null ? authorEntity.getAuthorSurname() : authorRequest.getAuthorSurname());
-        authorEntity.setDescription(authorRequest.getDescription() == null ? authorEntity.getDescription() : authorRequest.getDescription());
-        authorEntity.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        authorMapper.updateAuthorFromDto(authorRequest, authorEntity);
         authorRepository.save(authorEntity);
-
     }
 
     public void deleteAuthor(Long id) {
