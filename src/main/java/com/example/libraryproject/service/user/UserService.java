@@ -1,9 +1,10 @@
 package com.example.libraryproject.service.user;
 
 
-import com.example.libraryproject.constant.PasswordGenerator;
+
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.user.UserMapper;
+import com.example.libraryproject.model.dao.Author;
 import com.example.libraryproject.model.dao.Role;
 import com.example.libraryproject.model.dao.User;
 import com.example.libraryproject.model.dao.UserRole;
@@ -12,10 +13,8 @@ import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.UserResponseAdmin;
 import com.example.libraryproject.model.enums.user.RoleName;
 import com.example.libraryproject.rabbitmq.EmailProducer;
-import com.example.libraryproject.rabbitmq.MailService;
 import com.example.libraryproject.repository.user.RoleRepository;
 import com.example.libraryproject.repository.user.UserRepository;
-import com.example.libraryproject.repository.user.UserRoleRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -26,22 +25,23 @@ import java.util.regex.Pattern;
 
 import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.EMAIL_ALREADY_REGISTERED;
 import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.INVALID_EMAIL_FORMAT;
-import static com.example.libraryproject.model.enums.user.RoleName.ADMIN;
 import static com.example.libraryproject.model.enums.user.Status.DELETED;
 import static com.example.libraryproject.model.enums.user.Status.INACTIVE;
 import static com.example.libraryproject.utils.CommonUtils.throwIf;
+import static com.example.libraryproject.utils.PasswordGeneratorUtils.generatePassword;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserService {
+
     final UserRepository userRepository;
-    final UserRoleRepository userRoleRepository;
     final RoleRepository roleRepository;
     final UserMapper userMapper;
-    final MailService mailService;
     final EmailProducer emailProducer;
 //    final BCryptPasswordEncoder passwordEncoder;
+
+
     public void addUser(AdminRequestCreate adminRequestCreate,RoleName roleName)  {
         throwIf(() -> !isValidEmailAddress(adminRequestCreate.getEmail()), BaseException.of(INVALID_EMAIL_FORMAT));
         throwIf(
@@ -49,7 +49,7 @@ public class UserService {
                 BaseException.of(EMAIL_ALREADY_REGISTERED)
         );
         User user = userMapper.toEntity(adminRequestCreate);
-        String password = PasswordGenerator.generatePassword();
+        String password = generatePassword();
         emailProducer.sendEmailMessage(user.getEmail(),password);
         user.setPassword(password);// todo: security tetbiq ederken passwordu encode edib bazaya yaz
         List<Role> roles = new ArrayList<>();

@@ -7,17 +7,17 @@ import java.util.Map;
 @Service
 public class EmailConsumer {
 
-    private final MailService mailService;
+    private final EmailService emailService;
 
-    public EmailConsumer(MailService mailService) {
-        this.mailService = mailService;
+    public EmailConsumer(EmailService emailService) {
+        this.emailService = emailService;
     }
 
     @RabbitListener(queues = "emailQueue")
     public void receiveMessage(Map<String, String> message) throws InterruptedException {
         String email = message.get("email");
         String password = message.get("password");
-        mailService.sendMail(email, password);
+        emailService.sendMail(email, password);
         //todo: thread vererek email 1 saniye arayla gondermek olar
     }
 }

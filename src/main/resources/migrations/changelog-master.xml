@@ -12,4 +12,5 @@
     <include file="/migrations/1.0/1.0.4-add-column-books-table.xml"/>
     <include file="/migrations/1.0/1.0.5-drop-users-table.xml"/>
     <include file="/migrations/1.0/1.0.6-create-users-table.xml"/>
+    <include file="/migrations/1.0/1.0.7-create-rating-and-review-table.xml"/>
 </databaseChangeLog>

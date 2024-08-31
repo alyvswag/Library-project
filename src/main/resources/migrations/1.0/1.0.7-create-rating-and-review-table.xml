@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="ratingAndReview" author="talibaliyev">
+        <createTable tableName="ratings_and_reviews">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="book_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rating" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="review" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_active" type="boolean" defaultValue="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp">
+            </column>
+        </createTable>
+        <sql>
+            ALTER TABLE ratings_and_reviews  ADD CONSTRAINT chk_rating CHECK (rating  &gt;=1 AND rating &lt;= 5);
+        </sql>
+        <addForeignKeyConstraint baseTableName="ratings_and_reviews"
+                                 baseColumnNames="book_id"
+                                 constraintName="fk_ratings_and_reviews_books"
+                                 referencedTableName="books"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="ratings_and_reviews"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_ratings_and_reviews_users"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+
+</databaseChangeLog>
