@@ -4,10 +4,7 @@ package com.example.libraryproject.service.user;
 
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.user.UserMapper;
-import com.example.libraryproject.model.dao.Author;
-import com.example.libraryproject.model.dao.Role;
-import com.example.libraryproject.model.dao.User;
-import com.example.libraryproject.model.dao.UserRole;
+import com.example.libraryproject.model.dao.*;
 import com.example.libraryproject.model.dto.request.create.AdminRequestCreate;
 import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.UserResponseAdmin;
@@ -118,12 +115,21 @@ public class UserService {
         }
         return users;
     }
+
     private  boolean isValidEmailAddress(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         Pattern pat = Pattern.compile(emailRegex);
         return email != null && pat.matcher(email).matches();
     }
 
+    //public
+    public User findById(Long id) {
+        if (id == null) {
+            throw BaseException.nullNotAllowed(User.class.getSimpleName());
+        }
+        return userRepository.findById(id)
+                .orElseThrow(() -> BaseException.notFound(User.class.getSimpleName(), "user", String.valueOf(id)));
+    }
 
 
 }

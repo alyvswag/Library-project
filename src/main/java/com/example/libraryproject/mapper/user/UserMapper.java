@@ -1,14 +1,14 @@
 package com.example.libraryproject.mapper.user;
 
+import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dao.User;
 import com.example.libraryproject.model.dao.UserRole;
 import com.example.libraryproject.model.dto.request.create.AdminRequestCreate;
 import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.UserResponseAdmin;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import com.example.libraryproject.service.book.BookService;
+import com.example.libraryproject.service.user.UserService;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -22,6 +22,5 @@ public interface UserMapper {
     UserResponseAdmin toDto(User user);
 
     List<UserResponseAdmin> toDto(List<User> users);
-
 
 }

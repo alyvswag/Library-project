@@ -3,6 +3,7 @@ package com.example.libraryproject.service.author;
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.author.AuthorMapper;
 import com.example.libraryproject.model.dao.Author;
+import com.example.libraryproject.model.dao.User;
 import com.example.libraryproject.model.dto.request.create.AuthorRequestCreate;
 import com.example.libraryproject.model.dto.request.update.AuthorRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.AuthorResponseAdmin;
@@ -68,9 +69,12 @@ public class AuthorService {
     }
 
 
-    //
+    //public
     public Author findById(Long id) {
-        return id == null ? null : authorRepository.findById(id)
+        if (id == null) {
+            throw BaseException.nullNotAllowed(Author.class.getSimpleName());
+        }
+        return authorRepository.findById(id)
                 .orElseThrow(() -> BaseException.notFound(Author.class.getSimpleName(), "author", String.valueOf(id)));
     }
 

@@ -18,13 +18,13 @@ import java.util.List;
 public class AuthorManagementController {
     final AuthorManagementService authorManagementService;
 
-    @DeleteMapping("/removeBookFromAuthor")
+    @DeleteMapping("/remove-book-from-author")
     public BaseResponse<Void> removeBookFromAuthor(@RequestParam("bookId") Long bookId) {
         authorManagementService.removeBookFromAuthor(bookId);
         return BaseResponse.success();
     }
 
-    @GetMapping("/getBooksByAuthor")
+    @GetMapping("/get-books-by-author")
     public BaseResponse<List<BookResponseAdmin>> getBooksByAuthor(@RequestParam("authorId") Long authorId) {
         return BaseResponse.success(authorManagementService.getBooksByAuthorId(authorId));
     }

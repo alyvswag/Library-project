@@ -39,12 +39,12 @@ public class BookController {
         return BaseResponse.success();
     }
 
-    @GetMapping("/getBookById/{id}")
+    @GetMapping("/get-book-by-id/{id}")
     public BaseResponse<BookResponseAdmin> getBookById(@PathVariable("id") Long id) {
         return BaseResponse.success(bookService.getBookById(id));
     }
 
-    @GetMapping("/getAllBooks")
+    @GetMapping("/get-all-books")
     public BaseResponse<List<BookResponseAdmin>> getAllBooks() {
         return BaseResponse.success(bookService.getAllBooks());
     }

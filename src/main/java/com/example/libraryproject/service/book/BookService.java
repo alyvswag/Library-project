@@ -97,5 +97,13 @@ public class BookService {
         }
     }
 
+    // public methods
+    public Book findById(Long id) {
+        if (id == null) {
+          throw BaseException.nullNotAllowed(Book.class.getSimpleName());
+        }
+        return bookRepository.findById(id)
+                .orElseThrow(() -> BaseException.notFound(Book.class.getSimpleName(), "book", String.valueOf(id)));
+    }
 
 }

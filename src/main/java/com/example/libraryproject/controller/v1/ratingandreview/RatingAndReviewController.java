@@ -3,6 +3,7 @@ package com.example.libraryproject.controller.v1.ratingandreview;
 import com.example.libraryproject.model.dto.request.create.RatAndRevRequestCreate;
 import com.example.libraryproject.model.dto.request.update.RatAndRevRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.RatAndRevResponseAdmin;
+import com.example.libraryproject.model.dto.response.admin.RatingResponse;
 import com.example.libraryproject.model.dto.response.base.BaseResponse;
 import com.example.libraryproject.service.ratingandreview.RatingAndReviewService;
 import lombok.AccessLevel;
@@ -41,6 +42,10 @@ public class RatingAndReviewController {
     public BaseResponse<Void> deleteRatingAndReview(@PathVariable Long id) {
         service.deleteRatingAndReview(id);
         return BaseResponse.success();
+    }
+    @GetMapping("/get-average-rating/{bookId}")
+    public BaseResponse<RatingResponse> getAverageRating(@PathVariable Long bookId) {
+        return BaseResponse.success(service.getAverageRating(bookId));
     }
 
 

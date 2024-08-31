@@ -50,11 +50,13 @@ public class PublisherService {
         return publisherMapper.toResponse(publisherRepository.findAllPublisher());
     }
 
-    //
-
+    //public
     public Publisher findById(Long id) {
-        return id == null ? null : publisherRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Publisher not found"));
+        if (id == null) {
+            throw BaseException.nullNotAllowed(Publisher.class.getSimpleName());
+        }
+        return publisherRepository.findById(id)
+                .orElseThrow(() -> BaseException.notFound(Publisher.class.getSimpleName(), "publisher", String.valueOf(id)));
     }
 
 

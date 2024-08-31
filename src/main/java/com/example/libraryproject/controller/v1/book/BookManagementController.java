@@ -19,18 +19,18 @@ import java.util.List;
 public class BookManagementController {
     final BookManagementService bookManagementService;
 
-    @GetMapping("/searchBooks/{searchWords}")
+    @GetMapping("/search-books/{searchWords}")
     public BaseResponse<List<BookResponseUser>> searchBooks(@PathVariable String searchWords) {
         return BaseResponse.success(bookManagementService.searchBooks(searchWords));
     }
 
 
-    @PostMapping("/filterBooks")
+    @PostMapping("/filter-books")
     public BaseResponse<List<BookResponseUser>> filterBooks(@RequestBody BookRequestFilter bookRequest) {
         return BaseResponse.success(bookManagementService.filterBooks(bookRequest));
     }
 
-    @GetMapping("/getBookInventory")
+    @GetMapping("/get-book-inventory")
     public BaseResponse<List<QuantityBookResponseAdmin>> getBookInventory() {
         return BaseResponse.success(bookManagementService.getBookInventory());
     }

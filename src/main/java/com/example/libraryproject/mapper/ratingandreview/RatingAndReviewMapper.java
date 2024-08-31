@@ -1,9 +1,6 @@
 package com.example.libraryproject.mapper.ratingandreview;
 
-import com.example.libraryproject.model.dao.Author;
-import com.example.libraryproject.model.dao.Publisher;
-import com.example.libraryproject.model.dao.RatingAndReview;
-import com.example.libraryproject.model.dao.User;
+import com.example.libraryproject.model.dao.*;
 import com.example.libraryproject.model.dto.request.create.RatAndRevRequestCreate;
 import com.example.libraryproject.model.dto.request.update.RatAndRevRequestUpdate;
 import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
@@ -22,13 +19,14 @@ public interface RatingAndReviewMapper {
     @Mapping(target = "user", source = "userId")
     @Mapping(target = "book", source = "bookId")
     RatingAndReview toEntity(RatAndRevRequestCreate ratAndRevRequestCreate);
-//    default User mapUser(Long userId, @Context UserService userService) {
-//        return userService.findById(authorId);
-//    }
-//
-//    default Publisher mapPublisher(Long publisherId, @Context PublisherService publisherService) {
-//        return publisherService.findById(publisherId);
-//    }
+
+    default User mapUser(Long userId, @Context UserService userService) {
+        return userService.findById(userId);
+    }
+
+    default Book mapBook(Long bookId, @Context BookService bookService) {
+        return bookService.findById(bookId);
+    }
     // todo : servislerde findbyid metodu yazilsin mapper de problem yasanmasin deye ve
     //  idde null gonderilmesine diqqet edilsin null gelse yeni exception novu yaradilsin
 

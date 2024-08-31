@@ -20,38 +20,38 @@ import java.util.List;
 public class UserController {
    final  UserService userService;
 
-    @PostMapping("/addUser/{roleName}")
+    @PostMapping("/add-user/{roleName}")
     public BaseResponse<Void> addUser(@RequestBody AdminRequestCreate adminRequestCreate,@PathVariable RoleName roleName) {
         userService.addUser(adminRequestCreate,roleName);
         return BaseResponse.success();
     }
-    @PutMapping("/updateUser/{id}")
+    @PutMapping("/update-user/{id}")
     public BaseResponse<Void> updateUser(@PathVariable Long id, @RequestBody UserRequestUpdate userRequestUpdate) {
         userService.updateUser(id, userRequestUpdate);
         return BaseResponse.success();
     }
-    @DeleteMapping("/deleteUser/{id}")
+    @DeleteMapping("/delete-user/{id}")
     public BaseResponse<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return BaseResponse.success();
     }
-    @GetMapping("/getUserById/{id}")
+    @GetMapping("/get-user-by-id/{id}")
     public BaseResponse<UserResponseAdmin> getUserById(@PathVariable Long id) {
         return BaseResponse.success(userService.getUserById(id));
     }
-    @GetMapping("/getAllUsers")
+    @GetMapping("/get-all-users")
     public BaseResponse<List<UserResponseAdmin>> getAllUsers() {
         return BaseResponse.success(userService.getAllUsers());
     }
-    @GetMapping("/getUserByEmail/{email}")
+    @GetMapping("/get-user-by-email/{email}")
     public BaseResponse<UserResponseAdmin> getUserByEmail(@PathVariable String email) {
         return BaseResponse.success(userService.getUserByEmail(email));
     }
-    @GetMapping("/getUsersByRole/{roleName}")
+    @GetMapping("/get-users-by-role/{roleName}")
     public BaseResponse<List<UserResponseAdmin>> getUsersByRole(@PathVariable RoleName roleName) {
         return BaseResponse.success(userService.getUsersByRole(roleName));
     }
-    @DeleteMapping("/deactivateUser/{id}")
+    @DeleteMapping("/deactivate-user/{id}")
     public BaseResponse<Void> deactivateUser(@PathVariable Long id) {
         userService.deactivateUser(id);
         return BaseResponse.success();

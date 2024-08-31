@@ -2,14 +2,17 @@ package com.example.libraryproject.model.dto.response.base;
 
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.exception.types.NotFoundExceptionType;
+import com.example.libraryproject.exception.types.NullNotAllowedExceptionType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.NOT_FOUND;
+import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.NULL_NOT_ALLOWED;
 import static com.example.libraryproject.model.enums.response.SuccessResponseMessages.CREATED;
 import static com.example.libraryproject.model.enums.response.SuccessResponseMessages.SUCCESS;
 
@@ -51,7 +54,15 @@ public class BaseResponse<T> {
 
                 );
             }
+            if(ex.getResponseMessages().equals(NULL_NOT_ALLOWED)){
+                NullNotAllowedExceptionType nullNotAllowed   = ex.getNullNotAllowedData();
 
+                return of(
+                        String.format(ex.getResponseMessages().key(), nullNotAllowed.getTarget().toLowerCase()),
+                        String.format(ex.getResponseMessages().message(), nullNotAllowed.getTarget())
+                );
+
+            }
             return responseOf(ex.getResponseMessages());
         }
     }
@@ -80,6 +91,12 @@ public class BaseResponse<T> {
         return BaseResponse.builder()
                 .meta(Meta.of(ex))
                 .httpStatus(ex.getResponseMessages().httpStatus())
+                .build();
+    }
+    public static BaseResponse<?> error(SQLException ex) {
+        return BaseResponse.builder()
+                .meta(Meta.of(ex.getClass().getSimpleName(),ex.getMessage()))
+                .httpStatus(HttpStatus.BAD_REQUEST)
                 .build();
     }
 

@@ -1,5 +1,6 @@
 package com.example.libraryproject.exception;
 
+import com.example.libraryproject.exception.types.NullNotAllowedExceptionType;
 import com.example.libraryproject.model.dto.response.base.ResponseMessages;
 
 import com.example.libraryproject.exception.types.NotFoundExceptionType;
@@ -8,8 +9,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.util.Map;
 
-import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.NOT_FOUND;
-import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.UNEXPECTED;
+import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.*;
 
 
 @EqualsAndHashCode(callSuper = true)
@@ -21,6 +21,7 @@ import static com.example.libraryproject.model.enums.response.ErrorResponseMessa
 public class BaseException extends RuntimeException {
     ResponseMessages responseMessages;
     NotFoundExceptionType notFoundData;
+    NullNotAllowedExceptionType nullNotAllowedData;
 
     @Override
     public String getMessage() {
@@ -42,6 +43,14 @@ public class BaseException extends RuntimeException {
                 .responseMessages(NOT_FOUND)
                 .notFoundData(
                         NotFoundExceptionType.of(target, Map.of(field, value))
+                )
+                .build();
+    }
+    public static BaseException nullNotAllowed(String target) {
+        return BaseException.builder()
+                .responseMessages(NULL_NOT_ALLOWED)
+                .nullNotAllowedData(
+                        NullNotAllowedExceptionType.of(target)
                 )
                 .build();
     }

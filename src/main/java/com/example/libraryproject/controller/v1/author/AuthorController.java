@@ -36,15 +36,15 @@ public class AuthorController {
         authorService.deleteAuthor(id);
         return BaseResponse.success();
     }
-    @GetMapping("/getAuthorById/{id}")
+    @GetMapping("/get-author-by-id/{id}")
     public BaseResponse<AuthorResponseAdmin> getAuthorById(@PathVariable("id") Long id) {
         return BaseResponse.success(authorService.getAuthorById(id));
     }
-    @GetMapping("/getAllAuthors")
+    @GetMapping("/get-all-authors")
     public BaseResponse<List<AuthorResponseAdmin>> getAllAuthors() {
         return BaseResponse.success(authorService.getAllAuthors());
     }
-    @GetMapping("/getAuthorByName/{name}")
+    @GetMapping("/get-author-by-name/{name}")
     public BaseResponse<List<AuthorResponseAdmin>> getAuthorByName(@PathVariable("name") String name) {
         return BaseResponse.success(authorService.getAuthorByName(name));
     }

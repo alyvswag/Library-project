@@ -19,6 +19,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<BaseResponse<?>> handleBaseException( BaseException  ex) {
         return  ResponseEntity.status(ex.getResponseMessages().httpStatus()).body(BaseResponse.error(ex));
     }
+    @ExceptionHandler
+    public ResponseEntity<BaseResponse<?>> handleBaseException( SQLException  ex) {
+        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BaseResponse.error(ex));
+    }
+
     // qeyd: ResponseEntity, HTTP cavablarını (HTTP Response) bərpa etmək üçün istifadə olunan bir sinifdir.
     // Bu siniflə HTTP status kodunu (status), başlıqları (headers), və bədənini (body) idarə etmək mümkündür.
     // Yəni, hansı cavabı verəcəyini, hansı status kodu ilə verəcəyini və

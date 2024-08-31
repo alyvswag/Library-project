@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @Entity
 @Table(name = "user_role")
-    public class UserRole extends Base {
+public class UserRole extends Base {
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "user_id"  ,referencedColumnName = "id")
         User user;
@@ -22,4 +22,4 @@ import lombok.experimental.FieldDefaults;
         Role role;
         @Column(name ="is_active")
         Boolean isActive;
-    }
+}

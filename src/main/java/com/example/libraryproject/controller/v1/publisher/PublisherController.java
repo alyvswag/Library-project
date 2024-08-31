@@ -40,7 +40,7 @@ public class PublisherController {
         return BaseResponse.success();
     }
 
-    @GetMapping("/getAllPublishers")
+    @GetMapping("/get-all-publishers")
     public BaseResponse<List<PublisherResponseAdmin>> getAllPublishers() {
         return BaseResponse.success(publisherService.getAllPublishers());
     }
