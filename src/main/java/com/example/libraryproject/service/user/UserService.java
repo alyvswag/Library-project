@@ -1,7 +1,5 @@
 package com.example.libraryproject.service.user;
 
-
-
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.user.UserMapper;
 import com.example.libraryproject.model.dao.*;
@@ -37,7 +35,6 @@ public class UserService {
     final UserMapper userMapper;
     final EmailProducer emailProducer;
 //    final BCryptPasswordEncoder passwordEncoder;
-
 
     public void addUser(AdminRequestCreate adminRequestCreate,RoleName roleName)  {
         throwIf(() -> !isValidEmailAddress(adminRequestCreate.getEmail()), BaseException.of(INVALID_EMAIL_FORMAT));
@@ -106,8 +103,16 @@ public class UserService {
         userRepository.save(userEntity);
     }
 
-    //private
+    //public
+    public User findById(Long id) {
+        if (id == null) {
+            throw BaseException.nullNotAllowed(User.class.getSimpleName());
+        }
+        return userRepository.findById(id)
+                .orElseThrow(() -> BaseException.notFound(User.class.getSimpleName(), "user", String.valueOf(id)));
+    }
 
+    //private
     private List<User> mapUserRoleToUserResponseAdmin(List<UserRole> userRoles) {
         List<User> users = new ArrayList<>();
         for (UserRole userRole : userRoles) {
@@ -121,15 +126,5 @@ public class UserService {
         Pattern pat = Pattern.compile(emailRegex);
         return email != null && pat.matcher(email).matches();
     }
-
-    //public
-    public User findById(Long id) {
-        if (id == null) {
-            throw BaseException.nullNotAllowed(User.class.getSimpleName());
-        }
-        return userRepository.findById(id)
-                .orElseThrow(() -> BaseException.notFound(User.class.getSimpleName(), "user", String.valueOf(id)));
-    }
-
 
 }

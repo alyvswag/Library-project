@@ -1,11 +1,9 @@
 package com.example.libraryproject.service.book;
 
-
 import com.example.libraryproject.mapper.book.BookMapper;
 import com.example.libraryproject.mapper.book.QuantityBookMapper;
 import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dto.request.filter.BookRequestFilter;
-
 import com.example.libraryproject.model.dto.response.admin.QuantityBookResponseAdmin;
 import com.example.libraryproject.model.dto.response.user.BookResponseUser;
 import com.example.libraryproject.repository.book.BookRepository;
@@ -20,7 +18,6 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 

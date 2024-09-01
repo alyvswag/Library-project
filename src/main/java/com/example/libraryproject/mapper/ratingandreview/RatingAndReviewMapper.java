@@ -27,8 +27,6 @@ public interface RatingAndReviewMapper {
     default Book mapBook(Long bookId, @Context BookService bookService) {
         return bookService.findById(bookId);
     }
-    // todo : servislerde findbyid metodu yazilsin mapper de problem yasanmasin deye ve
-    //  idde null gonderilmesine diqqet edilsin null gelse yeni exception novu yaradilsin
 
     List<RatAndRevResponseAdmin> toResponseList(List<RatingAndReview> ratingAndReviewList);
 

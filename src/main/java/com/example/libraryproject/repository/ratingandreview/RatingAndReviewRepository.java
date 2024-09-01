@@ -18,8 +18,8 @@ public interface RatingAndReviewRepository extends JpaRepository<RatingAndReview
     @Query("select r from RatingAndReview  r where r.book.id = :bookId and r.isActive = true")
     List<RatingAndReview> findAllByRatingAndReviewByBook(@Param("bookId") Long bookId);
 
-    @Query("select r from RatingAndReview  r where r.user.id = :bookId and r.isActive = true")
-    List<RatingAndReview> findAllByRatingAndReviewByUser(@Param("bookId") Long userId);
+    @Query("select r from RatingAndReview  r where r.user.id = :userId and r.isActive = true")
+    List<RatingAndReview> findAllByRatingAndReviewByUser(@Param("userId") Long userId);
 
     @Query("Select AVG(r.rating) from RatingAndReview  r where r.book.id = :bookId")
     Double averageRatingByBookId(@Param("bookId") Long bookId);

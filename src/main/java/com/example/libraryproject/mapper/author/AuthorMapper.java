@@ -14,9 +14,13 @@ import java.util.List;
 
 @Mapper(componentModel = "spring",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface AuthorMapper {
+
     Author  toEntity(AuthorRequestCreate author);
+
     Author  toEntity(AuthorRequestUpdate author);
+
     AuthorResponseAdmin toResponse(Author author);
+
     List<AuthorResponseAdmin> toResponse(List<Author> authors);
 
     void updateAuthorFromDto(AuthorRequestUpdate dto, @MappingTarget Author author);

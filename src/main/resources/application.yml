@@ -22,8 +22,8 @@ spring :
             enable: true
 #            todo: elave et pass ve username
     username:
-    port: 587
     password:
+    port: 587
 
   rabbitmq:
     host: localhost

@@ -44,6 +44,6 @@ public class Book extends Base {
     @Column(name = "is_active")
     Boolean isActive;
     @OneToOne(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private QuantityBook quantityBook;
+    QuantityBook quantityBook;
 
 }

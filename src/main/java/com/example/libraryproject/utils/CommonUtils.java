@@ -13,4 +13,5 @@ public class CommonUtils {
             throw ex;
         }
     }
+    //ternary operatorunun daha tekmil formasi
 }

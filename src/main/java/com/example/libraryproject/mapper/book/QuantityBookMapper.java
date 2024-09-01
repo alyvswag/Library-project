@@ -34,6 +34,7 @@ public interface QuantityBookMapper {
                 .updatedAt(book.getUpdatedAt())
                 .build();
 
+    }
         // `BookAdminResponse` sahələrinin `Book` obyektindən əl ilə çevrilməsi
         // todo: kod chatgpt terefinden yazilib daha tekmil versiya eziyyet cek axtar
 //            response.setId(book.getId());
@@ -47,6 +48,6 @@ public interface QuantityBookMapper {
 //            response.setCreatedAt(book.getCreatedAt());
 //            response.setUpdatedAt(book.getUpdatedAt());
 //            return response;
-    }
+
 }
 

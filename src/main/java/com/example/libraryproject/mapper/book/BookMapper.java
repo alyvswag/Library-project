@@ -20,7 +20,6 @@ public interface BookMapper {
     @Mapping(target = "publisher", source = "publisherId")
     Book toEntity(BookRequestCreate bookRequestCreate);
 
-
     default Author mapAuthor(Long authorId, @Context AuthorService authorService) {
         return authorService.findById(authorId);
     }

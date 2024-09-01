@@ -19,6 +19,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class PublisherService {
+
     final PublisherRepository publisherRepository;
     final PublisherMapper publisherMapper;
 
@@ -50,6 +51,8 @@ public class PublisherService {
         return publisherMapper.toResponse(publisherRepository.findAllPublisher());
     }
 
+
+
     //public
     public Publisher findById(Long id) {
         if (id == null) {
@@ -58,6 +61,5 @@ public class PublisherService {
         return publisherRepository.findById(id)
                 .orElseThrow(() -> BaseException.notFound(Publisher.class.getSimpleName(), "publisher", String.valueOf(id)));
     }
-
 
 }

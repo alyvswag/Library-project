@@ -30,17 +30,6 @@ public class Author extends Base {
     @Column(name = "is_active")
     Boolean isActive;
 
-//    @Override
-//    public String toString() {
-//        return "Author{" +
-//                "name='" + name + '\'' +
-//                ", surname='" + surname + '\'' +
-//                ", description='" + description + '\'' +
-//                ", books=" + books +
-//                ", isActive=" + isActive +
-//                '}';
-//    }
-
     //one - author many kitab
     // many kitab one author
 }

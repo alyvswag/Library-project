@@ -20,9 +20,9 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class AuthorService {
+
     final AuthorMapper authorMapper;
     final AuthorRepository authorRepository;
-
 
     public void addAuthor(AuthorRequestCreate author) {
         Author authorEntity = authorMapper.toEntity(author);

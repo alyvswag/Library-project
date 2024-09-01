@@ -76,6 +76,14 @@ public class BookService {
         return bookMapper.toResponse(bookEntityList);
     }
 
+    // public methods
+    public Book findById(Long id) {
+        if (id == null) {
+            throw BaseException.nullNotAllowed(Book.class.getSimpleName());
+        }
+        return bookRepository.findBookById(id)
+                .orElseThrow(() -> BaseException.notFound(Book.class.getSimpleName(), "book", String.valueOf(id)));
+    }
 
     // private methods
     private void checkAuthor(Book bookEntity) {
@@ -95,15 +103,6 @@ public class BookService {
             if (!bookEntity.getPublisher().getIsActive())
                 throw BaseException.notFound(Publisher.class.getSimpleName(), "publisher", bookEntity.getPublisher().getId());
         }
-    }
-
-    // public methods
-    public Book findById(Long id) {
-        if (id == null) {
-          throw BaseException.nullNotAllowed(Book.class.getSimpleName());
-        }
-        return bookRepository.findById(id)
-                .orElseThrow(() -> BaseException.notFound(Book.class.getSimpleName(), "book", String.valueOf(id)));
     }
 
 }

@@ -2,26 +2,24 @@ package com.example.libraryproject.service.ratingandreview;
 
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.ratingandreview.RatingAndReviewMapper;
-import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dao.RatingAndReview;
 import com.example.libraryproject.model.dto.request.create.RatAndRevRequestCreate;
 import com.example.libraryproject.model.dto.request.update.RatAndRevRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.RatAndRevResponseAdmin;
 import com.example.libraryproject.model.dto.response.admin.RatingResponse;
-import com.example.libraryproject.repository.author.AuthorRepository;
 import com.example.libraryproject.repository.ratingandreview.RatingAndReviewRepository;
 import com.example.libraryproject.service.book.BookService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class RatingAndReviewService {
+
     final RatingAndReviewRepository repository;
     final RatingAndReviewMapper mapper;
     final BookService bookService;
@@ -63,6 +61,5 @@ public class RatingAndReviewService {
                 .averageRating(ratingString)
                 .build();
     }
-
 
 }

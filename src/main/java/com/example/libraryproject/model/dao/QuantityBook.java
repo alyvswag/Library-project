@@ -12,6 +12,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "quantity")
 public class QuantityBook  extends Base {
     @OneToOne(fetch = FetchType.LAZY)
