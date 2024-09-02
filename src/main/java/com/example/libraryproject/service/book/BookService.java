@@ -9,6 +9,7 @@ import com.example.libraryproject.model.dao.QuantityBook;
 import com.example.libraryproject.model.dto.request.create.BookRequestCreate;
 import com.example.libraryproject.model.dto.request.update.BookRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.BookResponseAdmin;
+import com.example.libraryproject.model.enums.book.Status;
 import com.example.libraryproject.service.publisher.PublisherService;
 import com.example.libraryproject.service.author.AuthorService;
 import lombok.AccessLevel;
@@ -19,6 +20,9 @@ import com.example.libraryproject.repository.book.BookRepository;
 
 import java.sql.Timestamp;
 import java.util.List;
+
+import static com.example.libraryproject.model.enums.book.Status.ACTIVE;
+import static com.example.libraryproject.model.enums.book.Status.DELETED;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -32,9 +36,12 @@ public class BookService {
     public void addBook(BookRequestCreate book) {
         Book bookEntity = bookMapper.toEntity(book);
         checkAuthorAndPublisher(bookEntity);
-        QuantityBook quantityBook = new QuantityBook(bookEntity, book.getQuantity());
+        QuantityBook quantityBook = QuantityBook.builder()
+                .book(bookEntity)
+                .quantity(book.getQuantity())
+                .build();
         bookEntity.setQuantityBook(quantityBook);
-        bookEntity.setIsActive(true);//todo : mapping target constant yaza bilirsin
+        bookEntity.setStatus(ACTIVE);//todo : mapping target constant yaza bilirsin
         bookRepository.save(bookEntity);
     }
 
@@ -54,7 +61,7 @@ public class BookService {
                         () -> BaseException.notFound(Book.class.getSimpleName(), "book", String.valueOf(id))
                 );
 
-        bookEntity.setIsActive(false);
+        bookEntity.setStatus(DELETED);
         bookEntity.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
         bookRepository.save(bookEntity);
     }

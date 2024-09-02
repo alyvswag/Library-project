@@ -9,6 +9,7 @@ import com.example.libraryproject.service.user.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
 public class UserController {
    final  UserService userService;
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/add-user/{roleName}")
     public BaseResponse<Void> addUser(@RequestBody AdminRequestCreate adminRequestCreate,@PathVariable RoleName roleName) {
         userService.addUser(adminRequestCreate,roleName);

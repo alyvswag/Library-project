@@ -4,6 +4,7 @@ package com.example.libraryproject.model.dao;
 import com.example.libraryproject.model.enums.book.Genre;
 import com.example.libraryproject.model.enums.book.Language;
 import com.example.libraryproject.model.dao.entity.Base;
+import com.example.libraryproject.model.enums.book.Status;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -41,8 +42,9 @@ public class Book extends Base {
     Integer pages;
     @Column(name = "publication_date")
     LocalDate publicationDate;
-    @Column(name = "is_active")
-    Boolean isActive;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    Status status;
     @OneToOne(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     QuantityBook quantityBook;
 

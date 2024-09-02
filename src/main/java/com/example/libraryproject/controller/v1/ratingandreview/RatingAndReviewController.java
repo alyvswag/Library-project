@@ -9,6 +9,7 @@ import com.example.libraryproject.service.ratingandreview.RatingAndReviewService
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
 public class RatingAndReviewController {
     final RatingAndReviewService service;
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/add-rating-and-review")
     public BaseResponse<Void> addRatingAndReview(@RequestBody RatAndRevRequestCreate ratingAndReview) {
         service.addRatingAndReview(ratingAndReview);

@@ -20,4 +20,8 @@ public class QuantityBook  extends Base {
     Book book;
     @Column(name ="quantity")
     Integer quantity;
+    @Column(name ="reserved_quantity",  columnDefinition = "integer default 0")
+    Integer reservedQuantity;
+    @Column(name ="rental_quantity",  columnDefinition = "integer default 0")
+    Integer rentalQuantity;
 }
