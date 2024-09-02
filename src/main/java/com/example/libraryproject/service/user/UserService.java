@@ -7,7 +7,7 @@ import com.example.libraryproject.model.dto.request.create.AdminRequestCreate;
 import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.UserResponseAdmin;
 import com.example.libraryproject.model.enums.user.RoleName;
-import com.example.libraryproject.rabbitmq.EmailProducer;
+import com.example.libraryproject.service.email.EmailProducer;
 import com.example.libraryproject.repository.user.RoleRepository;
 import com.example.libraryproject.repository.user.UserRepository;
 import lombok.AccessLevel;
@@ -20,8 +20,8 @@ import java.util.regex.Pattern;
 
 import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.EMAIL_ALREADY_REGISTERED;
 import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.INVALID_EMAIL_FORMAT;
-import static com.example.libraryproject.model.enums.user.Status.DELETED;
-import static com.example.libraryproject.model.enums.user.Status.INACTIVE;
+import static com.example.libraryproject.model.enums.base.Status.DELETED;
+import static com.example.libraryproject.model.enums.base.Status.INACTIVE;
 import static com.example.libraryproject.utils.CommonUtils.throwIf;
 import static com.example.libraryproject.utils.PasswordGeneratorUtils.generatePassword;
 

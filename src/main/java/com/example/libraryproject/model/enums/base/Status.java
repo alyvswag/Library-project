@@ -1,4 +1,4 @@
-package com.example.libraryproject.model.enums.book;
+package com.example.libraryproject.model.enums.base;
 
 public enum Status {
     ACTIVE,

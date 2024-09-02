@@ -19,6 +19,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class ReservationController {
+
     final ReservationService reservationService;
 
     @ResponseStatus(HttpStatus.CREATED)

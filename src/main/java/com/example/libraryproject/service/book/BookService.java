@@ -9,7 +9,6 @@ import com.example.libraryproject.model.dao.QuantityBook;
 import com.example.libraryproject.model.dto.request.create.BookRequestCreate;
 import com.example.libraryproject.model.dto.request.update.BookRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.BookResponseAdmin;
-import com.example.libraryproject.model.enums.book.Status;
 import com.example.libraryproject.service.publisher.PublisherService;
 import com.example.libraryproject.service.author.AuthorService;
 import lombok.AccessLevel;
@@ -21,8 +20,8 @@ import com.example.libraryproject.repository.book.BookRepository;
 import java.sql.Timestamp;
 import java.util.List;
 
-import static com.example.libraryproject.model.enums.book.Status.ACTIVE;
-import static com.example.libraryproject.model.enums.book.Status.DELETED;
+import static com.example.libraryproject.model.enums.base.Status.ACTIVE;
+import static com.example.libraryproject.model.enums.base.Status.DELETED;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -88,7 +87,7 @@ public class BookService {
         if (id == null) {
             throw BaseException.nullNotAllowed(Book.class.getSimpleName());
         }
-        return bookRepository.findBookById(id)
+        return bookRepository.findActiveBookById(id)
                 .orElseThrow(() -> BaseException.notFound(Book.class.getSimpleName(), "book", String.valueOf(id)));
     }
 

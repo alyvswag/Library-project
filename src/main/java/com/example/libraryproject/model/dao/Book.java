@@ -4,7 +4,7 @@ package com.example.libraryproject.model.dao;
 import com.example.libraryproject.model.enums.book.Genre;
 import com.example.libraryproject.model.enums.book.Language;
 import com.example.libraryproject.model.dao.entity.Base;
-import com.example.libraryproject.model.enums.book.Status;
+import com.example.libraryproject.model.enums.base.Status;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

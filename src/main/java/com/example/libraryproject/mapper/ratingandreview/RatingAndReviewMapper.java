@@ -3,11 +3,8 @@ package com.example.libraryproject.mapper.ratingandreview;
 import com.example.libraryproject.model.dao.*;
 import com.example.libraryproject.model.dto.request.create.RatAndRevRequestCreate;
 import com.example.libraryproject.model.dto.request.update.RatAndRevRequestUpdate;
-import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.RatAndRevResponseAdmin;
-import com.example.libraryproject.service.author.AuthorService;
 import com.example.libraryproject.service.book.BookService;
-import com.example.libraryproject.service.publisher.PublisherService;
 import com.example.libraryproject.service.user.UserService;
 import org.mapstruct.*;
 

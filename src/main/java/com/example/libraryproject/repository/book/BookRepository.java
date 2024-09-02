@@ -11,8 +11,11 @@ import java.util.Optional;
 
 @Repository
 public  interface BookRepository  extends JpaRepository<Book, Long>  {
-    @Query("SELECT b FROM Book b WHERE b.id = :id AND b.status = 'ACTIVE' and b.quantityBook.quantity > 0")
+    @Query("SELECT b FROM Book b WHERE b.id = :id AND b.status != 'DELETED' and b.quantityBook.quantity > 0")
     Optional<Book> findBookById(@Param("id") long id);
+
+    @Query("SELECT b FROM Book b WHERE b.id = :id AND b.status = 'ACTIVE' and b.quantityBook.quantity > 0")
+    Optional<Book> findActiveBookById(@Param("id") long id);
 
     @Query(" SELECT b FROM Book b where b.status = 'ACTIVE' and b.quantityBook.quantity > 0 ")
     List<Book> findAllBook();

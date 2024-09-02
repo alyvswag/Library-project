@@ -6,7 +6,6 @@ import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dto.request.filter.BookRequestFilter;
 import com.example.libraryproject.model.dto.response.admin.QuantityBookResponseAdmin;
 import com.example.libraryproject.model.dto.response.user.BookResponseUser;
-import com.example.libraryproject.model.enums.book.Status;
 import com.example.libraryproject.repository.book.BookRepository;
 import com.example.libraryproject.repository.book.QuantityBookRepository;
 import jakarta.persistence.EntityManager;
@@ -22,7 +21,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.libraryproject.model.enums.book.Status.ACTIVE;
+import static com.example.libraryproject.model.enums.base.Status.ACTIVE;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -64,7 +63,6 @@ public class BookManagementService {
         if (bookRequest.getMaxPages() != null) {
             predicates.add(cb.lessThanOrEqualTo(root.get("pages"), bookRequest.getMaxPages()));
         }
-
 
         query.where(
                 cb.and(predicates.toArray(new Predicate[0]))

@@ -1,4 +1,4 @@
-package com.example.libraryproject.rabbitmq;
+package com.example.libraryproject.service.email;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

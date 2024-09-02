@@ -15,5 +15,6 @@
     <include file="/migrations/1.0/1.0.7-create-rating-and-review-table.xml"/>
     <include file="/migrations/1.0/1.0.8-create-reservation-table.xml"/>
     <include file="/migrations/1.0/1.0.9-alter-quantity-table.xml"/>
-    <include file="/migrations/1.0/1.10.0-add-status-column-books-table.xml"/>
+    <include file="/migrations/1.0/1.1.0-add-status-column-books-table.xml"/>
+    <include file="/migrations/1.0/1.1.1-create-rental-table.xml"/>
 </databaseChangeLog>

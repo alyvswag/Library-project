@@ -18,5 +18,4 @@ public class ReservationRequestCreate {
     Long userId;
     LocalDate startDate;
     LocalDate endDate;
-    RezervStatus status;
 }

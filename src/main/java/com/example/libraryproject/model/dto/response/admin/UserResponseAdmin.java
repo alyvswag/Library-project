@@ -1,6 +1,6 @@
 package com.example.libraryproject.model.dto.response.admin;
 
-import com.example.libraryproject.model.enums.user.Status;
+import com.example.libraryproject.model.enums.base.Status;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
