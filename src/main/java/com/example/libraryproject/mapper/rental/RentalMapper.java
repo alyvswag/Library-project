@@ -5,14 +5,16 @@ import com.example.libraryproject.model.dao.Rental;
 import com.example.libraryproject.model.dao.Reservation;
 import com.example.libraryproject.model.dto.request.create.RentalRequestCreate;
 import com.example.libraryproject.model.dto.request.update.BookRequestUpdate;
+import com.example.libraryproject.model.dto.request.update.RentalRequestUpdate;
+import com.example.libraryproject.model.dto.request.update.ReservationRequestUpdate;
+import com.example.libraryproject.model.dto.response.admin.RentalResponseAdmin;
 import com.example.libraryproject.service.book.BookService;
 import com.example.libraryproject.service.user.UserService;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
-@Mapper(componentModel = "spring",uses = {UserService.class, BookService.class},nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+import java.util.List;
+
+@Mapper(componentModel = "spring", uses = {UserService.class, BookService.class}, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface RentalMapper {
 
     @Mapping(source = "book", target = "book")
@@ -25,4 +27,19 @@ public interface RentalMapper {
 
     void dtoModelMappingDao(RentalRequestCreate dto, @MappingTarget Rental rental);
 
+    void updateRentalFromDto(RentalRequestUpdate dto, @MappingTarget Rental rental);
+
+    @Named(value = "toDtoUserActivity")
+    @Mapping(target = "user", ignore = true)
+    RentalResponseAdmin toDtoUserActivity (Rental rental);
+
+    @IterableMapping(qualifiedByName = "toDtoUserActivity")
+    List<RentalResponseAdmin> toDtoUserActivity(List<Rental> rentals);
+
+    @Mapping(target = "book", ignore = true)
+    @Named(value = "toDtoBookRentalHistory")
+    RentalResponseAdmin toDtoBookRentalHistory (Rental rental);
+
+    @IterableMapping(qualifiedByName = "toDtoBookRentalHistory")
+    List<RentalResponseAdmin> toDtoBookRentalHistory(List<Rental> rentals);
 }

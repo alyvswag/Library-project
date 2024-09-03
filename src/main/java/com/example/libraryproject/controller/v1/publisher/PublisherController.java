@@ -25,7 +25,7 @@ public class PublisherController {
     @PostMapping("/add")
     public BaseResponse<Void> addPublisher(@RequestBody PublisherRequestCreate publisher) {
         publisherService.addPublisher(publisher);
-        return BaseResponse.success();
+        return BaseResponse.created();
     }
 
     @PutMapping("/update/{id}")

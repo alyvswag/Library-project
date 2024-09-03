@@ -76,4 +76,16 @@ public class BookManagementService {
     }
 
 
+    //public
+    public synchronized void reservationQuantity(Book book,Integer value){
+        Integer quantity = book.getQuantityBook().getReservedQuantity();
+        book.getQuantityBook().setReservedQuantity(quantity+value);
+        bookRepository.save(book);
+    }
+    public synchronized void rentalQuantity(Book book,Integer value){
+        Integer quantity = book.getQuantityBook().getRentalQuantity();
+        book.getQuantityBook().setRentalQuantity(quantity+value);
+        bookRepository.save(book);
+    }
+
 }

@@ -24,7 +24,7 @@ public class BookController {
     @PostMapping("/add")
     public BaseResponse<Void> addBook(@RequestBody BookRequestCreate book) {
         bookService.addBook(book);
-        return BaseResponse.success();
+        return BaseResponse.created();
     }
 
     @PutMapping("/update/{id}")

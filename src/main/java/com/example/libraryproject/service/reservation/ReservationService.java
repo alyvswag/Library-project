@@ -13,8 +13,10 @@ import com.example.libraryproject.model.dto.response.base.BaseResponse;
 import com.example.libraryproject.model.enums.reservation.RezervStatus;
 import com.example.libraryproject.model.enums.response.ErrorResponseMessages;
 import com.example.libraryproject.repository.book.BookRepository;
+import com.example.libraryproject.repository.rental.RentalRepository;
 import com.example.libraryproject.repository.reservation.ReservationRepository;
 import com.example.libraryproject.repository.user.UserRepository;
+import com.example.libraryproject.service.book.BookManagementService;
 import com.example.libraryproject.service.book.BookService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.example.libraryproject.model.enums.reservation.RezervStatus.CANCELLED;
@@ -37,16 +40,17 @@ public class ReservationService {
     final ReservationMapper reservationMapper;
     final BookRepository bookRepository;
     final UserRepository userRepository;
+    final BookManagementService bookManagementService;
+    private final BookService bookService;
+    private final RentalRepository rentalRepository;
 
-    public void addReservation(ReservationRequestCreate request) {
+    public synchronized void addReservation(ReservationRequestCreate request) {
         Reservation reservationEntity = reservationMapper.toEntity(request);
         Book bookEntity = reservationEntity.getBook();
 
         throwIf(() -> !checkBookAvailability(bookEntity), BaseException.of(BOOK_UNAVAILABLE_QUANTITY));
 
-        Integer reservedQuantity = bookEntity.getQuantityBook().getReservedQuantity();
-        bookEntity.getQuantityBook().setReservedQuantity(reservedQuantity + 1);
-        bookRepository.save(bookEntity);
+        bookManagementService.reservationQuantity(bookEntity,1);
         reservationRepository.save(reservationEntity);
     }
 
@@ -58,14 +62,13 @@ public class ReservationService {
         reservationRepository.save(entity);
     }
 
-    public void cancelReservation(Long id) {
+    public synchronized void cancelReservation(Long id) {
         Reservation reservationEntity = reservationRepository.findReservationById(id).orElseThrow(
                 () -> BaseException.notFound(Reservation.class.getSimpleName(), "reservation", String.valueOf(id))
         );
-        Book bookEntity = reservationEntity.getBook();
 
-        Integer quantity = bookEntity.getQuantityBook().getReservedQuantity();
-        bookEntity.getQuantityBook().setReservedQuantity(quantity - 1);
+        Book bookEntity = reservationEntity.getBook();
+        bookManagementService.reservationQuantity(bookEntity,-1);
 
         reservationEntity.setStatus(CANCELLED);
         reservationRepository.save(reservationEntity);
@@ -92,8 +95,14 @@ public class ReservationService {
                 () -> BaseException.notFound(Reservation.class.getSimpleName(), "reservation", String.valueOf(id))
         ));
     }
+    public Boolean checkAvailability(Long bookId, LocalDate startDate, LocalDate endDate) {
+        bookService.findById(bookId);
+       return  !(rentalRepository.findRentalByBookIdAndDate(bookId,startDate,endDate).isEmpty());
+
+    }
 
     //private
+
 
     private synchronized boolean checkBookAvailability(Book book) {
         return book.getQuantityBook().getQuantity()

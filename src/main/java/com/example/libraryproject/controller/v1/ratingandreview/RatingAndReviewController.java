@@ -25,7 +25,7 @@ public class RatingAndReviewController {
     @PostMapping("/add-rating-and-review")
     public BaseResponse<Void> addRatingAndReview(@RequestBody RatAndRevRequestCreate ratingAndReview) {
         service.addRatingAndReview(ratingAndReview);
-        return BaseResponse.success();
+        return BaseResponse.created();
     }
     @GetMapping("/get-ratings-and-reviews-book/{bookId}")
     public BaseResponse<List<RatAndRevResponseAdmin>> getRatingsAndReviewsByBook(@PathVariable Long bookId) {

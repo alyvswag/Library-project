@@ -1,8 +1,7 @@
 package com.example.libraryproject.model.enums.rental;
 
 public enum RentalStatus {
-    ACTIVE,
-    RETURNED,
-    OVERDUE,
-    DELETED
+    ACTIVE, // GOZLEYEN
+    RETURNED, // QAYTARILMIS
+    OVERDUE //gecikdirilmis
 }

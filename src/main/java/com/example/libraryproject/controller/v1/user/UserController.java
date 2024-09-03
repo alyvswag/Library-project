@@ -25,7 +25,7 @@ public class UserController {
     @PostMapping("/add-user/{roleName}")
     public BaseResponse<Void> addUser(@RequestBody AdminRequestCreate adminRequestCreate,@PathVariable RoleName roleName) {
         userService.addUser(adminRequestCreate,roleName);
-        return BaseResponse.success();
+        return BaseResponse.created();
     }
     @PutMapping("/update-user/{id}")
     public BaseResponse<Void> updateUser(@PathVariable Long id, @RequestBody UserRequestUpdate userRequestUpdate) {

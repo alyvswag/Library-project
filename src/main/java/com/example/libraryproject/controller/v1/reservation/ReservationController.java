@@ -1,6 +1,5 @@
 package com.example.libraryproject.controller.v1.reservation;
 
-import com.example.libraryproject.model.dao.Reservation;
 import com.example.libraryproject.model.dto.request.create.ReservationRequestCreate;
 import com.example.libraryproject.model.dto.request.update.ReservationRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.ReservationResponseAdmin;
@@ -12,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -26,7 +26,7 @@ public class ReservationController {
     @PostMapping("/add-reservation")
     public BaseResponse<Void> addReservation(@RequestBody ReservationRequestCreate reservation) {
         reservationService.addReservation(reservation);
-        return BaseResponse.success();
+        return BaseResponse.created();
     }
     @PutMapping("/update-reservation/{reservationId}")
     public BaseResponse<Void> updateReservation(@PathVariable Long reservationId, @RequestBody ReservationRequestUpdate reservation) {
@@ -49,6 +49,10 @@ public class ReservationController {
     @GetMapping("/get-reservation-details/{reservationId}")
     public BaseResponse<ReservationResponseAdmin> getReservationDetails(@PathVariable Long reservationId) {
         return BaseResponse.success(reservationService.getReservationDetails(reservationId));
+    }
+    @GetMapping("/check-availability/{bookId}/{startDate}/{endDate}")
+    public BaseResponse<Boolean> checkAvailability(@PathVariable Long bookId, @PathVariable LocalDate startDate, @PathVariable LocalDate endDate) {
+        return BaseResponse.success(reservationService.checkAvailability(bookId,startDate,endDate));
     }
 
 }
