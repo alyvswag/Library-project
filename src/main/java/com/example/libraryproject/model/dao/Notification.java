@@ -2,7 +2,7 @@ package com.example.libraryproject.model.dao;
 
 import com.example.libraryproject.model.dao.entity.Base;
 import com.example.libraryproject.model.enums.notification.DataType;
-import com.example.libraryproject.model.enums.notification.NotificationType;
+import com.example.libraryproject.model.enums.notification.NotificationStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,11 +19,13 @@ public class Notification extends Base {
     @ManyToOne(fetch = FetchType.LAZY)
     User user;
     @Column(name = "data_type")
+    @Enumerated(EnumType.STRING)
     DataType dataType;
     @Column(name = "data_id")
     Long dataId;
     @Column(name = "message")
     String message;
-    @Column(name = "notification_type")
-    NotificationType notificationType;
+    @Column(name = "notification_status")
+    @Enumerated(EnumType.STRING)
+    NotificationStatus notificationStatus;
 }

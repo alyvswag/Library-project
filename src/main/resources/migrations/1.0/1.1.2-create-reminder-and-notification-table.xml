@@ -82,6 +82,14 @@
                 columnDataType="boolean"/>
     </changeSet>
 
+    <changeSet id="renameColumnNotificationTypeNotificationTable" author="talibaliyev">
+        <renameColumn
+                tableName="notifications"
+                oldColumnName="notification_type"
+                newColumnName="notification_status"
+                columnDataType="boolean"/>
+    </changeSet>
+
     <changeSet id="changeDataTypeDataId" author="talibaliyev">
         <modifyDataType tableName="notifications" columnName="data_id" newDataType="bigint"/>
     </changeSet>

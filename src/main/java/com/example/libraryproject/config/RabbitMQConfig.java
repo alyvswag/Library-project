@@ -14,17 +14,47 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue emailQueue() {
-        return new Queue("emailQueue",false);
+        return new Queue("emailQueue", false);
     }
 
     @Bean
-    public TopicExchange emailTopicExchange() {
-        return new TopicExchange("emailTopicExchange",true,false);
+    public Queue reminderQueue() {
+        return new Queue("reminderQueue", false);
     }
+
+    @Bean
+    public Queue bookQueue() {
+        return new Queue("bookQueue", false);
+    }
+    @Bean
+    public Queue eventQueue() {
+        return new Queue("eventQueue", false);
+    }
+
+    //----
+    @Bean
+    public TopicExchange emailTopicExchange() {
+        return new TopicExchange("emailTopicExchange", true, false);
+    }
+    //------
 
     @Bean
     public Binding binding(Queue emailQueue, TopicExchange emailTopicExchange) {
         return BindingBuilder.bind(emailQueue).to(emailTopicExchange).with("email.key");
+    }
+
+    @Bean
+    public Binding reminderBinding(Queue reminderQueue, TopicExchange emailTopicExchange) {
+        return BindingBuilder.bind(reminderQueue).to(emailTopicExchange).with("reminder.key");
+    }
+
+    @Bean
+    public Binding bookBinding(Queue bookQueue, TopicExchange emailTopicExchange) {
+        return BindingBuilder.bind(bookQueue).to(emailTopicExchange).with("book.key");
+    }
+    @Bean
+    public Binding eventBinding(Queue eventQueue, TopicExchange emailTopicExchange) {
+        return BindingBuilder.bind(eventQueue).to(emailTopicExchange).with("event.key");
     }
 
     @Bean
