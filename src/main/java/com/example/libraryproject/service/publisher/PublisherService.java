@@ -26,7 +26,6 @@ public class PublisherService {
 
     public void addPublisher(PublisherRequestCreate publisherRequestCreate) {
         Publisher publisher = publisherMapper.toEntity(publisherRequestCreate);
-        publisher.setIsActive(true);
         publisherRepository.save(publisher);
     }
 
@@ -45,7 +44,6 @@ public class PublisherService {
                 .orElseThrow(() -> BaseException.notFound(Publisher.class.getSimpleName(), "publisher", String.valueOf(id)));
 
         publisherEntity.setIsActive(false);
-        publisherEntity.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
         publisherRepository.save(publisherEntity);
 
     }

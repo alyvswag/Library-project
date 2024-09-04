@@ -20,6 +20,10 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
     @Query("SELECT r FROM Rental r WHERE r.id = :id AND ( r.rentalStatus = 'ACTIVE' or r.rentalStatus = 'OVERDUE')")
     Optional<Rental> findRentalById(@Param("id") Long id);
 
+    @Query("SELECT r FROM Rental r WHERE r.id = :id AND  r.rentalStatus = 'ACTIVE' ")
+    Optional<Rental> findRentalByIdForReminder(@Param("id") Long id);
+
+
     @Query("Select r.book , count (r.book) as usage_count  " +
             "from Rental r " +
             "group by  r.book " +
