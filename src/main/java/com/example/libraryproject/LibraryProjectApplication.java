@@ -14,5 +14,4 @@ public class LibraryProjectApplication {
         SpringApplication.run(LibraryProjectApplication.class, args);
     }
 }
-//todo: nc , demek bosluq  response gonderilmesin gonderilen sey yoxlanilsin , eger bosdusa message olaraq telebe uygun olmuyan icra
-// todo: yeni janrlar elave et
+

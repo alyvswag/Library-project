@@ -1,0 +1,29 @@
+package com.example.libraryproject.model.dao;
+
+import com.example.libraryproject.model.dao.entity.Base;
+import com.example.libraryproject.model.enums.notification.DataType;
+import com.example.libraryproject.model.enums.notification.NotificationType;
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "notifications")
+public class Notification extends Base {
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    User user;
+    @Column(name = "data_type")
+    DataType dataType;
+    @Column(name = "data_id")
+    Long dataId;
+    @Column(name = "message")
+    String message;
+    @Column(name = "notification_type")
+    NotificationType notificationType;
+}

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="reminders" author="talibaliyev">
+        <createTable tableName="reminders">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="book_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reminder_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isActive" type="boolean" defaultValue="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp">
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="reminders"
+                                 baseColumnNames="book_id"
+                                 constraintName="fk_reminders_books"
+                                 referencedTableName="books"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="reminders"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_reminders_users"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+
+    <changeSet id="notifications" author="talibaliyev">
+        <createTable tableName="notifications">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_type" type="varchar(10)"><!-- event,book,reminder-->
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_id" type="integer"><!-- event_id,book_id,reminder_id-->
+                <constraints nullable="false"/>
+            </column>
+            <column name="message" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="notification_type" type="varchar(15)" defaultValue="SENT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp">
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="notifications"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_notifications_users"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="renameColumnIsActiveRemindersTable" author="talibaliyev">
+        <renameColumn
+                tableName="reminders"
+                oldColumnName="isActive"
+                newColumnName="is_active"
+                columnDataType="boolean"/>
+    </changeSet>
+
+    <changeSet id="changeDataTypeDataId" author="talibaliyev">
+        <modifyDataType tableName="notifications" columnName="data_id" newDataType="bigint"/>
+    </changeSet>
+
+
+
+</databaseChangeLog>

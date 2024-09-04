@@ -17,4 +17,7 @@
     <include file="/migrations/1.0/1.0.9-alter-quantity-table.xml"/>
     <include file="/migrations/1.0/1.1.0-add-status-column-books-table.xml"/>
     <include file="/migrations/1.0/1.1.1-create-rental-table.xml"/>
+    <include file="/migrations/1.0/1.1.2-create-reminder-and-notification-table.xml"/>
+    <include file="/migrations/1.0/1.1.3-create-event-table.xml"/>
+
 </databaseChangeLog>
