@@ -25,22 +25,31 @@ public class EmailConsumer {
     public void receiveReminderMessage(Map<String, String> message) throws InterruptedException {
         String email = message.get("email");
         String bookName = message.get("bookName");
-        emailService.sendReminderHtmlMail(email, "Reminder", email, bookName);
+        String day = message.get("day");
+        emailService.sendReminderHtmlMail("Reminder", email, bookName,day);
     }
+    @RabbitListener(queues = "overdueQueue")
+    public void receiveOverdueReminderMessage(Map<String, String> message) throws InterruptedException {
+        String email = message.get("email");
+        String bookName = message.get("bookName");
+        String day = message.get("day");
+        emailService.sendOverdueHtmlMail("Overdue", email, bookName,day);
+    }
+
 
     @RabbitListener(queues = "bookQueue")
     public void receiveBookMessage(Map<String, String> message) throws InterruptedException {
         String email = message.get("email");
         String bookName = message.get("bookName");
         String bookId = message.get("bookId");
-        emailService.sendBookHtmlMail(email, "New Book", email,bookId, bookName);
+        emailService.sendBookHtmlMail("New Book", email,bookId, bookName);
     }
 
     @RabbitListener(queues = "eventQueue")
     public void receiveEventMessage(Map<String, String> message) throws InterruptedException {
         String email = message.get("email");
         String eventName = message.get("eventName");
-        emailService.sendEventHtmlMail(email, "New Event", email,eventName);
+        emailService.sendEventHtmlMail( "New Event", email,eventName);
     }
 
 

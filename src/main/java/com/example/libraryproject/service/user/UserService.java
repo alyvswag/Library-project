@@ -14,6 +14,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -36,15 +37,18 @@ public class UserService {
     final EmailProducer emailProducer;
 //    final BCryptPasswordEncoder passwordEncoder;
 
-    public void addUser(AdminRequestCreate adminRequestCreate,RoleName roleName)  {
-        throwIf(() -> !isValidEmailAddress(adminRequestCreate.getEmail()), BaseException.of(INVALID_EMAIL_FORMAT));
+    public void addUser(AdminRequestCreate adminRequestCreate, RoleName roleName) {
+        throwIf(
+                () -> !isValidEmailAddress(adminRequestCreate.getEmail()),
+                BaseException.of(INVALID_EMAIL_FORMAT)
+        );
         throwIf(
                 () -> userRepository.findUserByEmail(adminRequestCreate.getEmail()).isPresent(),
                 BaseException.of(EMAIL_ALREADY_REGISTERED)
         );
         User user = userMapper.toEntity(adminRequestCreate);
         String password = generatePassword();
-        emailProducer.sendEmailMessage(user.getEmail(),password);
+        emailProducer.sendEmailMessage(user.getEmail(), password);
         user.setPassword(password);// todo: security tetbiq ederken passwordu encode edib bazaya yaz
         List<Role> roles = new ArrayList<>();
         roles.add(roleRepository.findRole(roleName));
@@ -121,7 +125,7 @@ public class UserService {
         return users;
     }
 
-    private  boolean isValidEmailAddress(String email) {
+    private boolean isValidEmailAddress(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         Pattern pat = Pattern.compile(emailRegex);
         return email != null && pat.matcher(email).matches();

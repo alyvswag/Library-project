@@ -15,11 +15,13 @@ import java.time.LocalDate;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
 public class RentalResponseAdmin {
+    Long id;
     UserResponseAdmin user;
     BookResponseAdmin book;
     LocalDate rentalStartDate;
     LocalDate rentalEndDate;
     RentalStatus rentalStatus;
+    LocalDate returnDate;
     Timestamp createdAt;
     Timestamp updatedAt;
 }

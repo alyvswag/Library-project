@@ -18,7 +18,6 @@ public class NotificationResponseAdmin {
     Long id;
     UserResponseAdmin user;
     DataType dataType;
-    Long dataId;
     String message;
     NotificationStatus notificationStatus;
     Timestamp createdAt;

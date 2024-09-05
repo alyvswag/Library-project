@@ -30,6 +30,10 @@ public class RabbitMQConfig {
     public Queue eventQueue() {
         return new Queue("eventQueue", false);
     }
+    @Bean
+    public Queue overdueQueue() {
+        return new Queue("overdueQueue", false);
+    }
 
     //----
     @Bean
@@ -55,6 +59,10 @@ public class RabbitMQConfig {
     @Bean
     public Binding eventBinding(Queue eventQueue, TopicExchange emailTopicExchange) {
         return BindingBuilder.bind(eventQueue).to(emailTopicExchange).with("event.key");
+    }
+    @Bean
+    public Binding overdueBinding(Queue overdueQueue, TopicExchange emailTopicExchange) {
+        return BindingBuilder.bind(overdueQueue).to(emailTopicExchange).with("overdue.key");
     }
 
     @Bean

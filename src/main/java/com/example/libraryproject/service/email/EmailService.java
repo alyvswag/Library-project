@@ -31,18 +31,40 @@ public class EmailService {
         mailSender.send(message);
     }
 
-    public void sendReminderHtmlMail(String to, String subject, String userEmail, String bookName) {
+    public void sendReminderHtmlMail( String subject, String userEmail, String bookName, String day) {
         try {
             Resource resource = resourceLoader.getResource("classpath:templates/reminder.html");
             String htmlContent = new String(Files.readAllBytes(resource.getFile().toPath()));
 
             htmlContent = htmlContent.replace("{userEmail}", userEmail);
             htmlContent = htmlContent.replace("{bookName}", bookName);
+            htmlContent = htmlContent.replace("{day}", day);
 
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom("support@domain.com");
-            helper.setTo(to);
+            helper.setTo(userEmail);
+            helper.setSubject(subject);
+            helper.setText(htmlContent, true);
+
+            mailSender.send(message);
+        } catch (IOException | MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+    public void sendOverdueHtmlMail( String subject, String userEmail, String bookName, String day) {
+        try {
+            Resource resource = resourceLoader.getResource("classpath:templates/overdue.html");
+            String htmlContent = new String(Files.readAllBytes(resource.getFile().toPath()));
+
+            htmlContent = htmlContent.replace("{userEmail}", userEmail);
+            htmlContent = htmlContent.replace("{bookName}", bookName);
+            htmlContent = htmlContent.replace("{day}", day);
+
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setFrom("support@domain.com");
+            helper.setTo(userEmail);
             helper.setSubject(subject);
             helper.setText(htmlContent, true);
 
@@ -52,7 +74,7 @@ public class EmailService {
         }
     }
 
-    public void sendBookHtmlMail(String to, String subject, String userEmail, String bookId, String bookName) {
+    public void sendBookHtmlMail( String subject, String userEmail, String bookId, String bookName) {
         try {
             Resource resource = resourceLoader.getResource("classpath:templates/book.html");
             String htmlContent = new String(Files.readAllBytes(resource.getFile().toPath()));
@@ -64,7 +86,7 @@ public class EmailService {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom("support@domain.com");
-            helper.setTo(to);
+            helper.setTo(userEmail);
             helper.setSubject(subject);
             helper.setText(htmlContent, true);
 
@@ -74,7 +96,7 @@ public class EmailService {
         }
     }
 
-    public void sendEventHtmlMail(String to, String subject, String userEmail, String eventName) {
+    public void sendEventHtmlMail( String subject, String userEmail, String eventName) {
         try {
             Resource resource = resourceLoader.getResource("classpath:templates/event.html");
             String htmlContent = new String(Files.readAllBytes(resource.getFile().toPath()));
@@ -85,7 +107,7 @@ public class EmailService {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom("support@domain.com");
-            helper.setTo(to);
+            helper.setTo(userEmail);
             helper.setSubject(subject);
             helper.setText(htmlContent, true);
 

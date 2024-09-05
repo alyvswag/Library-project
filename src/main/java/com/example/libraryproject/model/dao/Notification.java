@@ -21,8 +21,6 @@ public class Notification extends Base {
     @Column(name = "data_type")
     @Enumerated(EnumType.STRING)
     DataType dataType;
-    @Column(name = "data_id")
-    Long dataId;
     @Column(name = "message")
     String message;
     @Column(name = "notification_status")

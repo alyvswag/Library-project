@@ -93,7 +93,14 @@
     <changeSet id="changeDataTypeDataId" author="talibaliyev">
         <modifyDataType tableName="notifications" columnName="data_id" newDataType="bigint"/>
     </changeSet>
-
+    <changeSet id="changeDataTypeMessageForNotificationTable" author="talibaliyev">
+        <modifyDataType tableName="notifications" columnName="message" newDataType="varchar(150)"/>
+    </changeSet>
+    <changeSet author="talibaliyev" id="dropColumnNotificationDataId">
+        <dropColumn  tableName="notifications">
+            <column name="data_id"/>
+        </dropColumn>
+    </changeSet>
 
 
 </databaseChangeLog>

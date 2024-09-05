@@ -20,6 +20,8 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static com.example.libraryproject.model.enums.notification.DataType.*;
@@ -44,13 +46,13 @@ public class NotificationServiceImpl implements NotificationService {
         Reminder reminderEntity = reminderRepository.findReminderById(reminderId)
                 .orElseThrow(() -> BaseException.notFound(Reminder.class.getSimpleName(), "reminder", String.valueOf(reminderId)));
 
-        emailProducer.sendReminderNotification(reminderEntity.getUser().getEmail(), reminderEntity.getBook().getBookName());
+        Long daysBetween = ChronoUnit.DAYS.between( LocalDate.now(),(reminderEntity.getReminderDate().plusDays(1)));
+        emailProducer.sendReminderNotification(reminderEntity.getUser().getEmail(), reminderEntity.getBook().getBookName(),String.valueOf(daysBetween));
 
         notificationRepository.save(notificationMapper.toEntity(NotificationRequestCreate.builder()
                 .userId(reminderEntity.getUser().getId())
                 .dataType(REMINDER)
-                .dataId(reminderId)
-                .message("Sizin kirayə götürdüyünüz kitabın (" + reminderEntity.getBook().getBookName() + ") kirayə müddətinin bitməsinə bir gün qalıb.")
+                .message("Sizin kirayə götürdüyünüz kitabın (" + reminderEntity.getBook().getBookName() + ") kirayə müddətinin bitməsinə " + daysBetween+" gün qalıb.")
                 .build()
         ));
     }
@@ -69,7 +71,6 @@ public class NotificationServiceImpl implements NotificationService {
         notificationRepository.save(notificationMapper.toEntity(NotificationRequestCreate.builder()
                 .userId(userId)
                 .dataType(BOOK)
-                .dataId(bookEntity.getId())
                 .message("Kitabxanamızda yeni " + bookEntity.getBookName() + " kitabı var")
                 .build()
         ));
@@ -89,7 +90,6 @@ public class NotificationServiceImpl implements NotificationService {
         notificationRepository.save(notificationMapper.toEntity(NotificationRequestCreate.builder()
                 .userId(userId)
                 .dataType(EVENT)
-                .dataId(eventEntity.getId())
                 .message("Kitabxanamızda " + eventEntity.getEventName() + " tedbiri olacaq. Dəvətlisiniz")
                 .build()
         ));

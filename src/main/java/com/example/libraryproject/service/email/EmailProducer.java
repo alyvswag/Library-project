@@ -21,11 +21,19 @@ public class EmailProducer {
         rabbitTemplate.convertAndSend("emailTopicExchange", "email.key", message);
     }
 
-    public void sendReminderNotification(String email,  String bookName) {
+    public void sendReminderNotification(String email,  String bookName,String day) {
         Map<String, String> notificationMessage = new HashMap<>();
         notificationMessage.put("email", email);
         notificationMessage.put("bookName", bookName);
+        notificationMessage.put("day", day);
         rabbitTemplate.convertAndSend("emailTopicExchange", "reminder.key", notificationMessage);
+    }
+    public void sendOverdueReminderNotification(String email,String bookName,String day) {
+        Map<String, String> notificationMessage = new HashMap<>();
+        notificationMessage.put("email", email);
+        notificationMessage.put("bookName", bookName);
+        notificationMessage.put("day", day);
+        rabbitTemplate.convertAndSend("emailTopicExchange", "overdue.key", notificationMessage);
     }
     public void sendBookNotification(String email,String bookId,  String bookName) {
         Map<String, String> notificationMessage = new HashMap<>();

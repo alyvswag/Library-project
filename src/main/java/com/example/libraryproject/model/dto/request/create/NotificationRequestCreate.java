@@ -12,6 +12,5 @@ import lombok.experimental.FieldDefaults;
 public class NotificationRequestCreate {
     Long userId;
     DataType dataType;
-    Long dataId;
     String message;
 }

@@ -21,7 +21,7 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
     Optional<Rental> findRentalById(@Param("id") Long id);
 
     @Query("SELECT r FROM Rental r WHERE r.id = :id AND  r.rentalStatus = 'ACTIVE' ")
-    Optional<Rental> findRentalByIdForReminder(@Param("id") Long id);
+    Optional<Rental> findRentalByIdIsActive(@Param("id") Long id);
 
 
     @Query("Select r.book , count (r.book) as usage_count  " +
@@ -34,16 +34,19 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
             "from Rental r " +
             "where r.rentalStartDate > :startDate and r.rentalStartDate < :endDate " +
             "group by r.book")
-    List<Object[]> findRentalStatisticsWithCounts(LocalDate startDate, LocalDate endDate);
+    List<Object[]> findRentalStatisticsWithCounts(@Param("startDate") LocalDate startDate, @Param("endDate")  LocalDate endDate);
 
     @Query("select r from Rental r where r.user.id = :userId")
-    List<Rental> findRentalByUserId(Long userId);
+    List<Rental> findRentalByUserId(@Param("userId") Long userId);
 
     @Query("Select r from Rental r where r.book.id = :bookId")
-    List<Rental> findRentalByBookId(Long bookId);
+    List<Rental> findRentalByBookId(@Param("bookId") Long bookId);
 
     @Query("select r.book from Rental r where r.book.id = :bookId" +
             " and r.rentalEndDate > :startDate and r.rentalEndDate < :endDate ")
-    List<Book> findRentalByBookIdAndDate(Long bookId, LocalDate startDate, LocalDate endDate);
+    List<Book> findRentalByBookIdAndDate(@Param("bookId") Long bookId,@Param("startDate") LocalDate startDate,@Param("endDate") LocalDate endDate);
+
+    @Query("Select r from Rental r where r.rentalEndDate< :currentDate AND ( r.rentalStatus = 'ACTIVE' or r.rentalStatus = 'OVERDUE') ")
+    List<Rental> findRentalOverdue(@Param("currentDate") LocalDate currentDate);
 
 }

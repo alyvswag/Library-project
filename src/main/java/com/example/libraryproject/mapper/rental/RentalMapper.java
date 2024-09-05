@@ -42,4 +42,10 @@ public interface RentalMapper {
 
     @IterableMapping(qualifiedByName = "toDtoBookRentalHistory")
     List<RentalResponseAdmin> toDtoBookRentalHistory(List<Rental> rentals);
+
+    @Named(value = "toDtoListRentalResponseAdminModel")
+    RentalResponseAdmin toDtoListRentalResponseAdminModel (Rental rental);
+
+    @IterableMapping(qualifiedByName = "toDtoListRentalResponseAdminModel")
+    List<RentalResponseAdmin> toDtoListRentalResponseAdminModel(List<Rental> rentals);
 }

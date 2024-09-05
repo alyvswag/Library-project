@@ -14,8 +14,9 @@ public enum ErrorResponseMessages implements ResponseMessages {
     EMAIL_ALREADY_REGISTERED("email_already_registered", "Email already registered", HttpStatus.CONFLICT),
     INVALID_EMAIL_FORMAT("invalid_email_format", "Email format is invalid", HttpStatus.BAD_REQUEST),
     NULL_NOT_ALLOWED("null_not_allowed_%s", "The column %s does not allow null values.", HttpStatus.BAD_REQUEST),
-    BOOK_UNAVAILABLE_QUANTITY("book_unavailable_quantity", "The requested quantity of the book is unavailable.", HttpStatus.CONFLICT)
-    ;
+    BOOK_UNAVAILABLE_QUANTITY("book_unavailable_quantity", "The requested quantity of the book is unavailable.", HttpStatus.CONFLICT),
+    RENTAL_NOT_OVERDUE("rental_not_overdue", "The rental period has not yet expired for the specified book.", HttpStatus.BAD_REQUEST),
+            ;
 
 
     String key;

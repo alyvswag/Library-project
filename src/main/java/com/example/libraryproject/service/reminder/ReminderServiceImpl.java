@@ -30,7 +30,7 @@ public class ReminderServiceImpl implements ReminderService {
 
     @Override
     public void addReminder(Long rentalId) {
-        Rental rentalEntity = rentalRepository.findRentalByIdForReminder(rentalId).orElseThrow(
+        Rental rentalEntity = rentalRepository.findRentalByIdIsActive(rentalId).orElseThrow(
                 () -> BaseException.notFound(Rental.class.getSimpleName(), "rental", String.valueOf(rentalId))
         );
         reminderRepository.save(reminderMapper.toEntity(

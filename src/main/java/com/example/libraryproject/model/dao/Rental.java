@@ -29,4 +29,6 @@ public class Rental extends Base {
     @Column(name = "rental_status")
     @Enumerated(EnumType.STRING)
     RentalStatus rentalStatus;
+    @Column(name = "return_date")
+    LocalDate returnDate;
 }
