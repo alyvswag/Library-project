@@ -22,14 +22,14 @@ public class EmailConsumer {
     }
 
     @RabbitListener(queues = "reminderQueue")
-    public void receiveReminderMessage(Map<String, String> message) throws InterruptedException {
+    public void receiveReminderMessage(Map<String, String> message) throws Exception {
         String email = message.get("email");
         String bookName = message.get("bookName");
         String day = message.get("day");
         emailService.sendReminderHtmlMail("Reminder", email, bookName,day);
     }
     @RabbitListener(queues = "overdueQueue")
-    public void receiveOverdueReminderMessage(Map<String, String> message) throws InterruptedException {
+    public void receiveOverdueReminderMessage(Map<String, String> message) throws Exception{
         String email = message.get("email");
         String bookName = message.get("bookName");
         String day = message.get("day");
@@ -38,7 +38,7 @@ public class EmailConsumer {
 
 
     @RabbitListener(queues = "bookQueue")
-    public void receiveBookMessage(Map<String, String> message) throws InterruptedException {
+    public void receiveBookMessage(Map<String, String> message) throws Exception {
         String email = message.get("email");
         String bookName = message.get("bookName");
         String bookId = message.get("bookId");
@@ -46,7 +46,7 @@ public class EmailConsumer {
     }
 
     @RabbitListener(queues = "eventQueue")
-    public void receiveEventMessage(Map<String, String> message) throws InterruptedException {
+    public void receiveEventMessage(Map<String, String> message) throws Exception {
         String email = message.get("email");
         String eventName = message.get("eventName");
         emailService.sendEventHtmlMail( "New Event", email,eventName);

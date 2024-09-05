@@ -20,26 +20,30 @@ public class ManagementController {
     final ManagementService managementService;
 
     @GetMapping("/check-overdue-books")
-    public BaseResponse<List<RentalResponseAdmin>> checkOverdueBooks(){
+    public BaseResponse<List<RentalResponseAdmin>> checkOverdueBooks() {
         return BaseResponse.success(managementService.checkOverdueBooks());
     }
+
     @PostMapping("/send-all-overdue-books-notices")
-    public BaseResponse<Void> sendAllOverdueBooksNotices(){
+    public BaseResponse<Void> sendAllOverdueBooksNotices() {
         managementService.sendAllOverdueBooksNotices();
         return BaseResponse.success();
     }
+
     @PostMapping("/send-overdue-notices/{rentalId}")
-    public BaseResponse<Void> sendOverdueNotices(@PathVariable("rentalId") Long rentalId){
+    public BaseResponse<Void> sendOverdueNotices(@PathVariable("rentalId") Long rentalId) {
         managementService.sendOverdueNotices(rentalId);
         return BaseResponse.success();
     }
+
     @PutMapping("/update-book-status/{rentalId}/{rentalStatus}")
-    public BaseResponse<Void> updateBookStatus(@PathVariable("rentalId") Long rentalId, @PathVariable("rentalStatus") RentalStatus rentalStatus){
+    public BaseResponse<Void> updateBookStatus(@PathVariable("rentalId") Long rentalId, @PathVariable("rentalStatus") RentalStatus rentalStatus) {
         managementService.updateBookStatus(rentalId, rentalStatus);
         return BaseResponse.success();
     }
+
     @PutMapping("/log-return-event/{rentalId}/{returnDate}")
-    public BaseResponse<Void> logReturnEvent(@PathVariable("rentalId") Long rentalId, @PathVariable("returnDate") LocalDate returnDate){
+    public BaseResponse<Void> logReturnEvent(@PathVariable("rentalId") Long rentalId, @PathVariable("returnDate") LocalDate returnDate) {
         managementService.logReturnEvent(rentalId, returnDate);
         return BaseResponse.success();
     }

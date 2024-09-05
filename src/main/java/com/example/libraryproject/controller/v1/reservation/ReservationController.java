@@ -28,31 +28,37 @@ public class ReservationController {
         reservationService.addReservation(reservation);
         return BaseResponse.created();
     }
+
     @PutMapping("/update-reservation/{reservationId}")
     public BaseResponse<Void> updateReservation(@PathVariable Long reservationId, @RequestBody ReservationRequestUpdate reservation) {
         reservationService.updateReservation(reservationId, reservation);
         return BaseResponse.success();
     }
+
     @DeleteMapping("/cancel-reservation/{reservationId}")
     public BaseResponse<Void> cancelReservation(@PathVariable Long reservationId) {
         reservationService.cancelReservation(reservationId);
         return BaseResponse.success();
     }
+
     @GetMapping("/get-user-reservations/{userId}")
     public BaseResponse<List<ReservationResponseAdmin>> getUserReservations(@PathVariable Long userId) {
         return BaseResponse.success(reservationService.getUserReservations(userId));
     }
+
     @GetMapping("/get-book-reservations/{bookId}")
     public BaseResponse<List<ReservationResponseAdmin>> getBookReservations(@PathVariable Long bookId) {
         return BaseResponse.success(reservationService.getBookReservations(bookId));
     }
+
     @GetMapping("/get-reservation-details/{reservationId}")
     public BaseResponse<ReservationResponseAdmin> getReservationDetails(@PathVariable Long reservationId) {
         return BaseResponse.success(reservationService.getReservationDetails(reservationId));
     }
+
     @GetMapping("/check-availability/{bookId}/{startDate}/{endDate}")
     public BaseResponse<Boolean> checkAvailability(@PathVariable Long bookId, @PathVariable LocalDate startDate, @PathVariable LocalDate endDate) {
-        return BaseResponse.success(reservationService.checkAvailability(bookId,startDate,endDate));
+        return BaseResponse.success(reservationService.checkAvailability(bookId, startDate, endDate));
     }
 
 }

@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import static com.example.libraryproject.constant.HtmlPathConstants.*;
+
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
@@ -26,96 +28,72 @@ public class EmailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("support@domain.com");
         message.setTo(email);
-        message.setText("Salam sizin admin passwordunuz: " + text);
-        message.setSubject("Library Admin");
+        message.setText("Salam sizin admin passwordunuz: " + text + "\n" +
+                "Zehmet olmasa heckesle paylasmayin.");
+        message.setSubject("Masazir Library");
         mailSender.send(message);
     }
 
-    public void sendReminderHtmlMail( String subject, String userEmail, String bookName, String day) {
-        try {
-            Resource resource = resourceLoader.getResource("classpath:templates/reminder.html");
-            String htmlContent = new String(Files.readAllBytes(resource.getFile().toPath()));
+    public void sendReminderHtmlMail(String subject, String userEmail, String bookName, String day) throws IOException, MessagingException {
+        Resource resource = resourceLoader.getResource(reminderTemplatePath);
+        String htmlContent = new String(Files.readAllBytes(resource.getFile().toPath()));
 
-            htmlContent = htmlContent.replace("{userEmail}", userEmail);
-            htmlContent = htmlContent.replace("{bookName}", bookName);
-            htmlContent = htmlContent.replace("{day}", day);
+        htmlContent = htmlContent.replace("{userEmail}", userEmail);
+        htmlContent = htmlContent.replace("{bookName}", bookName);
+        htmlContent = htmlContent.replace("{day}", day);
 
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom("support@domain.com");
-            helper.setTo(userEmail);
-            helper.setSubject(subject);
-            helper.setText(htmlContent, true);
-
-            mailSender.send(message);
-        } catch (IOException | MessagingException e) {
-            e.printStackTrace();
-        }
-    }
-    public void sendOverdueHtmlMail( String subject, String userEmail, String bookName, String day) {
-        try {
-            Resource resource = resourceLoader.getResource("classpath:templates/overdue.html");
-            String htmlContent = new String(Files.readAllBytes(resource.getFile().toPath()));
-
-            htmlContent = htmlContent.replace("{userEmail}", userEmail);
-            htmlContent = htmlContent.replace("{bookName}", bookName);
-            htmlContent = htmlContent.replace("{day}", day);
-
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom("support@domain.com");
-            helper.setTo(userEmail);
-            helper.setSubject(subject);
-            helper.setText(htmlContent, true);
-
-            mailSender.send(message);
-        } catch (IOException | MessagingException e) {
-            e.printStackTrace();
-        }
+        MimeMessage message = createMimeMessage(htmlContent, userEmail, subject);
+        mailSender.send(message);
     }
 
-    public void sendBookHtmlMail( String subject, String userEmail, String bookId, String bookName) {
-        try {
-            Resource resource = resourceLoader.getResource("classpath:templates/book.html");
-            String htmlContent = new String(Files.readAllBytes(resource.getFile().toPath()));
+    public void sendOverdueHtmlMail(String subject, String userEmail, String bookName, String day) throws MessagingException, IOException {
+        Resource resource = resourceLoader.getResource(overdueTemplatePath);
+        String htmlContent = new String(Files.readAllBytes(resource.getFile().toPath()));
 
-            htmlContent = htmlContent.replace("{userEmail}", userEmail);
-            htmlContent = htmlContent.replace("{bookName}", bookName);
-            htmlContent = htmlContent.replace("{bookId}", bookId);
+        htmlContent = htmlContent.replace("{userEmail}", userEmail);
+        htmlContent = htmlContent.replace("{bookName}", bookName);
+        htmlContent = htmlContent.replace("{day}", day);
 
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom("support@domain.com");
-            helper.setTo(userEmail);
-            helper.setSubject(subject);
-            helper.setText(htmlContent, true);
+        MimeMessage message = createMimeMessage(htmlContent, userEmail, subject);
 
-            mailSender.send(message);
-        } catch (IOException | MessagingException e) {
-            e.printStackTrace();
-        }
+        mailSender.send(message);
     }
 
-    public void sendEventHtmlMail( String subject, String userEmail, String eventName) {
-        try {
-            Resource resource = resourceLoader.getResource("classpath:templates/event.html");
-            String htmlContent = new String(Files.readAllBytes(resource.getFile().toPath()));
+    public void sendBookHtmlMail(String subject, String userEmail, String bookId, String bookName) throws IOException, MessagingException {
+        Resource resource = resourceLoader.getResource(bookTemplatePath);
+        String htmlContent = new String(Files.readAllBytes(resource.getFile().toPath()));
 
-            htmlContent = htmlContent.replace("{userEmail}", userEmail);
-            htmlContent = htmlContent.replace("{eventName}", eventName);
+        htmlContent = htmlContent.replace("{userEmail}", userEmail);
+        htmlContent = htmlContent.replace("{bookName}", bookName);
+        htmlContent = htmlContent.replace("{bookId}", bookId);
 
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom("support@domain.com");
-            helper.setTo(userEmail);
-            helper.setSubject(subject);
-            helper.setText(htmlContent, true);
+        MimeMessage message = createMimeMessage(htmlContent, userEmail, subject);
 
-            mailSender.send(message);
-        } catch (IOException | MessagingException e) {
-            e.printStackTrace();
-        }
+        mailSender.send(message);
     }
+
+    public void sendEventHtmlMail( String subject, String userEmail, String eventName) throws IOException, MessagingException {
+        Resource resource = resourceLoader.getResource(eventTemplatePath);
+        String htmlContent = new String(Files.readAllBytes(resource.getFile().toPath()));
+
+        htmlContent = htmlContent.replace("{userEmail}", userEmail);
+        htmlContent = htmlContent.replace("{eventName}", eventName);
+
+        MimeMessage message = createMimeMessage(htmlContent, userEmail, subject);
+        mailSender.send(message);
+    }
+
+    private MimeMessage createMimeMessage(String htmlContent, String userEmail, String subject) throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setFrom("support@domain.com");
+        helper.setTo(userEmail);
+        helper.setSubject(subject);
+        helper.setText(htmlContent, true);
+        return message;
+    }
+
+
 //todo: Oxunma təsdiqi üçün başlıq əlavə edin
 //        message.setHeader("Disposition-Notification-To", "support@domain.com");
 }

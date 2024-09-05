@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitMQConfig {
+public  class RabbitMQConfig {
 
     @Bean
     public Queue emailQueue() {
@@ -26,10 +26,12 @@ public class RabbitMQConfig {
     public Queue bookQueue() {
         return new Queue("bookQueue", false);
     }
+
     @Bean
     public Queue eventQueue() {
         return new Queue("eventQueue", false);
     }
+
     @Bean
     public Queue overdueQueue() {
         return new Queue("overdueQueue", false);
@@ -56,10 +58,12 @@ public class RabbitMQConfig {
     public Binding bookBinding(Queue bookQueue, TopicExchange emailTopicExchange) {
         return BindingBuilder.bind(bookQueue).to(emailTopicExchange).with("book.key");
     }
+
     @Bean
     public Binding eventBinding(Queue eventQueue, TopicExchange emailTopicExchange) {
         return BindingBuilder.bind(eventQueue).to(emailTopicExchange).with("event.key");
     }
+
     @Bean
     public Binding overdueBinding(Queue overdueQueue, TopicExchange emailTopicExchange) {
         return BindingBuilder.bind(overdueQueue).to(emailTopicExchange).with("overdue.key");

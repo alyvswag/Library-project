@@ -44,18 +44,9 @@ public class ManagementServiceImpl implements ManagementService {
     @Override
     public void sendAllOverdueBooksNotices() {
         List<Rental> rentalOverdueList = rentalRepository.findRentalOverdue(LocalDate.now());
-        Long days = null;
-        for (Rental rental : rentalOverdueList) {
-            days = ChronoUnit.DAYS.between(rental.getRentalEndDate(), LocalDate.now());
-            emailProducer.sendOverdueReminderNotification(
-                    rental.getUser().getEmail(), rental.getBook().getBookName(), String.valueOf(days));
-            notificationRepository.save(notificationMapper.toEntity(NotificationRequestCreate.builder()
-                    .userId(rental.getUser().getId())
-                    .dataType(REMINDER)
-                    .message("Sizin kirayə götürdüyünüz kitabın (" + rental.getBook().getBookName() + ") qaytarılma müddətindən " + days + "gün keçmişdir. Xahiş edirik, kitabı ən qısa zamanda geri qaytarasınız")
-                    .build()
-            ));
 
+        for (Rental rental : rentalOverdueList) {
+            sendOverdueBookNotificationAndSaveNotification(rental);
         }
     }
 
@@ -65,19 +56,10 @@ public class ManagementServiceImpl implements ManagementService {
                 () -> BaseException.notFound(Rental.class.getSimpleName(), "rental", String.valueOf(rentalId))
         );
         throwIf(
-                ()-> isRentalStillActive(rentalEntity) ,// bura false geldikde avtomatik exceptionimiz atilacaq
+                () -> isRentalStillActive(rentalEntity),// bura false geldikde avtomatik exceptionimiz atilacaq
                 BaseException.of(RENTAL_NOT_OVERDUE)
         );
-        Long days = ChronoUnit.DAYS.between(rentalEntity.getRentalEndDate(), LocalDate.now());
-        emailProducer.sendOverdueReminderNotification(
-                rentalEntity.getUser().getEmail(), rentalEntity.getBook().getBookName(), String.valueOf(days));
-        notificationRepository.save(notificationMapper.toEntity(NotificationRequestCreate.builder()
-                .userId(rentalEntity.getUser().getId())
-                .dataType(REMINDER)
-                .message("Sizin kirayə götürdüyünüz kitabın (" + rentalEntity.getBook().getBookName() + ") qaytarılma müddətindən " + days + "gün keçmişdir. Xahiş edirik, kitabı ən qısa zamanda geri qaytarasınız")
-                .build()
-        ));
-
+        sendOverdueBookNotificationAndSaveNotification(rentalEntity);
     }
 
     @Override
@@ -106,5 +88,18 @@ public class ManagementServiceImpl implements ManagementService {
         // kiraye muddeti bitmeyibse true atacaq
         // bitibse false
     }
+
+    private void sendOverdueBookNotificationAndSaveNotification(Rental rental) {
+        Long days = ChronoUnit.DAYS.between(rental.getRentalEndDate(), LocalDate.now());
+        emailProducer.sendOverdueReminderNotification(
+                rental.getUser().getEmail(), rental.getBook().getBookName(), String.valueOf(days));
+        notificationRepository.save(notificationMapper.toEntity(NotificationRequestCreate.builder()
+                .userId(rental.getUser().getId())
+                .dataType(REMINDER)
+                .message("Sizin kirayə götürdüyünüz kitabın (" + rental.getBook().getBookName() + ") qaytarılma müddətindən " + days + "gün keçmişdir. Xahiş edirik, kitabı ən qısa zamanda geri qaytarasınız")
+                .build()
+        ));
+    }
+
 
 }

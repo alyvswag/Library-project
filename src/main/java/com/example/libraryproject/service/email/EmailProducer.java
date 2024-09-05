@@ -20,7 +20,6 @@ public class EmailProducer {
         message.put("password", password);
         rabbitTemplate.convertAndSend("emailTopicExchange", "email.key", message);
     }
-
     public void sendReminderNotification(String email,  String bookName,String day) {
         Map<String, String> notificationMessage = new HashMap<>();
         notificationMessage.put("email", email);

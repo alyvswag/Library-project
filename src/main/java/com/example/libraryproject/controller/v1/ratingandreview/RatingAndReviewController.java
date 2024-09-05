@@ -27,24 +27,29 @@ public class RatingAndReviewController {
         service.addRatingAndReview(ratingAndReview);
         return BaseResponse.created();
     }
+
     @GetMapping("/get-ratings-and-reviews-book/{bookId}")
     public BaseResponse<List<RatAndRevResponseAdmin>> getRatingsAndReviewsByBook(@PathVariable Long bookId) {
         return BaseResponse.success(service.getRatingsAndReviewsByBook(bookId));
     }
+
     @GetMapping("/get-ratings-and-reviews-user/{userId}")
     public BaseResponse<List<RatAndRevResponseAdmin>> getRatingsAndReviewsByUser(@PathVariable Long userId) {
         return BaseResponse.success(service.getRatingsAndReviewsByUser(userId));
     }
+
     @PutMapping("/update-rating-and-review/{id}")
     public BaseResponse<Void> updateRatingAndReview(@PathVariable Long id, @RequestBody RatAndRevRequestUpdate ratingAndReview) {
         service.updateRatingAndReview(id, ratingAndReview);
         return BaseResponse.success();
     }
+
     @DeleteMapping("/delete-rating-and-review/{id}")
     public BaseResponse<Void> deleteRatingAndReview(@PathVariable Long id) {
         service.deleteRatingAndReview(id);
         return BaseResponse.success();
     }
+
     @GetMapping("/get-average-rating/{bookId}")
     public BaseResponse<RatingResponse> getAverageRating(@PathVariable Long bookId) {
         return BaseResponse.success(service.getAverageRating(bookId));

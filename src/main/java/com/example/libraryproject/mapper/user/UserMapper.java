@@ -1,13 +1,9 @@
 package com.example.libraryproject.mapper.user;
 
-import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dao.User;
-import com.example.libraryproject.model.dao.UserRole;
 import com.example.libraryproject.model.dto.request.create.AdminRequestCreate;
 import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.UserResponseAdmin;
-import com.example.libraryproject.service.book.BookService;
-import com.example.libraryproject.service.user.UserService;
 import org.mapstruct.*;
 
 import java.util.List;

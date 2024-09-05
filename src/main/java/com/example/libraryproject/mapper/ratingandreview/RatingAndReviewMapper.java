@@ -10,9 +10,9 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring",uses = {UserService.class, BookService.class},nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring", uses = {UserService.class, BookService.class}, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface RatingAndReviewMapper {
-    @Mapping(target = "isActive" ,constant = "true")
+    @Mapping(target = "isActive", constant = "true")
     @Mapping(target = "user", source = "userId")
     @Mapping(target = "book", source = "bookId")
     RatingAndReview toEntity(RatAndRevRequestCreate ratAndRevRequestCreate);

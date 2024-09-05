@@ -1,10 +1,8 @@
 package com.example.libraryproject.mapper.reminder;
 
 import com.example.libraryproject.model.dao.Book;
-import com.example.libraryproject.model.dao.RatingAndReview;
 import com.example.libraryproject.model.dao.Reminder;
 import com.example.libraryproject.model.dao.User;
-import com.example.libraryproject.model.dto.request.create.RatAndRevRequestCreate;
 import com.example.libraryproject.model.dto.request.create.ReminderRequestCreate;
 import com.example.libraryproject.model.dto.response.admin.ReminderResponseAdmin;
 import com.example.libraryproject.model.dto.response.user.ReminderResponseUser;

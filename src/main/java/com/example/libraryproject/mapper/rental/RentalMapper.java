@@ -1,12 +1,9 @@
 package com.example.libraryproject.mapper.rental;
 
-import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dao.Rental;
 import com.example.libraryproject.model.dao.Reservation;
 import com.example.libraryproject.model.dto.request.create.RentalRequestCreate;
-import com.example.libraryproject.model.dto.request.update.BookRequestUpdate;
 import com.example.libraryproject.model.dto.request.update.RentalRequestUpdate;
-import com.example.libraryproject.model.dto.request.update.ReservationRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.RentalResponseAdmin;
 import com.example.libraryproject.service.book.BookService;
 import com.example.libraryproject.service.user.UserService;
