@@ -18,6 +18,7 @@ public interface BookMapper {
 
     @Mapping(target = "author", source = "authorId")
     @Mapping(target = "publisher", source = "publisherId")
+    @Mapping(target = "status", constant = "ACTIVE")
     Book toEntity(BookRequestCreate bookRequestCreate);
 
     default Author mapAuthor(Long authorId, @Context AuthorService authorService) {

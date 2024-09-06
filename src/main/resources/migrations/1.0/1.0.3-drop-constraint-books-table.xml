@@ -12,5 +12,4 @@
         <dropNotNullConstraint tableName="books" columnName="author_id"/>
     </changeSet>
 
-
 </databaseChangeLog>

@@ -1,4 +1,4 @@
-spring :
+spring:
   main:
     allow-bean-definition-overriding: true
   application:
@@ -20,9 +20,9 @@ spring :
           auth: true
           starttls:
             enable: true
-#            todo: elave et pass ve username
-    username: 
-    password: 
+    #            todo: elave et pass ve username
+    username:
+    password:
     port: 587
 
   rabbitmq:

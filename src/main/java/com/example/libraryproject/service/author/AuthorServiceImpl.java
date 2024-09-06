@@ -25,7 +25,6 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public void addAuthor(AuthorRequestCreate author) {
         Author authorEntity = authorMapper.toEntity(author);
-        authorEntity.setIsActive(true);
         authorRepository.save(authorEntity);
     }
 

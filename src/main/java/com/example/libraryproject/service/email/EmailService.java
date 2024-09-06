@@ -28,7 +28,7 @@ public class EmailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("support@domain.com");
         message.setTo(email);
-        message.setText("Salam sizin admin passwordunuz: " + text + "\n" +
+        message.setText("Salam sizin passwordunuz: " + text + "\n" +
                 "Zehmet olmasa heckesle paylasmayin.");
         message.setSubject("Masazir Library");
         mailSender.send(message);

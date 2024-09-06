@@ -19,5 +19,12 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="addColumnReservedQuantityDefaultValue" author="talibaliyev">
+        <addDefaultValue tableName="quantity" columnName="reserved_quantity" defaultValue="0"/>
+    </changeSet>
+    <changeSet id="addColumnRentalQuantityDefaultValue" author="sizin-adiniz">
+        <addDefaultValue tableName="quantity" columnName="rental_quantity" defaultValue="0"/>
+    </changeSet>
+
 
 </databaseChangeLog>

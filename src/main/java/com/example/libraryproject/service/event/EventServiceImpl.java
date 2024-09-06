@@ -30,16 +30,14 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void updateEvent(Long id, EventRequestUpdate eventRequestUpdate) {
-        Event eventEntity = eventRepository.findEventById(id)
-                .orElseThrow(() -> BaseException.notFound(Event.class.getSimpleName(), "event", String.valueOf(id)));
+        Event eventEntity = findEventById(id);
         eventMapper.updateEventFromDto(eventRequestUpdate, eventEntity);
         eventRepository.save(eventEntity);
     }
 
     @Override
     public void removeEvent(Long id) {
-        Event eventEntity = eventRepository.findEventById(id)
-                .orElseThrow(() -> BaseException.notFound(Event.class.getSimpleName(), "event", String.valueOf(id)));
+        Event eventEntity = findEventById(id);
         eventEntity.setIsActive(false);
         eventRepository.save(eventEntity);
     }
@@ -47,6 +45,11 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<EventResponseAdmin> findAllEvent() {
         return eventMapper.toDtoList(eventRepository.findAllEvent());
+    }
+    //private
+    private Event findEventById(Long id) {
+       return  eventRepository.findEventById(id)
+                .orElseThrow(() -> BaseException.notFound(Event.class.getSimpleName(), "event", String.valueOf(id)));
     }
 
 }

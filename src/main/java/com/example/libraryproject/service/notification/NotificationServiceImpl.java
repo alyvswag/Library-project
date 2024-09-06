@@ -43,69 +43,80 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void sendReminderNotification(Long reminderId) {
-        Reminder reminderEntity = reminderRepository.findReminderById(reminderId)
-                .orElseThrow(() -> BaseException.notFound(Reminder.class.getSimpleName(), "reminder", String.valueOf(reminderId)));
-
-        Long daysBetween = ChronoUnit.DAYS.between( LocalDate.now(),(reminderEntity.getReminderDate().plusDays(1)));
-        emailProducer.sendReminderNotification(reminderEntity.getUser().getEmail(), reminderEntity.getBook().getBookName(),String.valueOf(daysBetween));
-
-        notificationRepository.save(notificationMapper.toEntity(NotificationRequestCreate.builder()
-                .userId(reminderEntity.getUser().getId())
-                .dataType(REMINDER)
-                .message("Sizin kirayə götürdüyünüz kitabın (" + reminderEntity.getBook().getBookName() + ") kirayə müddətinin bitməsinə " + daysBetween+" gün qalıb.")
-                .build()
-        ));
+        Reminder reminderEntity = findReminderById(reminderId);
+        Long daysBetween = ChronoUnit.DAYS.between(LocalDate.now(), (reminderEntity.getReminderDate().plusDays(1)));
+        emailProducer.sendReminderNotification(reminderEntity.getUser().getEmail(), reminderEntity.getBook().getBookName(), String.valueOf(daysBetween));
+        saveNotification(reminderEntity.getUser().getId()
+                , REMINDER,
+                "Sizin kirayə götürdüyünüz kitabın (" + reminderEntity.getBook().getBookName() + ") kirayə müddətinin bitməsinə " + daysBetween + " gün qalıb.");
     }
 
     @Override
     public void sendNewBookNotification(Long bookId, Long userId) {
-        Book bookEntity = bookRepository.findBookById(bookId)
-                .orElseThrow(
-                        () -> BaseException.notFound(Book.class.getSimpleName(), "book", String.valueOf(bookId))
-                );
-        User userEntity = userRepository.findUserById(userId)
-                .orElseThrow(
-                        () -> BaseException.notFound(User.class.getSimpleName(), "user", String.valueOf(userId))
-                );
+        Book bookEntity = findBookById(bookId);
+        User userEntity = findUserById(userId);
         emailProducer.sendBookNotification(userEntity.getEmail(), String.valueOf(bookId), bookEntity.getBookName());
-        notificationRepository.save(notificationMapper.toEntity(NotificationRequestCreate.builder()
-                .userId(userId)
-                .dataType(BOOK)
-                .message("Kitabxanamızda yeni " + bookEntity.getBookName() + " kitabı var")
-                .build()
-        ));
+        saveNotification(userId, BOOK, "Kitabxanamızda yeni " + bookEntity.getBookName() + " kitabı var");
     }
 
     @Override
     public void sendEventNotification(Long eventId, Long userId) {
-        Event eventEntity = eventRepository.findEventById(eventId)
-                .orElseThrow(() -> BaseException.notFound(Event.class.getSimpleName(), "event", String.valueOf(eventId)));
-        User userEntity = userRepository.findUserById(userId)
-                .orElseThrow(
-                        () -> BaseException.notFound(User.class.getSimpleName(), "user", String.valueOf(userId))
-                );
-
+        Event eventEntity = findEventById(eventId);
+        User userEntity = findUserById(userId);
         emailProducer.sendEventNotification(userEntity.getEmail(), eventEntity.getEventName());
-
-        notificationRepository.save(notificationMapper.toEntity(NotificationRequestCreate.builder()
-                .userId(userId)
-                .dataType(EVENT)
-                .message("Kitabxanamızda " + eventEntity.getEventName() + " tedbiri olacaq. Dəvətlisiniz")
-                .build()
-        ));
+        saveNotification(userId, EVENT, "Kitabxanamızda " + eventEntity.getEventName() + " tedbiri olacaq. Dəvətlisiniz");
     }
+
     @Override
-    public List<NotificationResponseAdmin> getNotificationsByUser(Long userId){
+    public List<NotificationResponseAdmin> getNotificationsByUser(Long userId) {
         return notificationMapper.toDto(notificationRepository.findNotificationsByUserId(userId));
     }
 
     @Override
     public void removeNotification(Long notificationId) {
-        Notification notificationEntity = notificationRepository.findNotificationById(notificationId).orElseThrow(
-                () -> BaseException.notFound(Notification.class.getSimpleName(), "notification", String.valueOf(notificationId))
-        );
+        Notification notificationEntity = findNotificationById(notificationId);
         notificationEntity.setNotificationStatus(DELETED);
         notificationRepository.save(notificationEntity);
+    }
+
+
+
+    //private
+    private User findUserById(Long id) {
+        return userRepository.findUserById(id)
+                .orElseThrow(
+                        () -> BaseException.notFound(User.class.getSimpleName(), "user", String.valueOf(id)));
+    }
+
+    private Book findBookById(Long id) {
+        return bookRepository.findBookById(id)
+                .orElseThrow(
+                        () -> BaseException.notFound(Book.class.getSimpleName(), "book", String.valueOf(id)));
+    }
+
+    private Event findEventById(Long id) {
+        return eventRepository.findEventById(id)
+                .orElseThrow(() -> BaseException.notFound(Event.class.getSimpleName(), "event", String.valueOf(id)));
+    }
+
+    private Reminder findReminderById(Long id) {
+        return reminderRepository.findReminderById(id)
+                .orElseThrow(() -> BaseException.notFound(Reminder.class.getSimpleName(), "reminder", String.valueOf(id)));
+    }
+
+    private Notification findNotificationById(Long id) {
+        return notificationRepository.findNotificationById(id).orElseThrow(
+                () -> BaseException.notFound(Notification.class.getSimpleName(), "notification", String.valueOf(id))
+        );
+    }
+
+    private void saveNotification(Long userId, DataType dataType, String message) {
+        notificationRepository.save(notificationMapper.toEntity(NotificationRequestCreate.builder()
+                .userId(userId)
+                .dataType(dataType)
+                .message(message)
+                .build()
+        ));
     }
 
 

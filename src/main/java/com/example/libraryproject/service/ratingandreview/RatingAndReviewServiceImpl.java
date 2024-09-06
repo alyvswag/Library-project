@@ -57,10 +57,8 @@ public class RatingAndReviewServiceImpl implements RatingAndReviewService {
 
     @Override
     public RatingResponse getAverageRating(Long bookId) {
-
         bookService.findById(bookId);
         Double rating = repository.averageRatingByBookId(bookId);
-        System.out.println(rating);
         String ratingString = (rating == null ? "0.00" : String.valueOf(rating).substring(0, 3));
         return RatingResponse.builder()
                 .averageRating(ratingString)

@@ -9,6 +9,7 @@ import com.example.libraryproject.model.dto.response.admin.RentalResponseAdmin;
 import com.example.libraryproject.model.enums.rental.RentalStatus;
 import com.example.libraryproject.repository.notification.NotificationRepository;
 import com.example.libraryproject.repository.rental.RentalRepository;
+import com.example.libraryproject.service.book.BookManagementService;
 import com.example.libraryproject.service.email.EmailProducer;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static com.example.libraryproject.model.enums.notification.DataType.REMINDER;
+import static com.example.libraryproject.model.enums.rental.RentalStatus.RETURNED;
 import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.RENTAL_NOT_OVERDUE;
 import static com.example.libraryproject.utils.CommonUtils.throwIf;
 
@@ -35,6 +37,7 @@ public class ManagementServiceImpl implements ManagementService {
     final RentalMapper rentalMapper;
     final NotificationMapper notificationMapper;
     final EmailProducer emailProducer;
+    final BookManagementService bookManagementService;
 
     @Override
     public List<RentalResponseAdmin> checkOverdueBooks() {
@@ -44,7 +47,6 @@ public class ManagementServiceImpl implements ManagementService {
     @Override
     public void sendAllOverdueBooksNotices() {
         List<Rental> rentalOverdueList = rentalRepository.findRentalOverdue(LocalDate.now());
-
         for (Rental rental : rentalOverdueList) {
             sendOverdueBookNotificationAndSaveNotification(rental);
         }
@@ -64,19 +66,21 @@ public class ManagementServiceImpl implements ManagementService {
 
     @Override
     public void updateBookStatus(Long rentalId, RentalStatus rentalStatus) {
-        Rental rentalEntity = rentalRepository.findRentalByIdIsActive(rentalId).orElseThrow(
-                () -> BaseException.notFound(Rental.class.getSimpleName(), "rental", String.valueOf(rentalId))
-        );
+        Rental rentalEntity = findRentalByIdIsActive(rentalId);
         rentalEntity.setRentalStatus(rentalStatus);
+        if(rentalStatus==RETURNED){
+            rentalEntity.setReturnDate(LocalDate.now());
+            bookManagementService.rentalQuantity(rentalEntity.getBook(),-1);
+        }
         rentalRepository.save(rentalEntity);
     }
 
     @Override
-    public void logReturnEvent(Long rentalId, LocalDate returnDate) {
-        Rental rentalEntity = rentalRepository.findRentalByIdIsActive(rentalId).orElseThrow(
-                () -> BaseException.notFound(Rental.class.getSimpleName(), "rental", String.valueOf(rentalId))
-        );
+    public void logReturnEvent(Long rentalId, LocalDate returnDate) {//todo : bunu bele basa dusmusem
+        Rental rentalEntity = findRentalByIdIsActive(rentalId);
+        rentalEntity.setRentalStatus(RETURNED);
         rentalEntity.setReturnDate(returnDate);
+        bookManagementService.rentalQuantity(rentalEntity.getBook(),-1);
         rentalRepository.save(rentalEntity);
     }
 
@@ -100,6 +104,11 @@ public class ManagementServiceImpl implements ManagementService {
                 .build()
         ));
     }
+        private Rental findRentalByIdIsActive(Long id){
+            return rentalRepository.findRentalByIdIsActive(id).orElseThrow(
+                    () -> BaseException.notFound(Rental.class.getSimpleName(), "rental", String.valueOf(id))
+            );
+        }
 
 
 }

@@ -7,6 +7,7 @@ import com.example.libraryproject.model.dto.request.update.AuthorRequestUpdate;
 import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.AuthorResponseAdmin;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface AuthorMapper {
-
+    @Mapping(target = "isActive", constant = "true")
     Author  toEntity(AuthorRequestCreate author);
 
     Author  toEntity(AuthorRequestUpdate author);

@@ -38,12 +38,12 @@ public class BookServiceImpl implements BookService {
     public void addBook(BookRequestCreate book) {
         Book bookEntity = bookMapper.toEntity(book);
         checkAuthorAndPublisher(bookEntity);
-        QuantityBook quantityBook = QuantityBook.builder()
+        bookEntity.setQuantityBook(QuantityBook.builder()
                 .book(bookEntity)
                 .quantity(book.getQuantity())
-                .build();
-        bookEntity.setQuantityBook(quantityBook);
-        bookEntity.setStatus(ACTIVE);//todo : mapping target constant yaza bilirsin
+                .reservedQuantity(0)
+                .rentalQuantity(0) //rucnoy daxil etme
+                .build());
         bookRepository.save(bookEntity);
     }
 
