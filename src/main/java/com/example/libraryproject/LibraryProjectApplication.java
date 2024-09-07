@@ -15,28 +15,37 @@ import static com.example.libraryproject.constant.TokenConstants.EMAIL_KEY;
 
 @RequiredArgsConstructor
 @SpringBootApplication
-public class LibraryProjectApplication implements CommandLineRunner {
+public class LibraryProjectApplication{  //implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(LibraryProjectApplication.class, args);
     }
 
-    private final UserRepository userRepository;
-    private final AccessTokenManager accessTokenManager;
-    private final RefreshTokenManager refreshTokenManager;
+    //todo: baslangic
 
-    @Override
-    public void run(String... args) throws Exception {
-        User user = userRepository.findUserById(1L).orElseThrow(
-                () -> new RuntimeException("User not found")
-        );
-        RefreshTokenDto refreshTokenDto = RefreshTokenDto.builder()
-                .rememberMe(true)
-                .user(user)
-                .build();
-        String accesToken =accessTokenManager.generate(user);
-        String refreshToken =refreshTokenManager.generate(refreshTokenDto);
+//    private final UserRepository userRepository;
+//    private final AccessTokenManager accessTokenManager;
+//    private final RefreshTokenManager refreshTokenManager;
+
+//    @Override
+//    public void run(String... args) throws Exception {
+//        User user = userRepository.findUserById(1L).orElseThrow(
+//                () -> new RuntimeException("User not found")
+//        );
+//
+//        RefreshTokenDto refreshTokenDto = RefreshTokenDto.builder()
+//                .rememberMe(true)
+//                .user(user)
+//                .build();
+//        String accessToken =accessTokenManager.generate(user);
+//        String refreshToken =refreshTokenManager.generate(refreshTokenDto);
+//        System.out.println(accessToken);
 //        System.out.println(refreshTokenManager.read(refreshToken).get(EMAIL_KEY,String.class));
-//        System.out.println(accessTokenManager.read(accesToken).get(EMAIL_KEY,String.class));
-    }
+//        System.out.println(accessTokenManager.read(accessToken).get(EMAIL_KEY,String.class));
+
+
+
+
+        //todo: son
+
 }

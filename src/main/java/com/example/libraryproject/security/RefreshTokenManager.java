@@ -1,6 +1,7 @@
 package com.example.libraryproject.security;
 
 import com.example.libraryproject.model.dao.User;
+import com.example.libraryproject.security.base.EmailGetter;
 import com.example.libraryproject.security.base.TokenGenerator;
 import com.example.libraryproject.security.base.TokenReader;
 import com.example.libraryproject.security.models.SecurityProperties;
@@ -21,7 +22,7 @@ import static com.example.libraryproject.constant.TokenConstants.EMAIL_KEY;
 @Component
 @Slf4j
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class RefreshTokenManager implements TokenGenerator<RefreshTokenDto>, TokenReader<Claims> {
+public class RefreshTokenManager implements TokenGenerator<RefreshTokenDto>, TokenReader<Claims>, EmailGetter {
 
     final SecurityProperties securityProperties;
 
@@ -60,5 +61,10 @@ public class RefreshTokenManager implements TokenGenerator<RefreshTokenDto>, Tok
         }
 
         return tokenData;
+    }
+
+    @Override
+    public String getEmail(String token) {
+        return read(token).get(EMAIL_KEY, String.class);
     }
 }

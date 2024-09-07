@@ -13,6 +13,8 @@ import com.example.libraryproject.repository.user.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class UserServiceImpl implements UserService {
     final RoleRepository roleRepository;
     final UserMapper userMapper;
     final EmailProducer emailProducer;
-//    final BCryptPasswordEncoder passwordEncoder;
+    final PasswordEncoder passwordEncoder;
 
     @Override
     public void addUser(AdminRequestCreate adminRequestCreate, RoleName roleName) {
@@ -50,7 +52,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.toEntity(adminRequestCreate);
         String password = generatePassword();
         emailProducer.sendEmailMessage(user.getEmail(), password);
-        user.setPassword(password);// todo: security tetbiq ederken passwordu encode edib bazaya yaz
+        user.setPassword(passwordEncoder.encode(password));// todo: security tetbiq ederken passwordu encode edib bazaya yaz
         List<Role> roles = new ArrayList<>();
         roles.add(roleRepository.findRole(roleName));
         user.setRoles(roles);

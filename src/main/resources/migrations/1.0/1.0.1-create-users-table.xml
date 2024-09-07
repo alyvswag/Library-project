@@ -28,5 +28,8 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="=modifyDataTypeUsersTablePasswordColumn" author="talibaliyev">
+        <modifyDataType tableName="users" columnName="password" newDataType="VARCHAR(100)" />
+    </changeSet>
 
 </databaseChangeLog>

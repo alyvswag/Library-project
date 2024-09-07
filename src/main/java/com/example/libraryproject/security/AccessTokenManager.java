@@ -1,6 +1,7 @@
 package com.example.libraryproject.security;
 
 import com.example.libraryproject.model.dao.User;
+import com.example.libraryproject.security.base.EmailGetter;
 import com.example.libraryproject.security.base.TokenGenerator;
 import com.example.libraryproject.security.base.TokenReader;
 import com.example.libraryproject.security.models.SecurityJwtData;
@@ -22,7 +23,8 @@ import static com.example.libraryproject.constant.TokenConstants.EMAIL_KEY;
 @Component
 @Slf4j
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class AccessTokenManager implements TokenGenerator<User>, TokenReader<Claims> {
+public class AccessTokenManager implements TokenGenerator<User>, TokenReader<Claims>, EmailGetter {
+
     final SecurityProperties securityProperties;
 
     @Override
@@ -50,5 +52,10 @@ public class AccessTokenManager implements TokenGenerator<User>, TokenReader<Cla
                 .build()
                 .parseClaimsJws(token)//her gelen token parse olunmur yanliz bize mexsus olan verify olanlar
                 .getBody();
+    }
+
+    @Override
+    public String getEmail(String token) {
+        return read(token).get(EMAIL_KEY,String.class);
     }
 }

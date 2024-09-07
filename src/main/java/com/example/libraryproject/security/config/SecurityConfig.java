@@ -49,10 +49,17 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> {
                             // Swagger UI
                             request.requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll();
+
+                            //lazimmsiz urller
                             request.requestMatchers("/api/v1/user/**").permitAll();
+                            request.requestMatchers("/api/v1/book/**").authenticated();
+                            request.requestMatchers("/test/test").anonymous();
+                            request.requestMatchers("/test/test1").authenticated();
+
+
                             // Auth URLs
                             request.requestMatchers("/v1/auth/logout").authenticated();
-                            request.requestMatchers("/v1/auth/**").anonymous();
+                            request.requestMatchers("api/v1/auth/**").anonymous();
                         }
                 )
                 .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
