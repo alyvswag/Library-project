@@ -10,8 +10,8 @@ public class SecurityJwtData {
 
     String publicKey;
     String privateKey;
-    Integer accessTokenValidityTime;
-    Integer refreshTokenValidityTime;
+    Long accessTokenValidityTime;
+    Long  refreshTokenValidityTime;
 
     public Long getRefreshTokenValidityTime(boolean rememberMe) {
         return refreshTokenValidityTime * (rememberMe ? 30L : 1L);

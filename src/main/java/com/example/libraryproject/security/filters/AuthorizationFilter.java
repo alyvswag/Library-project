@@ -1,6 +1,8 @@
 package com.example.libraryproject.security.filters;
 
+import com.example.libraryproject.redis.RedisService;
 import com.example.libraryproject.security.AccessTokenManager;
+import com.example.libraryproject.security.RefreshTokenManager;
 import com.example.libraryproject.service.auth.AuthService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
@@ -31,11 +33,12 @@ public class AuthorizationFilter extends OncePerRequestFilter {
     final AccessTokenManager accessTokenManager;
     final UserDetailsService userDetailsService;
     final AuthService authService;
-
+    final RedisService redisService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (token != null && token.startsWith(PREFIX)) {
+//            redisService.exists(token.substring(7));
             authService.setAuthentication(
                     accessTokenManager.getEmail(
                             token.substring(7)));

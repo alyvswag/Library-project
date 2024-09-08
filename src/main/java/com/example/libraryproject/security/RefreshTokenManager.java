@@ -32,8 +32,6 @@ public class RefreshTokenManager implements TokenGenerator<RefreshTokenDto>, Tok
 
         Claims claims = Jwts.claims();
         claims.put(EMAIL_KEY, user.getEmail());
-        claims.put("type", "REFRESH_TOKEN");
-
         Date now = new Date();
         Date exp = new Date(now.getTime() + securityProperties.getJwt().getRefreshTokenValidityTime(obj.isRememberMe()));
 
@@ -48,19 +46,12 @@ public class RefreshTokenManager implements TokenGenerator<RefreshTokenDto>, Tok
 
     @Override
     public Claims read(String token) {
-        Claims tokenData = Jwts.parserBuilder()
+        return Jwts.parserBuilder()
                 .setSigningKey(PublicPrivateKeyUtils.getPublicKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
 
-        String typeOfToken = tokenData.get("type", String.class);
-
-        if (!"REFRESH_TOKEN".equals(typeOfToken)) {
-            throw new RuntimeException("Invalid type of token");//todo:BaseException
-        }
-
-        return tokenData;
     }
 
     @Override

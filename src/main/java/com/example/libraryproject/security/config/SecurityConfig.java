@@ -1,21 +1,37 @@
 package com.example.libraryproject.security.config;
 
+import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.security.filters.AuthorizationFilter;
-import org.springdoc.webmvc.core.service.RequestService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerExceptionResolver;
+
+import java.io.IOException;
+
+import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.FORBIDDEN;
 
 
 @Configuration
@@ -41,10 +57,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
-                                                   AuthorizationFilter authorizationFilter,
-                                                   // AuthEntryPoint authEntryPoint
-                                                   RequestService requestBuilder)
-            throws Exception {
+                                                   AuthorizationFilter authorizationFilter) throws Exception {
         return http
                 .authorizeHttpRequests(request -> {
                             // Swagger UI
@@ -52,10 +65,10 @@ public class SecurityConfig {
 
                             //lazimmsiz urller
                             request.requestMatchers("/api/v1/user/**").permitAll();
-                            request.requestMatchers("/api/v1/book/**").authenticated();
+                            request.requestMatchers("/api/v1/book/get-book-by-id/**").hasRole("ADMIN");
+                            request.requestMatchers("/api/v1/book/get-all-books/**").hasRole("USER");
                             request.requestMatchers("/test/test").anonymous();
                             request.requestMatchers("/test/test1").authenticated();
-
 
                             // Auth URLs
                             request.requestMatchers("/v1/auth/logout").authenticated();
@@ -63,10 +76,30 @@ public class SecurityConfig {
                         }
                 )
                 .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
+//                .exceptionHandling(eh -> eh.authenticationEntryPoint(authEntryPoint))
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
 
     }
+
+//    @Component
+//    @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+//    @Slf4j
+//    @Primary
+//    public static class AuthEntryPoint implements AuthenticationEntryPoint {
+//
+//        @Qualifier("handlerExceptionResolver")
+//        final HandlerExceptionResolver resolver;
+//
+//        @Override
+//        public void commence(HttpServletRequest request,
+//                             HttpServletResponse response,
+//                             AuthenticationException authException) throws IOException, ServletException {
+//
+//            authException.printStackTrace();
+//            resolver.resolveException(request, response, null, BaseException.of(FORBIDDEN));
+//        }
+//    }
 
 }

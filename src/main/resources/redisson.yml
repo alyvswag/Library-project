@@ -1,0 +1,10 @@
+singleServerConfig:
+  idleConnectionTimeout: 10000
+  connectTimeout: 10000
+  timeout: 3000
+  retryAttempts: 3
+  retryInterval: 1500
+  password: redis123
+  subscriptionsPerConnection: 5
+  clientName: redis
+  address: "redis://127.0.0.1:6379"

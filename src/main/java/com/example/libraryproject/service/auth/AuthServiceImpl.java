@@ -3,9 +3,11 @@ package com.example.libraryproject.service.auth;
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.model.dao.User;
 import com.example.libraryproject.model.dto.request.create.UserRequestCreate;
+import com.example.libraryproject.redis.RedisService;
 import com.example.libraryproject.repository.user.UserRepository;
 import com.example.libraryproject.security.AccessTokenManager;
 import com.example.libraryproject.security.RefreshTokenManager;
+import com.example.libraryproject.security.models.SecurityProperties;
 import com.example.libraryproject.security.models.dto.RefreshTokenDto;
 import com.example.libraryproject.security.models.login.LoginRequestPayload;
 import com.example.libraryproject.security.models.login.RefreshTokenRequestPayload;
@@ -22,7 +24,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import static com.example.libraryproject.constant.TokenConstants.EMAIL_KEY;
+import static com.example.libraryproject.constant.TokenConstants.*;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -34,6 +36,8 @@ public class AuthServiceImpl implements AuthService {
     final AccessTokenManager accessTokenManager;
     final RefreshTokenManager refreshTokenManager;
     final UserDetailsService userDetailsService;
+    final RedisService redisService;
+    final SecurityProperties securityProperties;
 
     @Override
     public LoginResponse login(LoginRequestPayload loginRequestPayload) {
@@ -52,20 +56,21 @@ public class AuthServiceImpl implements AuthService {
     public void logout() {
 
     }
+
     @Override
     public void registerUser(UserRequestCreate userRequestCreate) {
 
     }
+
     @Override
     public void setAuthentication(String email) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
         SecurityContextHolder.getContext().setAuthentication(
-                new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities())
+                new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities())
         );
 
     }
-
 
 
     //private
@@ -85,15 +90,18 @@ public class AuthServiceImpl implements AuthService {
     private LoginResponse prepareLoginResponse(String email, Boolean rememberMe) {
 
         User user = findUserByEmail(email);
-
+        String accessToken = accessTokenManager.generate(user);
+        String refreshToken = refreshTokenManager.generate(
+                RefreshTokenDto.builder()
+                        .user(user)
+                        .rememberMe(rememberMe)
+                        .build()
+        );
+        setAccessTokenRedisDb(accessToken);
+        setRefreshTokenRedisDb(refreshToken,  rememberMe);
         return LoginResponse.builder()
-                .accessToken(accessTokenManager.generate(user))
-                .refreshToken(refreshTokenManager.generate(
-                        RefreshTokenDto.builder()
-                                .user(user)
-                                .rememberMe(rememberMe)
-                                .build()
-                ))
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
                 .build();
 
     }
@@ -104,4 +112,14 @@ public class AuthServiceImpl implements AuthService {
                         () -> BaseException.notFound(User.class.getSimpleName(), "user", email)
                 );
     }
+
+    private void setAccessTokenRedisDb(String accessToken) {
+        redisService.set(ACCESS_TOKEN + accessToken, accessToken, securityProperties.getJwt().getAccessTokenValidityTime());
+    }
+
+    private void setRefreshTokenRedisDb(String refreshToken,  Boolean rememberMe) {
+        redisService.set(REFRESH_TOKEN + refreshToken, refreshToken, securityProperties.getJwt().getRefreshTokenValidityTime(rememberMe));
+    }
+
+
 }

@@ -18,7 +18,7 @@ public class UserRole extends Base {
         @JoinColumn(name = "user_id"  ,referencedColumnName = "id")
         User user;
         @JoinColumn(name = "role_id"  ,referencedColumnName = "id")
-        @ManyToOne(fetch = FetchType.LAZY)
+        @ManyToOne(fetch = FetchType.EAGER)
         Role role;
         @Column(name ="is_active")
         Boolean isActive;
