@@ -37,7 +37,7 @@ public  class RabbitMQConfig {
         return new Queue("overdueQueue", false);
     }
 
-    //----
+    //----exchange
     @Bean
     public TopicExchange emailTopicExchange() {
         return new TopicExchange("emailTopicExchange", true, false);

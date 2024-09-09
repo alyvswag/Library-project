@@ -7,7 +7,6 @@ import lombok.experimental.FieldDefaults;
 
 import java.sql.Timestamp;
 
-
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor

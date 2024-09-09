@@ -6,6 +6,7 @@ import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dto.response.admin.BookResponseAdmin;
 import com.example.libraryproject.model.dto.response.admin.RentalResponseAdmin;
 import com.example.libraryproject.repository.rental.RentalRepository;
+import com.example.libraryproject.service.redis.RedisService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -27,6 +28,7 @@ public class ReportServiceImpl implements ReportService{
     final RentalRepository rentalRepository;
     final BookMapper bookMapper;
     final RentalMapper rentalMapper;
+    final RedisService redisService;
 
     @Override
     public Map<BookResponseAdmin,Long> generateRentalStatistics(LocalDate startDate, LocalDate endDate) {
@@ -59,5 +61,9 @@ public class ReportServiceImpl implements ReportService{
         return rentalMapper.toDtoBookRentalHistory(rentalRepository.findRentalByBookId(bookId));
     }
 
+    @Override
+    public List<String> getUserLoginHistory(String email) {
+       return redisService.getUserLoginHistory(email);
+    }
 
 }

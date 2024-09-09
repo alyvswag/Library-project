@@ -5,16 +5,13 @@ import com.example.libraryproject.mapper.user.UserMapper;
 import com.example.libraryproject.model.dao.Role;
 import com.example.libraryproject.model.dao.User;
 import com.example.libraryproject.model.dto.request.create.UserRequestCreate;
-import com.example.libraryproject.model.enums.user.RoleName;
-import com.example.libraryproject.redis.RedisService;
+import com.example.libraryproject.service.redis.RedisService;
 import com.example.libraryproject.repository.user.RoleRepository;
 import com.example.libraryproject.repository.user.UserRepository;
-import com.example.libraryproject.security.config.SecurityConfig;
-import com.example.libraryproject.security.models.SecurityProperties;
-import com.example.libraryproject.security.models.jwt.TokenProvider;
-import com.example.libraryproject.security.models.login.LoginRequestPayload;
-import com.example.libraryproject.security.models.response.LoginResponse;
-import com.example.libraryproject.utils.CommonUtils;
+import com.example.libraryproject.security.SecurityProperties;
+import com.example.libraryproject.security.jwt.TokenProvider;
+import com.example.libraryproject.model.dto.request.login.LoginRequestPayload;
+import com.example.libraryproject.model.dto.response.login.LoginResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -22,7 +19,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -56,6 +52,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public LoginResponse login(LoginRequestPayload loginRequestPayload) {
         authenticate(loginRequestPayload);
+        redisService.addUserLoginTime(loginRequestPayload.getEmail());
         return prepareLoginResponse(loginRequestPayload.getEmail());
     }
 
@@ -63,7 +60,7 @@ public class AuthServiceImpl implements AuthService {
     public LoginResponse refreshToken(String refreshToken) {
         String email = tokenProvider.getEmail(refreshToken);
         throwIf(
-                ()-> !redisService.isTokenMine(email, refreshToken),
+                () -> !redisService.isTokenMine(email, refreshToken),
                 BaseException.of(WRONG_TOKEN)
         );
         redisService.deleteMap(email);
@@ -94,6 +91,7 @@ public class AuthServiceImpl implements AuthService {
         roles.add(roleRepository.findRole(USER));
         user.setRoles(roles);
         userRepository.save(user);
+        redisService.addUserLoginTime(userRequestCreate.getEmail());
         return prepareLoginResponse(userRequestCreate.getEmail());
     }
 
@@ -130,9 +128,11 @@ public class AuthServiceImpl implements AuthService {
         setAccessTokenRedisDb(accessToken, email);
         setRefreshTokenRedisDb(refreshToken, email);
         addTokensToEmail(email, accessToken, refreshToken);
+
         return LoginResponse.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
+                .user(userMapper.toDto(user))
                 .build();
 
     }

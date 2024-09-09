@@ -10,11 +10,13 @@ import java.util.Map;
 
 
 public interface ReportService {
-    Map<Integer,BookResponseAdmin> getMostReadBooks();
+    Map<Integer, BookResponseAdmin> getMostReadBooks();
 
-    Map<BookResponseAdmin,Long> generateRentalStatistics(LocalDate startDate, LocalDate endDate);
+    Map<BookResponseAdmin, Long> generateRentalStatistics(LocalDate startDate, LocalDate endDate);
 
     List<RentalResponseAdmin> generateUserActivityReport(Long userId);
 
     List<RentalResponseAdmin> getBookRentalHistory(Long bookId);
+
+    List<String> getUserLoginHistory(String email);
 }

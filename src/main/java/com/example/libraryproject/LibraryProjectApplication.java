@@ -12,11 +12,18 @@ import static com.example.libraryproject.constant.TokenConstants.ACCESS_TOKEN;
 
 @RequiredArgsConstructor
 @SpringBootApplication
-public class LibraryProjectApplication {
+public class LibraryProjectApplication  {
 
     public static void main(String[] args) {
         SpringApplication.run(LibraryProjectApplication.class, args);
     }
+
+//    @Autowired
+//    private RedissonClient redisson;
+//    @Override
+//    public void run(String... args) throws Exception {
+//        redisson.getKeys().flushall();
+//    }
 
 
 //    @Autowired

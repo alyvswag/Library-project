@@ -40,5 +40,9 @@ public class ReportController {
     public BaseResponse<List<RentalResponseAdmin>> getBookRentalHistory(@PathVariable Long bookId) {
         return BaseResponse.success(reportService.getBookRentalHistory(bookId));
     }
+    @GetMapping("/get-user-login-history/{email}")
+    public BaseResponse<List<String>> getUserLoginHistory(@PathVariable String email) {
+        return BaseResponse.success(reportService.getUserLoginHistory(email));
+    }
 
 }
