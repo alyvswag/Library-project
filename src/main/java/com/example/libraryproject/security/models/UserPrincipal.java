@@ -13,7 +13,7 @@ public class UserPrincipal implements UserDetails {
 
     private Long id;
     private String username;
-    private transient String password; //don't show up on serialized places
+    private transient String password;
     private List<String> roles;
 
     public UserPrincipal() {

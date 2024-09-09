@@ -25,7 +25,8 @@ import static com.example.libraryproject.model.enums.response.ErrorResponseMessa
 import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.INVALID_EMAIL_FORMAT;
 import static com.example.libraryproject.model.enums.base.Status.DELETED;
 import static com.example.libraryproject.model.enums.base.Status.INACTIVE;
-import static com.example.libraryproject.utils.CommonUtils.throwIf;
+
+import static com.example.libraryproject.utils.CommonUtils.*;
 import static com.example.libraryproject.utils.PasswordGeneratorUtils.generatePassword;
 
 @Service
@@ -124,11 +125,7 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
-    private boolean isValidEmailAddress(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        Pattern pat = Pattern.compile(emailRegex);
-        return email != null && pat.matcher(email).matches();
-    }
+
 
     private User findUserById(Long id){
         return userRepository.findUserById(id)

@@ -28,15 +28,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByEmail(username)
-                .orElseThrow(
-                        () -> BaseException.notFound(User.class.getSimpleName(), "user", username)
-                );
+        User user = findUserByEmail(username);
         List<UserRole> userRoles = userRoleRepository.findRolesByUserId(user.getId());
         List<String> authorities = new ArrayList<>();
         for (UserRole userRole : userRoles) {
             authorities.add(String.valueOf(userRole.getRole().getRoleName()));
         }
         return new UserPrincipal(user.getId(), user.getEmail(), user.getPassword(), authorities);
+    }
+
+    private User findUserByEmail(String email) {
+       return  userRepository.findUserByEmail(email)
+                .orElseThrow(
+                        () -> BaseException.notFound(User.class.getSimpleName(), "user", email)
+                );
     }
 }

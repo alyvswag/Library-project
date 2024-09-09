@@ -13,8 +13,4 @@ public class SecurityJwtData {
     Long accessTokenValidityTime;
     Long  refreshTokenValidityTime;
 
-    public Long getRefreshTokenValidityTime(boolean rememberMe) {
-        return refreshTokenValidityTime * (rememberMe ? 30L : 1L);
-    }
-
 }

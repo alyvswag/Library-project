@@ -2,6 +2,7 @@ package com.example.libraryproject.mapper.user;
 
 import com.example.libraryproject.model.dao.User;
 import com.example.libraryproject.model.dto.request.create.AdminRequestCreate;
+import com.example.libraryproject.model.dto.request.create.UserRequestCreate;
 import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
 import com.example.libraryproject.model.dto.response.admin.UserResponseAdmin;
 import org.mapstruct.*;
@@ -19,4 +20,6 @@ public interface UserMapper {
 
     List<UserResponseAdmin> toDto(List<User> users);
 
+    @Mapping(target = "status" ,constant = "ACTIVE")
+    User toEntity(UserRequestCreate userRequestCreate);
 }

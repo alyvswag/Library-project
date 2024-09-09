@@ -1,9 +1,9 @@
 package com.example.libraryproject.controller.v1.auth;
 
+import com.example.libraryproject.model.dto.request.create.UserRequestCreate;
 import com.example.libraryproject.model.dto.response.base.BaseResponse;
 import com.example.libraryproject.security.models.login.LoginRequestPayload;
-import com.example.libraryproject.security.models.login.RefreshTokenRequestPayload;
-import com.example.libraryproject.security.models.repsonse.LoginResponse;
+import com.example.libraryproject.security.models.response.LoginResponse;
 import com.example.libraryproject.service.auth.AuthService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +21,20 @@ public class AuthController {
     public BaseResponse<LoginResponse> login(@RequestBody LoginRequestPayload loginRequestPayload) {
         return BaseResponse.success(authService.login(loginRequestPayload));
     }
-    @PostMapping("/refreshToken")
-    public BaseResponse<LoginResponse> refreshToken(@RequestBody RefreshTokenRequestPayload refreshToken) {
+
+    @PostMapping("/refreshToken/{refreshToken}")
+    public BaseResponse<LoginResponse> refreshToken(@PathVariable("refreshToken") String refreshToken) {
         return BaseResponse.success(authService.refreshToken(refreshToken));
+    }
+
+    @PostMapping("/register-user")
+    public BaseResponse<LoginResponse> registerUser(@RequestBody UserRequestCreate userRequestCreate) {
+        return BaseResponse.success(authService.registerUser(userRequestCreate));
+    }
+
+    @PostMapping("/logout")
+    public BaseResponse<Void> logout() {
+        authService.logout();
+        return BaseResponse.success();
     }
 }

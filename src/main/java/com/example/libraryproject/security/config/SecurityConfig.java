@@ -1,41 +1,39 @@
 package com.example.libraryproject.security.config;
 
-import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.security.filters.AuthorizationFilter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.HandlerExceptionResolver;
-
-import java.io.IOException;
-
-import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.FORBIDDEN;
 
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
+    private static final String[] AUTH_WHITELIST = {
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/api/v1/auth/register-user",
+            "/api/v1/auth/login",
+            "/api/v1/auth/refreshToken/**"
+    };
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -55,51 +53,54 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    AuthorizationFilter authorizationFilter) throws Exception {
-        return http
+        http
                 .authorizeHttpRequests(request -> {
-                            // Swagger UI
-                            request.requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll();
+                    request.requestMatchers(AUTH_WHITELIST).permitAll();
+                    // Swagger UI
+                    request.requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll();
 
-                            //lazimmsiz urller
-                            request.requestMatchers("/api/v1/user/**").permitAll();
-                            request.requestMatchers("/api/v1/book/get-book-by-id/**").hasRole("ADMIN");
-                            request.requestMatchers("/api/v1/book/get-all-books/**").hasRole("USER");
-                            request.requestMatchers("/test/test").anonymous();
-                            request.requestMatchers("/test/test1").authenticated();
+                    // Lazımsız URL-lər
+                    request.requestMatchers("/api/v1/user/**").permitAll();
+                    request.requestMatchers("/api/v1/book/get-book-by-id/**").hasRole("ADMIN");
+                    request.requestMatchers("/api/v1/book/get-all-books/**").hasRole("USER");
+                    request.requestMatchers("/test/test").anonymous();
+                    request.requestMatchers("/test/test1").authenticated();
 
-                            // Auth URLs
-                            request.requestMatchers("/v1/auth/logout").authenticated();
-                            request.requestMatchers("api/v1/auth/**").anonymous();
-                        }
-                )
-                .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
-//                .exceptionHandling(eh -> eh.authenticationEntryPoint(authEntryPoint))
-                .csrf(AbstractHttpConfigurer::disable)
+                    // Auth URL-ləri
+                    request.requestMatchers("api/v1/auth/logout").authenticated();
+                })
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .build();
+                .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(eh -> {
+                    eh.authenticationEntryPoint(authenticationEntryPoint());
+                    eh.accessDeniedHandler(customAccessDeniedHandler());
+                })
+                .csrf(AbstractHttpConfigurer::disable);
 
+        return http.build();
     }
 
-//    @Component
-//    @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-//    @Slf4j
-//    @Primary
-//    public static class AuthEntryPoint implements AuthenticationEntryPoint {
-//
-//        @Qualifier("handlerExceptionResolver")
-//        final HandlerExceptionResolver resolver;
-//
-//        @Override
-//        public void commence(HttpServletRequest request,
-//                             HttpServletResponse response,
-//                             AuthenticationException authException) throws IOException, ServletException {
-//
-//            authException.printStackTrace();
-//            resolver.resolveException(request, response, null, BaseException.of(FORBIDDEN));
-//        }
-//    }
+
+    public AuthenticationEntryPoint authenticationEntryPoint() {
+
+        return (request, response, authException) -> {
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getOutputStream().println("{ \"error\": \"" + authException.getMessage() + "\" }");
+        };
+    }
+
+    @Bean
+    public AccessDeniedHandler customAccessDeniedHandler() {
+        return (request, response, accessDeniedException) -> {
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.getOutputStream().println("{ \"error\": \"" + accessDeniedException.getMessage() + "\" }");
+        };
+    }
 
 }

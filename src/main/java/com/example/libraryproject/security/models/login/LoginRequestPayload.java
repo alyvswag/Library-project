@@ -12,6 +12,5 @@ public class LoginRequestPayload {
 
     String email;
     String password;
-    Boolean rememberMe;
 
 }

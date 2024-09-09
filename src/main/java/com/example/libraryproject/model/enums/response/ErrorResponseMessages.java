@@ -16,7 +16,8 @@ public enum ErrorResponseMessages implements ResponseMessages {
     NULL_NOT_ALLOWED("null_not_allowed_%s", "The column %s does not allow null values.", HttpStatus.BAD_REQUEST),
     BOOK_UNAVAILABLE_QUANTITY("book_unavailable_quantity", "The requested quantity of the book is unavailable.", HttpStatus.CONFLICT),
     RENTAL_NOT_OVERDUE("rental_not_overdue", "The rental period has not yet expired for the specified book.", HttpStatus.BAD_REQUEST),
-    FORBIDDEN("forbidden", "Forbidden", HttpStatus.FORBIDDEN),
+    INVALID_TOKEN("invalid_token", "The provided token is no longer valid.", HttpStatus.UNAUTHORIZED),
+    WRONG_TOKEN("wrong_token", "The provided token does not belong to us.", HttpStatus.UNAUTHORIZED),
     ;
 
 
