@@ -7,14 +7,14 @@ import com.example.libraryproject.model.dto.response.admin.PublisherResponseAdmi
 
 import java.util.List;
 
-public interface PublisherService {
-    void addPublisher(PublisherRequestCreate publisherRequestCreate);
+    public interface PublisherService {
+        void addPublisher(PublisherRequestCreate publisherRequestCreate);
 
-    void updatePublisher(Long id, PublisherRequestUpdate publisherRequest);
+        void updatePublisher(Long id, PublisherRequestUpdate publisherRequest);
 
-    void deletePublisher(Long id);
+        void deletePublisher(Long id);
 
-    List<PublisherResponseAdmin> getAllPublishers();
+        List<PublisherResponseAdmin> getAllPublishers();
 
-    Publisher findById(Long id);
-}
+        Publisher findById(Long id);
+    }

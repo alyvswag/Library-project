@@ -19,9 +19,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Slf4j
 public class ReminderServiceImpl implements ReminderService {
 
     final ReminderRepository reminderRepository;

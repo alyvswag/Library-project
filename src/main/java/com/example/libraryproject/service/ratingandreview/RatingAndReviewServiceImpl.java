@@ -18,7 +18,7 @@ import java.util.List;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class RatingAndReviewServiceImpl implements RatingAndReviewService {
 
     final RatingAndReviewRepository repository;

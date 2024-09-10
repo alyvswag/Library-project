@@ -20,9 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Slf4j
 public class ReportServiceImpl implements ReportService{
 
     final RentalRepository rentalRepository;

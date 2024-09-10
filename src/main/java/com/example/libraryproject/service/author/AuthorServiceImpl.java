@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
 
     final AuthorMapper authorMapper;

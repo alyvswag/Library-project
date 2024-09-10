@@ -28,7 +28,7 @@ import static com.example.libraryproject.model.enums.response.ErrorResponseMessa
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class ReservationServiceImpl implements ReservationService {
 
     final ReservationRepository reservationRepository;

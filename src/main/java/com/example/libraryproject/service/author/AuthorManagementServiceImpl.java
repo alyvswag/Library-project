@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class AuthorManagementServiceImpl implements AuthorManagementService {
     final AuthorRepository authorRepository;
     final BookRepository bookRepository;

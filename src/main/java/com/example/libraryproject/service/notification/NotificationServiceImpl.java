@@ -29,9 +29,8 @@ import static com.example.libraryproject.model.enums.notification.Message.*;
 import static com.example.libraryproject.model.enums.notification.NotificationStatus.DELETED;
 
 @Service
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Slf4j
 public class NotificationServiceImpl implements NotificationService {
     final NotificationMapper notificationMapper;
     final NotificationRepository notificationRepository;

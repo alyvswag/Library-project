@@ -28,9 +28,8 @@ import static com.example.libraryproject.model.enums.response.ErrorResponseMessa
 import static com.example.libraryproject.utils.CommonUtils.throwIf;
 
 @Service
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Slf4j
 public class ManagementServiceImpl implements ManagementService {
 
     final RentalRepository rentalRepository;

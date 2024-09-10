@@ -36,7 +36,7 @@ import static com.example.libraryproject.utils.CommonUtils.throwIf;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
     final AuthenticationManager authenticationManager;

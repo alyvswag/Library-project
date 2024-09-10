@@ -26,8 +26,7 @@ import static com.example.libraryproject.model.enums.base.Status.DELETED;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-@Slf4j
+@RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
     final BookMapper bookMapper;
     final BookRepository bookRepository;

@@ -26,7 +26,7 @@ import static com.example.libraryproject.model.enums.base.Status.ACTIVE;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class BookManagementServiceImpl implements BookManagementService {
     final BookMapper bookMapper;
     final BookRepository bookRepository;

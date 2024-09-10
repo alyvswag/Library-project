@@ -21,7 +21,7 @@ import static com.example.libraryproject.model.enums.reservation.RezervStatus.CO
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class RentalServiceImpl implements RentalService {
     final RentalRepository rentalRepository;
     final RentalMapper rentalMapper;

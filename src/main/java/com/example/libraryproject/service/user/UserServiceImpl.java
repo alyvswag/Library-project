@@ -31,7 +31,7 @@ import static com.example.libraryproject.utils.PasswordGeneratorUtils.generatePa
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     final UserRepository userRepository;

@@ -61,17 +61,6 @@ public class SecurityConfig {
                     request.requestMatchers(HAS_ANY_ROLE_SUPER_ADMIN_AND_ADMIN).hasAnyRole("SUPERADMIN", "ADMIN");
                     //HAS_ROLE_USER
                     request.requestMatchers(HAS_ROLE_USER).hasRole("USER");
-
-                    // Lazımsız URL-lər
-//                    request.requestMatchers("/api/v1/user/**").permitAll();
-//                    request.requestMatchers("/api/v1/book/get-book-by-id/**").hasRole("ADMIN");
-//                    request.requestMatchers("/api/v1/book/get-all-books/**").hasRole("USER");
-//                    request.requestMatchers("/test/test").anonymous();
-//                    request.requestMatchers("/test/test1").authenticated();
-//                    request.requestMatchers("/api/v1/report/get-user-login-history/**").permitAll();
-//                    // Auth URL-ləri
-//                    request.requestMatchers("/api/v1/auth/logout").authenticated();
-//                    request.requestMatchers("/api/v1/book-management/filter-books/**").hasAnyRole("ADMIN", "USER");
                 })
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)

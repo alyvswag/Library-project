@@ -12,8 +12,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
-@Slf4j
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class RedisService {
 
     final RedissonClient redissonClient;
