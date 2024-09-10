@@ -30,13 +30,11 @@ public class RedisService {
     }
 
     public void addUserLoginTime(String email) {
-        // Redis-də istifadəçi üçün giriş vaxtını siyahıya əlavə edirik
         RList<String> loginTimes = redissonClient.getList("loginHistory:" + email);
         loginTimes.add("Giris vaxti: " + new Timestamp(System.currentTimeMillis()));
     }
 
     public List<String> getUserLoginHistory(String email) {
-        // İstifadəçinin giriş tarixçəsini siyahıdan oxuyuruq
         RList<String> loginTimes = redissonClient.getList("loginHistory:" + email);
         return loginTimes.readAll();
     }

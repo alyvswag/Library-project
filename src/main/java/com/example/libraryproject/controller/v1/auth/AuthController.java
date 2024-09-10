@@ -8,6 +8,7 @@ import com.example.libraryproject.service.auth.AuthService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,11 +23,12 @@ public class AuthController {
         return BaseResponse.success(authService.login(loginRequestPayload));
     }
 
-    @PostMapping("/refreshToken/{refreshToken}")
+    @PostMapping("/refresh-token/{refreshToken}")
     public BaseResponse<LoginResponse> refreshToken(@PathVariable("refreshToken") String refreshToken) {
         return BaseResponse.success(authService.refreshToken(refreshToken));
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/register-user")
     public BaseResponse<LoginResponse> registerUser(@RequestBody UserRequestCreate userRequestCreate) {
         return BaseResponse.success(authService.registerUser(userRequestCreate));

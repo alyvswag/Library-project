@@ -18,6 +18,7 @@ public enum ErrorResponseMessages implements ResponseMessages {
     RENTAL_NOT_OVERDUE("rental_not_overdue", "The rental period has not yet expired for the specified book.", HttpStatus.BAD_REQUEST),
     INVALID_TOKEN("invalid_token", "The provided token is no longer valid.", HttpStatus.UNAUTHORIZED),
     WRONG_TOKEN("wrong_token", "The provided token does not belong to us.", HttpStatus.UNAUTHORIZED),
+    INVALID_USERNAME_OR_PASSWORD("invalid_username_or_password", "The provided username or password is incorrect.", HttpStatus.UNAUTHORIZED),
     ;
 
 

@@ -64,6 +64,7 @@ public class UserServiceImpl implements UserService {
     public void updateUser(Long id, UserRequestUpdate userRequestUpdate) {
         User userEntity = findUserById(id);
         userMapper.updateUserFromDto(userRequestUpdate, userEntity);
+        userEntity.setPassword(passwordEncoder.encode(userRequestUpdate.getPassword()));
         userRepository.save(userEntity);
     }
 
@@ -126,8 +127,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
-    private User findUserById(Long id){
+    private User findUserById(Long id) {
         return userRepository.findUserById(id)
                 .orElseThrow(
                         () -> BaseException.notFound(User.class.getSimpleName(), "user", String.valueOf(id))

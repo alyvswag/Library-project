@@ -20,7 +20,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
-import static com.example.libraryproject.constant.SecurityPathConstants.PERMIT_ALL_LIST;
+import static com.example.libraryproject.constant.SecurityPathConstants.*;
 
 
 @Configuration
@@ -51,17 +51,27 @@ public class SecurityConfig {
                                                    AuthorizationFilter authorizationFilter) throws Exception {
         http
                 .authorizeHttpRequests(request -> {
+                    //PERMIT ALL LIST
                     request.requestMatchers(PERMIT_ALL_LIST).permitAll();
+                    //AUTHENTICATED
+                    request.requestMatchers(AUTHENTICATED).authenticated();
+                    //HAS_ROLE_SUPER_ADMIN
+                    request.requestMatchers(HAS_ROLE_SUPER_ADMIN).hasRole("SUPERADMIN");
+                    //HAS_ANY_ROLE_SUPER_ADMIN_AND_ADMIN
+                    request.requestMatchers(HAS_ANY_ROLE_SUPER_ADMIN_AND_ADMIN).hasAnyRole("SUPERADMIN", "ADMIN");
+                    //HAS_ROLE_USER
+                    request.requestMatchers(HAS_ROLE_USER).hasRole("USER");
 
                     // Lazımsız URL-lər
-                    request.requestMatchers("/api/v1/user/**").permitAll();
-                    request.requestMatchers("/api/v1/book/get-book-by-id/**").hasRole("ADMIN");
-                    request.requestMatchers("/api/v1/book/get-all-books/**").hasRole("USER");
-                    request.requestMatchers("/test/test").anonymous();
-                    request.requestMatchers("/test/test1").authenticated();
-                    request.requestMatchers("/api/v1/report/get-user-login-history/**").permitAll();
-                    // Auth URL-ləri
-                    request.requestMatchers("api/v1/auth/logout").authenticated();
+//                    request.requestMatchers("/api/v1/user/**").permitAll();
+//                    request.requestMatchers("/api/v1/book/get-book-by-id/**").hasRole("ADMIN");
+//                    request.requestMatchers("/api/v1/book/get-all-books/**").hasRole("USER");
+//                    request.requestMatchers("/test/test").anonymous();
+//                    request.requestMatchers("/test/test1").authenticated();
+//                    request.requestMatchers("/api/v1/report/get-user-login-history/**").permitAll();
+//                    // Auth URL-ləri
+//                    request.requestMatchers("/api/v1/auth/logout").authenticated();
+//                    request.requestMatchers("/api/v1/book-management/filter-books/**").hasAnyRole("ADMIN", "USER");
                 })
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)

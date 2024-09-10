@@ -59,10 +59,8 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public LoginResponse refreshToken(String refreshToken) {
         String email = tokenProvider.getEmail(refreshToken);
-        throwIf(
-                () -> !redisService.isTokenMine(email, refreshToken),
-                BaseException.of(WRONG_TOKEN)
-        );
+        throwIf(() -> !redisService.isTokenMine(email, refreshToken),
+                BaseException.of(WRONG_TOKEN));
         redisService.deleteMap(email);
         return prepareLoginResponse(tokenProvider.getEmail(refreshToken));
     }
@@ -72,19 +70,16 @@ public class AuthServiceImpl implements AuthService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         redisService.delete(redisService.getAccessTokenForEmail(authentication.getName()));
         redisService.delete(redisService.getRefreshTokenForEmail(authentication.getName()));
+        redisService.deleteMap(authentication.getName());
         SecurityContextHolder.clearContext();
     }
 
     @Override
     public LoginResponse registerUser(UserRequestCreate userRequestCreate) {
-        throwIf(
-                () -> !isValidEmailAddress(userRequestCreate.getEmail()),
-                BaseException.of(INVALID_EMAIL_FORMAT)
-        );
-        throwIf(
-                () -> userRepository.findUserByEmail(userRequestCreate.getEmail()).isPresent(),
-                BaseException.of(EMAIL_ALREADY_REGISTERED)
-        );
+        throwIf(() -> !isValidEmailAddress(userRequestCreate.getEmail()),
+                BaseException.of(INVALID_EMAIL_FORMAT));
+        throwIf(() -> userRepository.findUserByEmail(userRequestCreate.getEmail()).isPresent(),
+                BaseException.of(EMAIL_ALREADY_REGISTERED));
         User user = userMapper.toEntity(userRequestCreate);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         List<Role> roles = new ArrayList<>();
@@ -116,7 +111,7 @@ public class AuthServiceImpl implements AuthService {
         } catch (AuthenticationException e) {
             throw e.getCause() instanceof BaseException ?
                     (BaseException) e.getCause() :
-                    BaseException.unexpected();
+                    BaseException.of(INVALID_USERNAME_OR_PASSWORD);//user ve yaxud parol yanlisdir
         }
     }
 

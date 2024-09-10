@@ -24,8 +24,8 @@ spring:
           starttls:
             enable: true
     #            todo: elave et pass ve username
-    username: eliyevtalib2020@gmail.com
-    password: zknmbgaxrpljaswd
+    username:
+    password:
     port: 587
 
   rabbitmq:

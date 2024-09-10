@@ -15,6 +15,5 @@ import static lombok.AccessLevel.*;
 public class UserRequestUpdate {
     String name;
     String surname;
-    String email;
     String password;
 }

@@ -25,6 +25,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static com.example.libraryproject.model.enums.notification.DataType.*;
+import static com.example.libraryproject.model.enums.notification.Message.*;
 import static com.example.libraryproject.model.enums.notification.NotificationStatus.DELETED;
 
 @Service
@@ -48,7 +49,7 @@ public class NotificationServiceImpl implements NotificationService {
         emailProducer.sendReminderNotification(reminderEntity.getUser().getEmail(), reminderEntity.getBook().getBookName(), String.valueOf(daysBetween));
         saveNotification(reminderEntity.getUser().getId()
                 , REMINDER,
-                "Sizin kirayə götürdüyünüz kitabın (" + reminderEntity.getBook().getBookName() + ") kirayə müddətinin bitməsinə " + daysBetween + " gün qalıb.");
+                String.format(REMINDER_MESSAGE.message(), reminderEntity.getBook().getBookName(), daysBetween));
     }
 
     @Override
@@ -56,7 +57,7 @@ public class NotificationServiceImpl implements NotificationService {
         Book bookEntity = findBookById(bookId);
         User userEntity = findUserById(userId);
         emailProducer.sendBookNotification(userEntity.getEmail(), String.valueOf(bookId), bookEntity.getBookName());
-        saveNotification(userId, BOOK, "Kitabxanamızda yeni " + bookEntity.getBookName() + " kitabı var");
+        saveNotification(userId, BOOK, String.format(NEW_BOOK_MESSAGE.message(), bookEntity.getBookName()));
     }
 
     @Override
@@ -64,7 +65,7 @@ public class NotificationServiceImpl implements NotificationService {
         Event eventEntity = findEventById(eventId);
         User userEntity = findUserById(userId);
         emailProducer.sendEventNotification(userEntity.getEmail(), eventEntity.getEventName());
-        saveNotification(userId, EVENT, "Kitabxanamızda " + eventEntity.getEventName() + " tedbiri olacaq. Dəvətlisiniz");
+        saveNotification(userId, EVENT, String.format(EVENT_MESSAGE.message(), eventEntity.getEventName()));
     }
 
     @Override
@@ -78,7 +79,6 @@ public class NotificationServiceImpl implements NotificationService {
         notificationEntity.setNotificationStatus(DELETED);
         notificationRepository.save(notificationEntity);
     }
-
 
 
     //private
