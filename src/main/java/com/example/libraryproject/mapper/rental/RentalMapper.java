@@ -4,7 +4,7 @@ import com.example.libraryproject.model.dao.Rental;
 import com.example.libraryproject.model.dao.Reservation;
 import com.example.libraryproject.model.dto.request.create.RentalRequestCreate;
 import com.example.libraryproject.model.dto.request.update.RentalRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.RentalResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.RentalResponse;
 import com.example.libraryproject.service.book.BookService;
 import com.example.libraryproject.service.user.UserService;
 import org.mapstruct.*;
@@ -28,21 +28,21 @@ public interface RentalMapper {
 
     @Named(value = "toDtoUserActivity")
     @Mapping(target = "user", ignore = true)
-    RentalResponseAdmin toDtoUserActivity (Rental rental);
+    RentalResponse toDtoUserActivity (Rental rental);
 
     @IterableMapping(qualifiedByName = "toDtoUserActivity")
-    List<RentalResponseAdmin> toDtoUserActivity(List<Rental> rentals);
+    List<RentalResponse> toDtoUserActivity(List<Rental> rentals);
 
     @Mapping(target = "book", ignore = true)
     @Named(value = "toDtoBookRentalHistory")
-    RentalResponseAdmin toDtoBookRentalHistory (Rental rental);
+    RentalResponse toDtoBookRentalHistory (Rental rental);
 
     @IterableMapping(qualifiedByName = "toDtoBookRentalHistory")
-    List<RentalResponseAdmin> toDtoBookRentalHistory(List<Rental> rentals);
+    List<RentalResponse> toDtoBookRentalHistory(List<Rental> rentals);
 
-    @Named(value = "toDtoListRentalResponseAdminModel")
-    RentalResponseAdmin toDtoListRentalResponseAdminModel (Rental rental);
+    @Named(value = "toDtoListRentalResponseModel")
+    RentalResponse toDtoListRentalResponseModel (Rental rental);
 
-    @IterableMapping(qualifiedByName = "toDtoListRentalResponseAdminModel")
-    List<RentalResponseAdmin> toDtoListRentalResponseAdminModel(List<Rental> rentals);
+    @IterableMapping(qualifiedByName = "toDtoListRentalResponseModel")
+    List<RentalResponse> toDtoListRentalResponseModel(List<Rental> rentals);
 }

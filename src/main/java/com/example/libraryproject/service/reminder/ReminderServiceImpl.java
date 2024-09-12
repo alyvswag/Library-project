@@ -5,14 +5,12 @@ import com.example.libraryproject.mapper.reminder.ReminderMapper;
 import com.example.libraryproject.model.dao.Reminder;
 import com.example.libraryproject.model.dao.Rental;
 import com.example.libraryproject.model.dto.request.create.ReminderRequestCreate;
-import com.example.libraryproject.model.dto.response.admin.ReminderResponseAdmin;
-import com.example.libraryproject.model.dto.response.user.ReminderResponseUser;
+import com.example.libraryproject.model.dto.response.payload.ReminderResponse;
 import com.example.libraryproject.repository.reminder.ReminderRepository;
 import com.example.libraryproject.repository.rental.RentalRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -50,13 +48,13 @@ public class ReminderServiceImpl implements ReminderService {
     }
 
     @Override
-    public List<ReminderResponseUser> getRemindersByUser(Long userId) {
-        return reminderMapper.toResponseUser(reminderRepository.findAllReminderByUserId(userId));
+    public List<ReminderResponse> getRemindersByUser(Long userId) {
+        return reminderMapper.toResponse(reminderRepository.findAllReminderByUserId(userId));
     }
 
     @Override
-    public List<ReminderResponseAdmin> getUpcomingReminders(LocalDate date) {
-        return reminderMapper.toResponseAdmin(reminderRepository.findUpComingReminders(date));
+    public List<ReminderResponse> getUpcomingReminders(LocalDate date) {
+        return reminderMapper.toResponse(reminderRepository.findUpComingReminders(date));
     }
 
 }

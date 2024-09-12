@@ -1,9 +1,7 @@
 package com.example.libraryproject.controller.v1.reminder;
 
-import com.example.libraryproject.model.dto.request.create.ReminderRequestCreate;
-import com.example.libraryproject.model.dto.response.admin.ReminderResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.ReminderResponse;
 import com.example.libraryproject.model.dto.response.base.BaseResponse;
-import com.example.libraryproject.model.dto.response.user.ReminderResponseUser;
 import com.example.libraryproject.service.reminder.ReminderService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -33,11 +31,11 @@ public class ReminderController {
         return BaseResponse.success();
     }
     @GetMapping("/get-reminders-by-user/{userId}")
-    public BaseResponse<List<ReminderResponseUser>> getRemindersByUserId(@PathVariable("userId") Long userId) {
+    public BaseResponse<List<ReminderResponse>> getRemindersByUserId(@PathVariable("userId") Long userId) {
         return BaseResponse.success(reminderService.getRemindersByUser(userId));
     }
     @GetMapping("/get-upcoming-reminders/{date}")
-    public BaseResponse<List<ReminderResponseAdmin>> getUpcomingReminders(@PathVariable("date")LocalDate date){
+    public BaseResponse<List<ReminderResponse>> getUpcomingReminders(@PathVariable("date")LocalDate date){
         return BaseResponse.success(reminderService.getUpcomingReminders(date));
     }
 }

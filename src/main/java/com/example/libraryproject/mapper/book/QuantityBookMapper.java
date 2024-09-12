@@ -2,8 +2,8 @@ package com.example.libraryproject.mapper.book;
 
 import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dao.QuantityBook;
-import com.example.libraryproject.model.dto.response.admin.BookResponseAdmin;
-import com.example.libraryproject.model.dto.response.admin.QuantityBookResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.BookResponse;
+import com.example.libraryproject.model.dto.response.payload.QuantityBookResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -11,11 +11,12 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface QuantityBookMapper {
-    List<QuantityBookResponseAdmin> toResponse(List<QuantityBook> quantityBook);
+    List<QuantityBookResponse> toResponse(List<QuantityBook> quantityBook);
 
-    @Mapping(source = "book", target = "bookResponseAdmin")
-    QuantityBookResponseAdmin toQuantityBookAdminResponse(QuantityBook quantityBook);
-    BookResponseAdmin toResponse(Book book);
+    @Mapping(source = "book", target = "bookResponse")
+    QuantityBookResponse toQuantityBookResponse(QuantityBook quantityBook);
+
+    BookResponse toResponse(Book book);
 //    @Mapping(source = "book", target = "bookResponseAdmin")
 //    default BookResponseAdmin mapBookToAdminResponse(Book book) {
 //        if (book == null) {
@@ -35,8 +36,8 @@ public interface QuantityBookMapper {
 //                .build();
 //
 //    }
-        // `BookAdminResponse` sahələrinin `Book` obyektindən əl ilə çevrilməsi
-        // todo: kod chatgpt terefinden yazilib daha tekmil versiya eziyyet cek axtar
+    // `BookAdminResponse` sahələrinin `Book` obyektindən əl ilə çevrilməsi
+    // todo: kod chatgpt terefinden yazilib daha tekmil versiya eziyyet cek axtar
 //            response.setId(book.getId());
 //            response.setBookName(book.getBookName());
 //            response.setPrice(book.getPrice());

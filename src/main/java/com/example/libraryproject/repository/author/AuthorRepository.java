@@ -19,8 +19,7 @@ public interface AuthorRepository extends JpaRepository<Author,Long> {
     List<Author>  findAllAuthor();
 
     @Query("SELECT a FROM Author a WHERE lower(a.authorName) = lower(:name) AND a.isActive = true ")
-    Optional<List<Author>> findAuthorByName(@Param("name") String name);
+    List<Author> findAuthorByName(@Param("name") String name);
 
-    @Query("Select b from Book b where b.author.id = :authorId AND b.status = 'ACTIVE' ")
-    Optional<List<Book>> findBooksByAuthor(Long authorId);
+
 }

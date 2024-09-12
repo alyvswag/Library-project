@@ -1,8 +1,7 @@
 package com.example.libraryproject.service.reminder;
 
-import com.example.libraryproject.model.dto.request.create.ReminderRequestCreate;
-import com.example.libraryproject.model.dto.response.admin.ReminderResponseAdmin;
-import com.example.libraryproject.model.dto.response.user.ReminderResponseUser;
+import com.example.libraryproject.model.dto.response.payload.ReminderResponse;
+
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,7 +11,7 @@ public interface ReminderService {
 
     void removeReminder(Long reminderId);
 
-    List<ReminderResponseUser> getRemindersByUser(Long userId);
+    List<ReminderResponse> getRemindersByUser(Long userId);
 
-    List<ReminderResponseAdmin> getUpcomingReminders(LocalDate date);
+    List<ReminderResponse> getUpcomingReminders(LocalDate date);
 }

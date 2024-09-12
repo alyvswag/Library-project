@@ -3,7 +3,7 @@ package com.example.libraryproject.service.user;
 import com.example.libraryproject.model.dao.User;
 import com.example.libraryproject.model.dto.request.create.AdminRequestCreate;
 import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.UserResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.UserResponse;
 import com.example.libraryproject.model.enums.user.RoleName;
 
 import java.util.List;
@@ -15,13 +15,13 @@ public interface UserService {
 
     void deleteUser(Long id);
 
-    UserResponseAdmin getUserById(Long id);
+    UserResponse getUserById(Long id);
 
-    List<UserResponseAdmin> getAllUsers();
+    List<UserResponse> getAllUsers();
 
-    UserResponseAdmin getUserByEmail(String email);
+    UserResponse getUserByEmail(String email);
 
-    List<UserResponseAdmin> getUsersByRole(RoleName roleName);
+    List<UserResponse> getUsersByRole(RoleName roleName);
 
     void deactivateUser(Long id);
 

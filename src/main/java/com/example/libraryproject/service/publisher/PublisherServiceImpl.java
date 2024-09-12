@@ -5,7 +5,7 @@ import com.example.libraryproject.mapper.publisher.PublisherMapper;
 import com.example.libraryproject.model.dao.Publisher;
 import com.example.libraryproject.model.dto.request.create.PublisherRequestCreate;
 import com.example.libraryproject.model.dto.request.update.PublisherRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.PublisherResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.PublisherResponse;
 import com.example.libraryproject.repository.publisher.PublisherRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +44,7 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
-    public List<PublisherResponseAdmin> getAllPublishers() {
+    public List<PublisherResponse> getAllPublishers() {
         return publisherMapper.toResponse(publisherRepository.findAllPublisher());
     }
 

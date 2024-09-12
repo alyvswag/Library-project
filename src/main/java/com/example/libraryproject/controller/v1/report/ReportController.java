@@ -1,7 +1,7 @@
 package com.example.libraryproject.controller.v1.report;
 
-import com.example.libraryproject.model.dto.response.admin.BookResponseAdmin;
-import com.example.libraryproject.model.dto.response.admin.RentalResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.BookResponse;
+import com.example.libraryproject.model.dto.response.payload.RentalResponse;
 import com.example.libraryproject.model.dto.response.base.BaseResponse;
 import com.example.libraryproject.service.report.ReportService;
 import lombok.AccessLevel;
@@ -24,20 +24,20 @@ public class ReportController {
     final ReportService reportService;
 
     @GetMapping("/generate-rental-statistics/{startDate}/{endDate}")
-    public BaseResponse<Map<BookResponseAdmin,Long>> generateRentalStatistics(@PathVariable LocalDate startDate, @PathVariable LocalDate endDate) {
+    public BaseResponse<Map<BookResponse,Long>> generateRentalStatistics(@PathVariable LocalDate startDate, @PathVariable LocalDate endDate) {
         return BaseResponse.success(reportService.generateRentalStatistics(startDate,endDate));
     }
 
     @GetMapping("/get-most-read-books")
-    public BaseResponse<Map<Integer,BookResponseAdmin>> getMostReadBooks() {
+    public BaseResponse<Map<Integer, BookResponse>> getMostReadBooks() {
         return BaseResponse.success(reportService.getMostReadBooks());
     }
     @GetMapping("/generate-user-activity-report/{userId}")
-    public BaseResponse<List<RentalResponseAdmin>> generateUserActivityReport(@PathVariable Long userId) {
+    public BaseResponse<List<RentalResponse>> generateUserActivityReport(@PathVariable Long userId) {
         return BaseResponse.success(reportService.generateUserActivityReport(userId));
     }
     @GetMapping("/get-book-rental-history/{bookId}")
-    public BaseResponse<List<RentalResponseAdmin>> getBookRentalHistory(@PathVariable Long bookId) {
+    public BaseResponse<List<RentalResponse>> getBookRentalHistory(@PathVariable Long bookId) {
         return BaseResponse.success(reportService.getBookRentalHistory(bookId));
     }
     @GetMapping("/get-user-login-history/{email}")

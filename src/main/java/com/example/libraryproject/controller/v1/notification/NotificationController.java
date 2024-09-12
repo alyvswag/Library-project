@@ -1,6 +1,6 @@
 package com.example.libraryproject.controller.v1.notification;
 
-import com.example.libraryproject.model.dto.response.admin.NotificationResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.NotificationResponse;
 import com.example.libraryproject.model.dto.response.base.BaseResponse;
 import com.example.libraryproject.repository.notification.NotificationRepository;
 import com.example.libraryproject.service.notification.NotificationService;
@@ -37,7 +37,7 @@ public class NotificationController {
         return BaseResponse.success();
     }
     @GetMapping("/get-notifications-by-user/{userId}")
-    public BaseResponse<List<NotificationResponseAdmin>> getNotificationsByUserId(@PathVariable("userId") Long userId) {
+    public BaseResponse<List<NotificationResponse>> getNotificationsByUserId(@PathVariable("userId") Long userId) {
         return BaseResponse.success(notificationService.getNotificationsByUser(userId));
     }
     @DeleteMapping("/remove-notification/{notificationId}")

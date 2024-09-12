@@ -5,7 +5,7 @@ import com.example.libraryproject.mapper.notification.NotificationMapper;
 import com.example.libraryproject.mapper.rental.RentalMapper;
 import com.example.libraryproject.model.dao.Rental;
 import com.example.libraryproject.model.dto.request.create.NotificationRequestCreate;
-import com.example.libraryproject.model.dto.response.admin.RentalResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.RentalResponse;
 import com.example.libraryproject.model.enums.rental.RentalStatus;
 import com.example.libraryproject.repository.notification.NotificationRepository;
 import com.example.libraryproject.repository.rental.RentalRepository;
@@ -14,7 +14,6 @@ import com.example.libraryproject.service.email.EmailProducer;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -40,8 +39,8 @@ public class ManagementServiceImpl implements ManagementService {
     final BookManagementService bookManagementService;
 
     @Override
-    public List<RentalResponseAdmin> checkOverdueBooks() {
-        return rentalMapper.toDtoListRentalResponseAdminModel(rentalRepository.findRentalOverdue(LocalDate.now()));
+    public List<RentalResponse> checkOverdueBooks() {
+        return rentalMapper.toDtoListRentalResponseModel(rentalRepository.findRentalOverdue(LocalDate.now()));
     }
 
     @Override

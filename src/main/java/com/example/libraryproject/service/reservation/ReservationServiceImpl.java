@@ -7,7 +7,7 @@ import com.example.libraryproject.model.dao.Reservation;
 import com.example.libraryproject.model.dao.User;
 import com.example.libraryproject.model.dto.request.create.ReservationRequestCreate;
 import com.example.libraryproject.model.dto.request.update.ReservationRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.ReservationResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.ReservationResponse;
 import com.example.libraryproject.repository.book.BookRepository;
 import com.example.libraryproject.repository.rental.RentalRepository;
 import com.example.libraryproject.repository.reservation.ReservationRepository;
@@ -69,7 +69,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<ReservationResponseAdmin> getUserReservations(Long userId) {
+    public List<ReservationResponse> getUserReservations(Long userId) {
         userRepository.findUserById(userId)
                 .orElseThrow(
                         () -> BaseException.notFound(User.class.getSimpleName(), "user", String.valueOf(userId))
@@ -78,7 +78,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<ReservationResponseAdmin> getBookReservations(Long bookId) {
+    public List<ReservationResponse> getBookReservations(Long bookId) {
         bookRepository.findBookById(bookId)
                 .orElseThrow(
                         () -> BaseException.notFound(Book.class.getSimpleName(), "book", String.valueOf(bookId))
@@ -87,7 +87,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public ReservationResponseAdmin getReservationDetails(Long id) {
+    public ReservationResponse getReservationDetails(Long id) {
         return reservationMapper.toDto(reservationRepository.findReservationByIdForDetails(id).orElseThrow(
                 () -> BaseException.notFound(Reservation.class.getSimpleName(), "reservation", String.valueOf(id))
         ));

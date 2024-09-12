@@ -8,20 +8,18 @@ import com.example.libraryproject.model.dao.Publisher;
 import com.example.libraryproject.model.dao.QuantityBook;
 import com.example.libraryproject.model.dto.request.create.BookRequestCreate;
 import com.example.libraryproject.model.dto.request.update.BookRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.BookResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.BookResponse;
 import com.example.libraryproject.service.publisher.PublisherService;
 import com.example.libraryproject.service.author.AuthorService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.example.libraryproject.repository.book.BookRepository;
 
 import java.sql.Timestamp;
 import java.util.List;
 
-import static com.example.libraryproject.model.enums.base.Status.ACTIVE;
 import static com.example.libraryproject.model.enums.base.Status.DELETED;
 
 @Service
@@ -63,14 +61,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookResponseAdmin getBookById(Long id) {
+    public BookResponse getBookById(Long id) {
         Book bookEntity = findBookById(id);
         checkAuthor(bookEntity);
         return bookMapper.toResponse(bookEntity);
     }
 
     @Override
-    public List<BookResponseAdmin> getAllBooks() {
+    public List<BookResponse> getAllBooks() {
         List<Book> bookEntityList = bookRepository.findAllBook();
         for (Book bookEntity : bookEntityList) {
             checkAuthor(bookEntity);

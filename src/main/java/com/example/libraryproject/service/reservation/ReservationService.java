@@ -2,7 +2,7 @@ package com.example.libraryproject.service.reservation;
 
 import com.example.libraryproject.model.dto.request.create.ReservationRequestCreate;
 import com.example.libraryproject.model.dto.request.update.ReservationRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.ReservationResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.ReservationResponse;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,11 +14,11 @@ public interface ReservationService {
 
     void cancelReservation(Long id);
 
-    List<ReservationResponseAdmin> getUserReservations(Long userId);
+    List<ReservationResponse> getUserReservations(Long userId);
 
-    List<ReservationResponseAdmin> getBookReservations(Long bookId);
+    List<ReservationResponse> getBookReservations(Long bookId);
 
-    ReservationResponseAdmin getReservationDetails(Long id);
+    ReservationResponse getReservationDetails(Long id);
 
     Boolean checkAvailability(Long bookId, LocalDate startDate, LocalDate endDate);
 }

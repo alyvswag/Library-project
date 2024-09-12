@@ -4,8 +4,8 @@ import com.example.libraryproject.mapper.book.BookMapper;
 import com.example.libraryproject.mapper.book.QuantityBookMapper;
 import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dto.request.filter.BookRequestFilter;
-import com.example.libraryproject.model.dto.response.admin.QuantityBookResponseAdmin;
-import com.example.libraryproject.model.dto.response.user.BookResponseUser;
+import com.example.libraryproject.model.dto.response.payload.BookResponse;
+import com.example.libraryproject.model.dto.response.payload.QuantityBookResponse;
 import com.example.libraryproject.repository.book.BookRepository;
 import com.example.libraryproject.repository.book.QuantityBookRepository;
 import jakarta.persistence.EntityManager;
@@ -35,12 +35,12 @@ public class BookManagementServiceImpl implements BookManagementService {
     final QuantityBookMapper quantityBookMapper;
 
     @Override
-    public List<BookResponseUser> searchBooks(String searchWord) {
-        return bookMapper.toResponseUser(bookRepository.searchBook(searchWord));
+    public List<BookResponse> searchBooks(String searchWord) {
+        return bookMapper.toResponse(bookRepository.searchBook(searchWord));
     }
 
     @Override
-    public List<BookResponseUser> filterBooks(BookRequestFilter bookRequest) {
+    public List<BookResponse> filterBooks(BookRequestFilter bookRequest) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Book> query = cb.createQuery(Book.class);
         List<Predicate> predicates = new ArrayList<>();
@@ -71,11 +71,11 @@ public class BookManagementServiceImpl implements BookManagementService {
                 cb.and(predicates.toArray(new Predicate[0]))
         );
         TypedQuery<Book> typedQuery = em.createQuery(query);
-        return bookMapper.toResponseUser(typedQuery.getResultList());
+        return bookMapper.toResponse(typedQuery.getResultList());
     }
 
     @Override
-    public List<QuantityBookResponseAdmin> getBookInventory() {
+    public List<QuantityBookResponse> getBookInventory() {
         return quantityBookMapper.toResponse(quantityBookRepository.findAll());
     }
 

@@ -4,9 +4,8 @@ import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.notification.NotificationMapper;
 import com.example.libraryproject.model.dao.*;
 import com.example.libraryproject.model.dto.request.create.NotificationRequestCreate;
-import com.example.libraryproject.model.dto.response.admin.NotificationResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.NotificationResponse;
 import com.example.libraryproject.model.enums.notification.DataType;
-import com.example.libraryproject.model.enums.notification.NotificationStatus;
 import com.example.libraryproject.repository.book.BookRepository;
 import com.example.libraryproject.repository.event.EventRepository;
 import com.example.libraryproject.repository.notification.NotificationRepository;
@@ -17,7 +16,6 @@ import com.example.libraryproject.service.email.EmailService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -68,7 +66,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public List<NotificationResponseAdmin> getNotificationsByUser(Long userId) {
+    public List<NotificationResponse> getNotificationsByUser(Long userId) {
         return notificationMapper.toDto(notificationRepository.findNotificationsByUserId(userId));
     }
 

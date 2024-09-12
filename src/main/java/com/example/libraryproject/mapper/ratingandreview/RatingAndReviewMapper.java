@@ -3,7 +3,7 @@ package com.example.libraryproject.mapper.ratingandreview;
 import com.example.libraryproject.model.dao.*;
 import com.example.libraryproject.model.dto.request.create.RatAndRevRequestCreate;
 import com.example.libraryproject.model.dto.request.update.RatAndRevRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.RatAndRevResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.RatAndRevResponse;
 import com.example.libraryproject.service.book.BookService;
 import com.example.libraryproject.service.user.UserService;
 import org.mapstruct.*;
@@ -25,7 +25,7 @@ public interface RatingAndReviewMapper {
         return bookService.findById(bookId);
     }
 
-    List<RatAndRevResponseAdmin> toResponseList(List<RatingAndReview> ratingAndReviewList);
+    List<RatAndRevResponse> toResponseList(List<RatingAndReview> ratingAndReviewList);
 
     void updateRatingAndReviewFromDto(RatAndRevRequestUpdate dto, @MappingTarget RatingAndReview ratingAndReview);
 

@@ -2,7 +2,7 @@ package com.example.libraryproject.controller.v1.author;
 
 import com.example.libraryproject.model.dto.request.create.AuthorRequestCreate;
 import com.example.libraryproject.model.dto.request.update.AuthorRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.AuthorResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.AuthorResponse;
 import com.example.libraryproject.model.dto.response.base.BaseResponse;
 import com.example.libraryproject.service.author.AuthorService;
 import lombok.AccessLevel;
@@ -37,15 +37,15 @@ public class AuthorController {
         return BaseResponse.success();
     }
     @GetMapping("/get-author-by-id/{id}")
-    public BaseResponse<AuthorResponseAdmin> getAuthorById(@PathVariable("id") Long id) {
+    public BaseResponse<AuthorResponse> getAuthorById(@PathVariable("id") Long id) {
         return BaseResponse.success(authorService.getAuthorById(id));
     }
     @GetMapping("/get-all-authors")
-    public BaseResponse<List<AuthorResponseAdmin>> getAllAuthors() {
+    public BaseResponse<List<AuthorResponse>> getAllAuthors() {
         return BaseResponse.success(authorService.getAllAuthors());
     }
     @GetMapping("/get-author-by-name/{name}")
-    public BaseResponse<List<AuthorResponseAdmin>> getAuthorByName(@PathVariable("name") String name) {
+    public BaseResponse<List<AuthorResponse>> getAuthorByName(@PathVariable("name") String name) {
         return BaseResponse.success(authorService.getAuthorByName(name));
     }
 

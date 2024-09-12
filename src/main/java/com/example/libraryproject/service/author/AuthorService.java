@@ -3,7 +3,7 @@ package com.example.libraryproject.service.author;
 import com.example.libraryproject.model.dao.Author;
 import com.example.libraryproject.model.dto.request.create.AuthorRequestCreate;
 import com.example.libraryproject.model.dto.request.update.AuthorRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.AuthorResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.AuthorResponse;
 
 import java.util.List;
 
@@ -14,11 +14,11 @@ public interface AuthorService {
 
     void deleteAuthor(Long id);
 
-    AuthorResponseAdmin getAuthorById(Long id);
+    AuthorResponse getAuthorById(Long id);
 
-    List<AuthorResponseAdmin> getAllAuthors();
+    List<AuthorResponse> getAllAuthors();
 
-    List<AuthorResponseAdmin> getAuthorByName(String name);
+    List<AuthorResponse> getAuthorByName(String name);
 
     Author findById(Long id);
 }

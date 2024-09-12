@@ -2,7 +2,7 @@ package com.example.libraryproject.controller.v1.reservation;
 
 import com.example.libraryproject.model.dto.request.create.ReservationRequestCreate;
 import com.example.libraryproject.model.dto.request.update.ReservationRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.ReservationResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.ReservationResponse;
 import com.example.libraryproject.model.dto.response.base.BaseResponse;
 import com.example.libraryproject.service.reservation.ReservationService;
 import lombok.AccessLevel;
@@ -42,17 +42,17 @@ public class ReservationController {
     }
 
     @GetMapping("/get-user-reservations/{userId}")
-    public BaseResponse<List<ReservationResponseAdmin>> getUserReservations(@PathVariable Long userId) {
+    public BaseResponse<List<ReservationResponse>> getUserReservations(@PathVariable Long userId) {
         return BaseResponse.success(reservationService.getUserReservations(userId));
     }
 
     @GetMapping("/get-book-reservations/{bookId}")
-    public BaseResponse<List<ReservationResponseAdmin>> getBookReservations(@PathVariable Long bookId) {
+    public BaseResponse<List<ReservationResponse>> getBookReservations(@PathVariable Long bookId) {
         return BaseResponse.success(reservationService.getBookReservations(bookId));
     }
 
     @GetMapping("/get-reservation-details/{reservationId}")
-    public BaseResponse<ReservationResponseAdmin> getReservationDetails(@PathVariable Long reservationId) {
+    public BaseResponse<ReservationResponse> getReservationDetails(@PathVariable Long reservationId) {
         return BaseResponse.success(reservationService.getReservationDetails(reservationId));
     }
 

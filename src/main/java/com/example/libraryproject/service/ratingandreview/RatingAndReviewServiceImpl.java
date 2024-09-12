@@ -5,8 +5,8 @@ import com.example.libraryproject.mapper.ratingandreview.RatingAndReviewMapper;
 import com.example.libraryproject.model.dao.RatingAndReview;
 import com.example.libraryproject.model.dto.request.create.RatAndRevRequestCreate;
 import com.example.libraryproject.model.dto.request.update.RatAndRevRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.RatAndRevResponseAdmin;
-import com.example.libraryproject.model.dto.response.admin.RatingResponse;
+import com.example.libraryproject.model.dto.response.payload.RatAndRevResponse;
+import com.example.libraryproject.model.dto.response.payload.RatingResponse;
 import com.example.libraryproject.repository.ratingandreview.RatingAndReviewRepository;
 import com.example.libraryproject.service.book.BookService;
 import lombok.AccessLevel;
@@ -32,12 +32,12 @@ public class RatingAndReviewServiceImpl implements RatingAndReviewService {
     }
 
     @Override
-    public List<RatAndRevResponseAdmin> getRatingsAndReviewsByBook(Long bookId) {
+    public List<RatAndRevResponse> getRatingsAndReviewsByBook(Long bookId) {
         return mapper.toResponseList(repository.findAllByRatingAndReviewByBook(bookId));
     }
 
     @Override
-    public List<RatAndRevResponseAdmin> getRatingsAndReviewsByUser(Long userId) {
+    public List<RatAndRevResponse> getRatingsAndReviewsByUser(Long userId) {
         return mapper.toResponseList(repository.findAllByRatingAndReviewByUser(userId));
     }
 

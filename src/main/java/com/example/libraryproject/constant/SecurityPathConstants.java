@@ -17,7 +17,8 @@ public final class SecurityPathConstants {
             "/api/v1/author/get-all-authors/**",
             "/api/v1/get-author-by-id/**",
             "/api/v1/event/get-all-events/**",
-            "/api/v1/publisher/get-all-publishers/**"
+            "/api/v1/publisher/get-all-publishers/**",
+            "/api/v1/author-management/get-books-by-author/**"
     };
     public static final String[] AUTHENTICATED = {
             "/api/v1/auth/logout/**",

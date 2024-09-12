@@ -4,7 +4,7 @@ import com.example.libraryproject.model.dao.User;
 import com.example.libraryproject.model.dto.request.create.AdminRequestCreate;
 import com.example.libraryproject.model.dto.request.create.UserRequestCreate;
 import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.UserResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.UserResponse;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -16,9 +16,9 @@ public interface UserMapper {
 
     void updateUserFromDto(UserRequestUpdate dto, @MappingTarget User user);
 
-    UserResponseAdmin toDto(User user);
+    UserResponse toDto(User user);
 
-    List<UserResponseAdmin> toDto(List<User> users);
+    List<UserResponse> toDto(List<User> users);
 
     @Mapping(target = "status" ,constant = "ACTIVE")
     User toEntity(UserRequestCreate userRequestCreate);

@@ -2,17 +2,17 @@ package com.example.libraryproject.service.book;
 
 import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dto.request.filter.BookRequestFilter;
-import com.example.libraryproject.model.dto.response.admin.QuantityBookResponseAdmin;
-import com.example.libraryproject.model.dto.response.user.BookResponseUser;
+import com.example.libraryproject.model.dto.response.payload.BookResponse;
+import com.example.libraryproject.model.dto.response.payload.QuantityBookResponse;
 
 import java.util.List;
 
 public interface BookManagementService {
-    List<BookResponseUser> searchBooks(String searchWord);
+    List<BookResponse> searchBooks(String searchWord);
 
-    List<BookResponseUser> filterBooks(BookRequestFilter bookRequest);
+    List<BookResponse> filterBooks(BookRequestFilter bookRequest);
 
-    List<QuantityBookResponseAdmin> getBookInventory();
+    List<QuantityBookResponse> getBookInventory();
 
     void reservationQuantity(Book book, Integer value);
 

@@ -1,6 +1,6 @@
 package com.example.libraryproject.controller.v1.management;
 
-import com.example.libraryproject.model.dto.response.admin.RentalResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.RentalResponse;
 import com.example.libraryproject.model.dto.response.base.BaseResponse;
 import com.example.libraryproject.model.enums.rental.RentalStatus;
 import com.example.libraryproject.service.management.ManagementService;
@@ -20,7 +20,7 @@ public class ManagementController {
     final ManagementService managementService;
 
     @GetMapping("/check-overdue-books")
-    public BaseResponse<List<RentalResponseAdmin>> checkOverdueBooks() {
+    public BaseResponse<List<RentalResponse>> checkOverdueBooks() {
         return BaseResponse.success(managementService.checkOverdueBooks());
     }
 

@@ -1,10 +1,10 @@
 package com.example.libraryproject.service.author;
 
-import com.example.libraryproject.model.dto.response.admin.BookResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.BookResponse;
 
 import java.util.List;
 
 public interface AuthorManagementService {
     void removeBookFromAuthor(Long bookId);
-    List<BookResponseAdmin> getBooksByAuthorId(Long authorId);
+    List<BookResponse> getBooksByAuthorId(Long authorId);
 }

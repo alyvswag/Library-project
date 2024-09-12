@@ -2,7 +2,7 @@ package com.example.libraryproject.controller.v1.book;
 
 import com.example.libraryproject.model.dto.request.create.BookRequestCreate;
 import com.example.libraryproject.model.dto.request.update.BookRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.BookResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.BookResponse;
 import com.example.libraryproject.model.dto.response.base.BaseResponse;
 import com.example.libraryproject.service.book.BookService;
 import lombok.AccessLevel;
@@ -40,12 +40,12 @@ public class BookController {
     }
 
     @GetMapping("/get-book-by-id/{id}")
-    public BaseResponse<BookResponseAdmin> getBookById(@PathVariable("id") Long id) {
+    public BaseResponse<BookResponse> getBookById(@PathVariable("id") Long id) {
         return BaseResponse.success(bookService.getBookById(id));
     }
 
     @GetMapping("/get-all-books")
-    public BaseResponse<List<BookResponseAdmin>> getAllBooks() {
+    public BaseResponse<List<BookResponse>> getAllBooks() {
         return BaseResponse.success(bookService.getAllBooks());
     }
 

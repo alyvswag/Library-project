@@ -3,7 +3,7 @@ package com.example.libraryproject.mapper.event;
 import com.example.libraryproject.model.dao.Event;
 import com.example.libraryproject.model.dto.request.create.EventRequestCreate;
 import com.example.libraryproject.model.dto.request.update.EventRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.EventResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.EventResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -18,5 +18,5 @@ public interface EventMapper {
 
     void updateEventFromDto(EventRequestUpdate dto, @MappingTarget Event event);
 
-    List<EventResponseAdmin> toDtoList(List<Event> eventList);
+    List<EventResponse> toDtoList(List<Event> eventList);
 }

@@ -4,7 +4,7 @@ package com.example.libraryproject.mapper.notification;
 import com.example.libraryproject.model.dao.Notification;
 import com.example.libraryproject.model.dao.User;
 import com.example.libraryproject.model.dto.request.create.NotificationRequestCreate;
-import com.example.libraryproject.model.dto.response.admin.NotificationResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.NotificationResponse;
 import com.example.libraryproject.service.user.UserService;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
@@ -23,7 +23,7 @@ public interface NotificationMapper {
         return userService.findById(userId);
     }
 
-    NotificationResponseAdmin toDto(Notification notification);
+    NotificationResponse toDto(Notification notification);
 
-    List<NotificationResponseAdmin> toDto(List<Notification> notifications);
+    List<NotificationResponse> toDto(List<Notification> notifications);
 }

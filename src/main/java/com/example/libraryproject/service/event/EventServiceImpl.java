@@ -5,7 +5,7 @@ import com.example.libraryproject.mapper.event.EventMapper;
 import com.example.libraryproject.model.dao.Event;
 import com.example.libraryproject.model.dto.request.create.EventRequestCreate;
 import com.example.libraryproject.model.dto.request.update.EventRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.EventResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.EventResponse;
 import com.example.libraryproject.repository.event.EventRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +43,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventResponseAdmin> findAllEvent() {
+    public List<EventResponse> findAllEvent() {
         return eventMapper.toDtoList(eventRepository.findAllEvent());
     }
     //private

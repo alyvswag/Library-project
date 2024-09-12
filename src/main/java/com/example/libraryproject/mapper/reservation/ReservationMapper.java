@@ -5,7 +5,7 @@ import com.example.libraryproject.model.dao.Reservation;
 import com.example.libraryproject.model.dao.User;
 import com.example.libraryproject.model.dto.request.create.ReservationRequestCreate;
 import com.example.libraryproject.model.dto.request.update.ReservationRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.ReservationResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.ReservationResponse;
 import com.example.libraryproject.service.book.BookService;
 import com.example.libraryproject.service.user.UserService;
 import org.mapstruct.*;
@@ -29,7 +29,7 @@ public interface ReservationMapper {
 
     void updateReservationFromDto(ReservationRequestUpdate dto, @MappingTarget Reservation reservation);
 
-    List<ReservationResponseAdmin> toResponseList(List<Reservation> reservationList);
+    List<ReservationResponse> toResponseList(List<Reservation> reservationList);
 
-    ReservationResponseAdmin toDto(Reservation reservation);
+    ReservationResponse toDto(Reservation reservation);
 }

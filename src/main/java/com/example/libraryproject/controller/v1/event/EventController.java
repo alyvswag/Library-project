@@ -2,7 +2,7 @@ package com.example.libraryproject.controller.v1.event;
 
 import com.example.libraryproject.model.dto.request.create.EventRequestCreate;
 import com.example.libraryproject.model.dto.request.update.EventRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.EventResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.EventResponse;
 import com.example.libraryproject.model.dto.response.base.BaseResponse;
 import com.example.libraryproject.service.event.EventService;
 import lombok.AccessLevel;
@@ -37,7 +37,7 @@ public class EventController {
         return BaseResponse.success();
     }
     @GetMapping("/get-all-events")
-    public BaseResponse<List<EventResponseAdmin>> getAllEvents() {
+    public BaseResponse<List<EventResponse>> getAllEvents() {
         return BaseResponse.success(eventService.findAllEvent());
     }
 

@@ -4,8 +4,7 @@ import com.example.libraryproject.model.dao.Book;
 import com.example.libraryproject.model.dao.Reminder;
 import com.example.libraryproject.model.dao.User;
 import com.example.libraryproject.model.dto.request.create.ReminderRequestCreate;
-import com.example.libraryproject.model.dto.response.admin.ReminderResponseAdmin;
-import com.example.libraryproject.model.dto.response.user.ReminderResponseUser;
+import com.example.libraryproject.model.dto.response.payload.ReminderResponse;
 import com.example.libraryproject.service.book.BookService;
 import com.example.libraryproject.service.user.UserService;
 import org.mapstruct.Context;
@@ -30,8 +29,8 @@ public interface ReminderMapper {
         return bookService.findById(bookId);
     }
 
-    List<ReminderResponseUser> toResponseUser(List<Reminder> reminders);
+//    List<ReminderResponseUser> toResponseUser(List<Reminder> reminders);//silinecek
 
-    List<ReminderResponseAdmin> toResponseAdmin(List<Reminder> reminders);
+    List<ReminderResponse> toResponse(List<Reminder> reminders);
 
 }

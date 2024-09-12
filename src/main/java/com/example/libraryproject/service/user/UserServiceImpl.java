@@ -5,7 +5,7 @@ import com.example.libraryproject.mapper.user.UserMapper;
 import com.example.libraryproject.model.dao.*;
 import com.example.libraryproject.model.dto.request.create.AdminRequestCreate;
 import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
-import com.example.libraryproject.model.dto.response.admin.UserResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.UserResponse;
 import com.example.libraryproject.model.enums.user.RoleName;
 import com.example.libraryproject.service.email.EmailProducer;
 import com.example.libraryproject.repository.user.RoleRepository;
@@ -13,13 +13,11 @@ import com.example.libraryproject.repository.user.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.EMAIL_ALREADY_REGISTERED;
 import static com.example.libraryproject.model.enums.response.ErrorResponseMessages.INVALID_EMAIL_FORMAT;
@@ -76,18 +74,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseAdmin getUserById(Long id) {
+    public UserResponse getUserById(Long id) {
         User userEntity = findUserById(id);
         return userMapper.toDto(userEntity);
     }
 
     @Override
-    public List<UserResponseAdmin> getAllUsers() {
+    public List<UserResponse> getAllUsers() {
         return userMapper.toDto(userRepository.findAllUser());
     }
 
     @Override
-    public UserResponseAdmin getUserByEmail(String email) {
+    public UserResponse getUserByEmail(String email) {
         User userEntity = userRepository.findUserByEmail(email)
                 .orElseThrow(
                         () -> BaseException.notFound(User.class.getSimpleName(), "user", email)
@@ -96,8 +94,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserResponseAdmin> getUsersByRole(RoleName roleName) {
-        return userMapper.toDto(mapUserRoleToUserResponseAdmin(userRepository.getUsersByRole(roleName)));
+    public List<UserResponse> getUsersByRole(RoleName roleName) {
+        return userMapper.toDto(mapUserRoleToUserResponse(userRepository.getUsersByRole(roleName)));
     }
 
     @Override
@@ -118,7 +116,7 @@ public class UserServiceImpl implements UserService {
     }
 
     //private
-    private List<User> mapUserRoleToUserResponseAdmin(List<UserRole> userRoles) {
+    private List<User> mapUserRoleToUserResponse(List<UserRole> userRoles) {
         List<User> users = new ArrayList<>();
         for (UserRole userRole : userRoles) {
             users.add(userRole.getUser());

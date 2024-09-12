@@ -4,7 +4,7 @@ import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.book.BookMapper;
 import com.example.libraryproject.model.dao.Author;
 import com.example.libraryproject.model.dao.Book;
-import com.example.libraryproject.model.dto.response.admin.BookResponseAdmin;
+import com.example.libraryproject.model.dto.response.payload.BookResponse;
 import com.example.libraryproject.repository.author.AuthorRepository;
 import com.example.libraryproject.repository.book.BookRepository;
 import lombok.AccessLevel;
@@ -38,9 +38,9 @@ public class AuthorManagementServiceImpl implements AuthorManagementService {
     }
 
     @Override
-    public List<BookResponseAdmin> getBooksByAuthorId(Long authorId) {
+    public List<BookResponse> getBooksByAuthorId(Long authorId) {
         authorService.getAuthorById(authorId);
-        List<Book> books = authorRepository.findBooksByAuthor(authorId)
+        List<Book> books = bookRepository.findBooksByAuthor(authorId)
                 .filter(book -> !book.isEmpty())
                 .orElseThrow(() -> BaseException.notFound(Book.class.getSimpleName(), "book", "for the specified author"));
         return bookMapper.toResponse(books);
