@@ -2,6 +2,7 @@ package com.example.libraryproject.constant;
 
 public final class SecurityPathConstants {
     public static final String[] PERMIT_ALL_LIST = {
+            "/test/testNoAuth",
             "/swagger-ui.html",
             "/webjars/**",
             "/v3/api-docs/**",
@@ -21,6 +22,7 @@ public final class SecurityPathConstants {
             "/api/v1/author-management/get-books-by-author/**"
     };
     public static final String[] AUTHENTICATED = {
+            "/test/testAuth",
             "/api/v1/auth/logout/**",
             "/api/v1/reservation/get-user-reservations/**",
             "/api/v1/reservation/get-reservation-details/**",

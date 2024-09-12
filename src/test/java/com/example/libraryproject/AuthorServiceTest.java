@@ -2,6 +2,7 @@ package com.example.libraryproject;
 
 import com.example.libraryproject.mapper.author.AuthorMapper;
 import com.example.libraryproject.model.dao.Author;
+import com.example.libraryproject.model.dao.Publisher;
 import com.example.libraryproject.model.dto.request.create.AuthorRequestCreate;
 import com.example.libraryproject.model.dto.request.update.AuthorRequestUpdate;
 import com.example.libraryproject.model.dto.response.payload.AuthorResponse;
@@ -52,8 +53,10 @@ class AuthorServiceTest {
         AuthorRequestUpdate authorRequestUpdate = new AuthorRequestUpdate();
         Author author = new Author();
         when(authorRepository.findAuthorById(authorId)).thenReturn(Optional.of(author));
+
         authorService.updateAuthor(authorId, authorRequestUpdate);
-        verify((authorMapper), times(1)).toEntity(authorRequestUpdate);
+
+        verify((authorMapper), times(1)).updateAuthorFromDto(authorRequestUpdate, author);
         verify(authorRepository, times(1)).save(author);
         verify(authorRepository, times(1)).findAuthorById(authorId);
     }
@@ -81,6 +84,7 @@ class AuthorServiceTest {
         verify(authorRepository, times(1)).findAuthorById(authorId);
         verify(authorMapper, times(1)).toResponse(author);
     }
+
     @Test
     void testGetAllAuthors() {
         List<Author> authors = new ArrayList<>();
@@ -92,9 +96,27 @@ class AuthorServiceTest {
         verify(authorRepository, times(1)).findAllAuthor();
         verify(authorMapper, times(1)).toResponse(authors);
     }
+
     @Test
     void testGetAuthorsByName() {
+        List<Author> authors = new ArrayList<>();
+        List<AuthorResponse> authorResponses = new ArrayList<>();
+        when(authorRepository.findAuthorByName("Talib Aliyev")).thenReturn(authors);
+        when(authorMapper.toResponse(authors)).thenReturn(authorResponses);
+        List<AuthorResponse> result = authorService.getAuthorByName("Talib Aliyev");
+        assertEquals(authorResponses, result);
+        verify(authorRepository, times(1)).findAuthorByName("Talib Aliyev");
+        verify(authorMapper, times(1)).toResponse(authors);
+    }
 
+    @Test
+    void testFindById() {
+        Long id = 1L;
+        Author author = new Author();
+        when(authorRepository.findById(id)).thenReturn(Optional.of(author));
+        Author result = authorService.findById(id);
+        assertEquals(author, result);
+        verify(authorRepository, times(1)).findById(id);
     }
 
 }

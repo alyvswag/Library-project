@@ -39,7 +39,6 @@ public class AuthorManagementServiceImpl implements AuthorManagementService {
 
     @Override
     public List<BookResponse> getBooksByAuthorId(Long authorId) {
-        authorService.getAuthorById(authorId);
         List<Book> books = bookRepository.findBooksByAuthor(authorId)
                 .filter(book -> !book.isEmpty())
                 .orElseThrow(() -> BaseException.notFound(Book.class.getSimpleName(), "book", "for the specified author"));

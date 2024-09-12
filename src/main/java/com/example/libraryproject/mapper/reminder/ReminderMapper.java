@@ -29,8 +29,6 @@ public interface ReminderMapper {
         return bookService.findById(bookId);
     }
 
-//    List<ReminderResponseUser> toResponseUser(List<Reminder> reminders);//silinecek
-
     List<ReminderResponse> toResponse(List<Reminder> reminders);
 
 }

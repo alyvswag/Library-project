@@ -12,17 +12,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("test")
+@RequestMapping("/test")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class TestController {
-    @GetMapping("/test")
-    public BaseResponse<Void> testNoAuth() {
-        System.out.println("Salam dunya not auth");
-        return BaseResponse.success();
+    @GetMapping("/testNoAuth")
+    public BaseResponse<String> testNoAuth() {
+        return BaseResponse.success("NO AUTH");
     }
 
-    @GetMapping("/test1")
+    @GetMapping("/testAuth")
     public BaseResponse<String> testAuth() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return BaseResponse.success(userDetails.getUsername());
