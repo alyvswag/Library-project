@@ -52,7 +52,6 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public LoginResponse login(LoginRequestPayload loginRequestPayload) {
         authenticate(loginRequestPayload);
-        redisService.addUserLoginTime(loginRequestPayload.getEmail());
         return prepareLoginResponse(loginRequestPayload.getEmail());
     }
 
@@ -123,6 +122,7 @@ public class AuthServiceImpl implements AuthService {
         setAccessTokenRedisDb(accessToken, email);
         setRefreshTokenRedisDb(refreshToken, email);
         addTokensToEmail(email, accessToken, refreshToken);
+        redisService.addUserLoginTime(email);
 
         return LoginResponse.builder()
                 .accessToken(accessToken)
