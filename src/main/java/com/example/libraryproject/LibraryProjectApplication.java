@@ -1,15 +1,9 @@
 package com.example.libraryproject;
 
 import lombok.RequiredArgsConstructor;
-import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-
-import static com.example.libraryproject.constant.TokenConstants.ACCESS_TOKEN;
-
 
 @RequiredArgsConstructor
 @SpringBootApplication
@@ -19,6 +13,8 @@ public class LibraryProjectApplication  {
     public static void main(String[] args) {
         SpringApplication.run(LibraryProjectApplication.class, args);
     }
+
+
 
 //    @Autowired
 //    private RedissonClient redisson;

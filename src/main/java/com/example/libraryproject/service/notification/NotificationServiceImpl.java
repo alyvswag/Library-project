@@ -37,7 +37,6 @@ public class NotificationServiceImpl implements NotificationService {
     final UserRepository userRepository;
     final EventRepository eventRepository;
     final EmailProducer emailProducer;
-    private final EmailService emailService;
 
     @Override
     public void sendReminderNotification(Long reminderId) {
