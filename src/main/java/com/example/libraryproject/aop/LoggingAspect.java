@@ -18,13 +18,17 @@ public class LoggingAspect {
 
     @Before("execution(* com.example.libraryproject.service..*Service.*(..))")
     public void logMethodParameters(JoinPoint joinPoint) {
-        System.out.println("--Method called: " + joinPoint.getSignature().getName());
+        printMethodName(joinPoint);
         Object[] args = joinPoint.getArgs();
         if (args.length > 0) {
             System.err.println("Method parameters: " + Arrays.toString(args));
         } else {
             System.err.println("Method called with no parameters.");
         }
+    }
+
+    private synchronized static void printMethodName(JoinPoint joinPoint) {
+        System.out.println("--Method called: " + joinPoint.getSignature().getName());
     }
 
     @AfterReturning(value = "execution(* com.example.libraryproject.service..*Service.*(..))", returning = "result")

@@ -9,7 +9,8 @@ import lombok.experimental.FieldDefaults;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,4 +24,12 @@ public class Role extends Base {
     List<User> users;
     @Column(name = "is_active")
     Boolean isActive;
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "roleName=" + roleName +
+                ", isActive=" + isActive +
+                '}';
+    }
 }

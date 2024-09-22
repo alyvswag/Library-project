@@ -8,7 +8,8 @@ import lombok.experimental.FieldDefaults;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,6 +31,15 @@ public class Author extends Base {
     @Column(name = "is_active")
     Boolean isActive;
 
+    @Override
+    public String toString() {
+        return "Author{" +
+                "authorName='" + authorName + '\'' +
+                ", authorSurname='" + authorSurname + '\'' +
+                ", description='" + description + '\'' +
+                ", isActive=" + isActive +
+                '}';
+    }
     //one - author many kitab
     // many kitab one author
 }

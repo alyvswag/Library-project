@@ -1,6 +1,9 @@
 package com.example.libraryproject.constant;
 
 public final class SecurityPathConstants {
+    public static final String[] TEST_PERMIT_ALL = {
+            "/api/v1/**",
+    };
     public static final String[] PERMIT_ALL_LIST = {
             "/test/testNoAuth",
             "/swagger-ui.html",

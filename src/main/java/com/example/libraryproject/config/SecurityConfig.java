@@ -51,16 +51,18 @@ public class SecurityConfig {
                                                    AuthorizationFilter authorizationFilter) throws Exception {
         http
                 .authorizeHttpRequests(request -> {
+                    //PERMIT ALL LIST FOR TEST
+                    request.requestMatchers(TEST_PERMIT_ALL).permitAll();
                     //PERMIT ALL LIST
                     request.requestMatchers(PERMIT_ALL_LIST).permitAll();
-                    //AUTHENTICATED
-                    request.requestMatchers(AUTHENTICATED).authenticated();
-                    //HAS_ROLE_SUPER_ADMIN
-                    request.requestMatchers(HAS_ROLE_SUPER_ADMIN).hasRole("SUPERADMIN");
-                    //HAS_ANY_ROLE_SUPER_ADMIN_AND_ADMIN
-                    request.requestMatchers(HAS_ANY_ROLE_SUPER_ADMIN_AND_ADMIN).hasAnyRole("SUPERADMIN", "ADMIN");
-                    //HAS_ROLE_USER
-                    request.requestMatchers(HAS_ROLE_USER).hasRole("USER");
+//                    //AUTHENTICATED
+//                    request.requestMatchers(AUTHENTICATED).authenticated();
+//                    //HAS_ROLE_SUPER_ADMIN
+//                    request.requestMatchers(HAS_ROLE_SUPER_ADMIN).hasRole("SUPERADMIN");
+//                    //HAS_ANY_ROLE_SUPER_ADMIN_AND_ADMIN
+//                    request.requestMatchers(HAS_ANY_ROLE_SUPER_ADMIN_AND_ADMIN).hasAnyRole("SUPERADMIN", "ADMIN");
+//                    //HAS_ROLE_USER
+//                    request.requestMatchers(HAS_ROLE_USER).hasRole("USER");
                 })
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)

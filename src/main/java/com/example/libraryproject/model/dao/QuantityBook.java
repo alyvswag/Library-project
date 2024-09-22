@@ -7,7 +7,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,6 +26,12 @@ public class QuantityBook  extends Base {
     @Column(name ="rental_quantity" )
     Integer rentalQuantity;
 
-
-
+    @Override
+    public String toString() {
+        return "QuantityBook{" +
+                ", quantity=" + quantity +
+                ", reservedQuantity=" + reservedQuantity +
+                ", rentalQuantity=" + rentalQuantity +
+                '}';
+    }
 }
