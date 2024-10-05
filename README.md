@@ -1,46 +1,61 @@
+-----
 Project name: Online Library Management System
+------
 The purpose of the project: To create a complex system for the provision of library resources, users and management.
+-----
+Functions:
 
-Functions
 ○ Books:
 ■ Searching and filtering books (category, author, year of publication, etc. on).
 ■ Adding, updating, deleting and viewing books.
 ■ Inventory management of books (tracking the number of books).
+
 ○ Authors:
 ■ Searching and filtering authors
 ■ Adding, updating, deleting and viewing authors.
 ■ Management of authors ' books.
+
 ○ Rating and reviews:
 ■ Users writing ratings and reviews for books.
 ■ Viewing Ratings and reviews.
+
 ○ Book Reservation:
 ■ For users to reserve books online.
 ■ For users to reserve books online.
 ■ Tracking and managing reservation dates.
+
 ○ Book Rental:
 ■ Renting and returning books.
 ■ Tracking rental dates and return reminders.
+
 ○ Notifications and reminders:
 ■ Book return reminders notifications about new books and events
+
 ○ Administration:
 ■ System input-output and management.
 ■ User management (except superadmin).
+
 ○ User Module:
 ■ User Add, Update, Delete and view (except superadmin)..
+
 ○ Accountability:
 ■ Generating and viewing reports (rent statistics, most read books, etc.).
 
+-----------------------------------------------------------------------------------------------------------------------------
+
+
 Technical Task
 The operations that must be performed on the modules are explained below:
+------
+
 ❖ Book Management-APIs
-The functions of adding, updating, deleting and viewing books will be provided. The following methods will provide this functionality:
-Book Management 
+ 
 1.	addBook: adds new books.
 2.	updateBook: updates the information of the current book.
 3.	deleteBook: deletes the book.
 4.	getBookById: retrieves information about a particular book.
 5.	getAllBooks: gets all the books.
-Book Search and filtering 
+❖  Book Search and filtering 
 1.	searchBooks: searches books according to search criteria.
 2.	filterBooks: filters books according to certain criteria.
 Inventory Management
@@ -71,42 +86,18 @@ The functions of adding, updating, deleting and viewing authors will be provided
 4.	getAuthorById: obtains information about a particular author.
 5.	getAllAuthors: acquires all authors.
 6.	getAuthorByName: retrieves data based on the author's name.
-Management Of Books By Authors
+❖ Management Of Books By Authors
 1.	removeBookFromAuthor: removes the author's book.
 2.	getBooksByAuthor: acquires books belonging to the author.
 
+❖	Ratings and Reviews – APIs
+1. addRatingAndReview(): Adds new rating and feedback.
+2. getRatingsAndReviewsByBook(): Brings all ratings and reviews for a book.
+3. getRatingsAndReviewsByUser(): It brings all ratings and reviews given by a user.
+4. updateRatingAndReview(): Updates the current rating and review.
+5. deleteRatingAndReview(): Removes the current rating and review.
 
-● Detailed information for rating APIs is given below
-1. addRatingAndReview()
-Adds new rating and feedback.
-Input Parameters:
-➢ int bookId: ID of the book to be reviewed.
-➢ int userId: the ID of the user who gave the feedback.
-➢ int rating: the rating given by the user for the book (between 1-5).
-➢ String review:user's review of the book.
-2. getRatingsAndReviewsByBook()
-Brings all ratings and reviews for a book.
-Input Parameters:
-➢ int bookId: the ID of the book whose ratings and reviews will be brought.
-➢ Return: list of objects containing all ratings and reviews of the book.
-3. getRatingsAndReviewsByUser()
- It brings all ratings and reviews given by a user.
-     Input Parameters:
-○ int userId: the ID of the user whose ratings and reviews will be brought.
-○ Return: list of objects containing all ratings and feedback from the user.
-4. updateRatingAndReview()
-Updates the current rating and review.
-Input Parameters:
-○ int ratingId: the ID of the rating and review to be updated.
-○ int newRating: new rating (between 1-5).
-○ String newReview: new opinion.
-5. deleteRatingAndReview()
-Removes the current rating and review.
-Input Parameters:
-○ int ratingId: the ID of the rating and review to be removed.
-
-
-❖ Booking-APIs
+❖ Reservations-APIs
 
 1.	addReservation: adds new reservation for book by user.
 2.	updateReservation: updates an existing reservation (for example, changes dates).
@@ -174,7 +165,8 @@ The functions of automatic checking and returning books will be provided. The fo
 
 -----------------------------------------------------------------------------------------------------------------------------
 
-Roles and permissions
+Roles and permission
+---
 1.	Admin (SuperAdmin)
 ○ User management: ability to add, delete, update users and view all user data.
 ○ Book management: the ability to add, update, delete books and view the list of books.
@@ -205,15 +197,26 @@ Roles and permissions
 -----------------------------------------------------------------------------------------------------------------------------
 
 Requirements for the project
+-------
 ➔ Exception Handling:
+
 ◆ Error management and creation of custom exception classes in the management of book, user and author data.
- Un Unit Testing with JUnit:
+
+➔  Unit Testing with JUnit:
+
 ◆ Write unit tests using JUnit for project testing.
+
 ◆ Create tests for each method and make sure it works correctly.
+
 ➔ Security:
+
 ◆ Use Spring Security to ensure the security of your project.
+
 ◆ Apply role-based authentication and authorization.
+
 ➔ Spring AOP : 
+
 ◆ Build log mechanism using Aspect Oriented Programming.
+
 
 
