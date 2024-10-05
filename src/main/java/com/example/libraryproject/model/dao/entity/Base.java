@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
@@ -19,6 +21,7 @@ public class Base {
     //id, created_at,updated_at
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Cascade(CascadeType.ALL)//siliencek
     Long id;
     @CreationTimestamp
     @Column(name = "created_at")

@@ -20,10 +20,10 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "books")
 public class Book extends Base {
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publisher_id", referencedColumnName = "id")
     Publisher publisher;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     Author author;
     @Column(name = "name")
