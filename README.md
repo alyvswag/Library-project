@@ -55,6 +55,7 @@ The operations that must be performed on the modules are explained below:
 3.	deleteBook: deletes the book.
 4.	getBookById: retrieves information about a particular book.
 5.	getAllBooks: gets all the books.
+   
 ❖  Book Search and filtering 
 1.	searchBooks: searches books according to search criteria.
 2.	filterBooks: filters books according to certain criteria.
