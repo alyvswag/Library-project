@@ -87,6 +87,7 @@ The functions of adding, updating, deleting and viewing authors will be provided
 4.	getAuthorById: obtains information about a particular author.
 5.	getAllAuthors: acquires all authors.
 6.	getAuthorByName: retrieves data based on the author's name.
+   
 ❖ Management Of Books By Authors
 1.	removeBookFromAuthor: removes the author's book.
 2.	getBooksByAuthor: acquires books belonging to the author.
