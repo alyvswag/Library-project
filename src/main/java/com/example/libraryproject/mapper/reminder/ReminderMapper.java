@@ -1,8 +1,8 @@
 package com.example.libraryproject.mapper.reminder;
 
-import com.example.libraryproject.model.dao.Book;
-import com.example.libraryproject.model.dao.Reminder;
-import com.example.libraryproject.model.dao.User;
+import com.example.libraryproject.model.dao.entity.Book;
+import com.example.libraryproject.model.dao.entity.Reminder;
+import com.example.libraryproject.model.dao.entity.User;
 import com.example.libraryproject.model.dto.request.create.ReminderRequestCreate;
 import com.example.libraryproject.model.dto.response.payload.ReminderResponse;
 import com.example.libraryproject.service.book.BookService;

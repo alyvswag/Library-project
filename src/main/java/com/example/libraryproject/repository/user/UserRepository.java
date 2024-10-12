@@ -1,8 +1,7 @@
 package com.example.libraryproject.repository.user;
 
-import com.example.libraryproject.model.dao.Book;
-import com.example.libraryproject.model.dao.User;
-import com.example.libraryproject.model.dao.UserRole;
+import com.example.libraryproject.model.dao.entity.User;
+import com.example.libraryproject.model.dao.entity.UserRole;
 import com.example.libraryproject.model.enums.user.RoleName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

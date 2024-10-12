@@ -1,13 +1,12 @@
 package com.example.libraryproject;
 
 import com.example.libraryproject.mapper.user.UserMapper;
-import com.example.libraryproject.model.dao.Role;
-import com.example.libraryproject.model.dao.User;
+import com.example.libraryproject.model.dao.entity.Role;
+import com.example.libraryproject.model.dao.entity.User;
 import com.example.libraryproject.model.dto.request.create.UserRequestCreate;
 import com.example.libraryproject.model.dto.request.login.LoginRequestPayload;
 import com.example.libraryproject.model.dto.response.login.LoginResponse;
 import com.example.libraryproject.model.dto.response.payload.UserResponse;
-import com.example.libraryproject.model.enums.user.RoleName;
 import com.example.libraryproject.repository.user.RoleRepository;
 import com.example.libraryproject.repository.user.UserRepository;
 import com.example.libraryproject.security.SecurityJwtData;
@@ -15,14 +14,11 @@ import com.example.libraryproject.security.SecurityProperties;
 import com.example.libraryproject.security.jwt.TokenProvider;
 import com.example.libraryproject.service.auth.AuthServiceImpl;
 import com.example.libraryproject.service.redis.RedisService;
-import com.example.libraryproject.utils.CommonUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -32,16 +28,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.core.context.SecurityContext;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.libraryproject.model.enums.user.RoleName.ADMIN;
-import static com.example.libraryproject.model.enums.user.RoleName.USER;
-import static com.example.libraryproject.utils.CommonUtils.isValidEmailAddress;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import org.mockito.MockedStatic;
 
 //@ExtendWith(MockitoExtension.class)
 class AuthServiceTest {

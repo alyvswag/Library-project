@@ -1,7 +1,6 @@
 package com.example.libraryproject.repository.reservation;
 
-import com.example.libraryproject.model.dao.RatingAndReview;
-import com.example.libraryproject.model.dao.Reservation;
+import com.example.libraryproject.model.dao.entity.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

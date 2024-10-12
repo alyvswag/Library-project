@@ -16,6 +16,7 @@ import java.util.Arrays;
 @Component
 public class LoggingAspect {
 
+    //cagrilan methodunun parametrlerin capa verir
     @Before("execution(* com.example.libraryproject.service..*Service.*(..))")
     public void logMethodParameters(JoinPoint joinPoint) {
         printMethodName(joinPoint);
@@ -27,10 +28,12 @@ public class LoggingAspect {
         }
     }
 
+    //methodun adin capa verir
     private synchronized static void printMethodName(JoinPoint joinPoint) {
         System.out.println("--Method called: " + joinPoint.getSignature().getName());
     }
 
+    //methodun geriye donderdiyi deyerleri capa verir
     @AfterReturning(value = "execution(* com.example.libraryproject.service..*Service.*(..))", returning = "result")
     public void logMethodReturn(JoinPoint joinPoint, Object result) {
         if (result != null) {
@@ -40,6 +43,7 @@ public class LoggingAspect {
         }
     }
 
+    //cagrilan api neqeder vaxta cavab vermesin gosterir
     @Around("execution(* com.example.libraryproject.service..*Service.*(..))")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         try {

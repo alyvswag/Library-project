@@ -1,9 +1,9 @@
-package com.example.libraryproject.model.dao;
+package com.example.libraryproject.model.dao.entity;
 
 
+import com.example.libraryproject.model.dao.Base;
 import com.example.libraryproject.model.enums.book.Genre;
 import com.example.libraryproject.model.enums.book.Language;
-import com.example.libraryproject.model.dao.entity.Base;
 import com.example.libraryproject.model.enums.base.Status;
 import jakarta.persistence.*;
 import lombok.*;

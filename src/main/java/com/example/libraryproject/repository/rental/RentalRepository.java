@@ -1,9 +1,7 @@
 package com.example.libraryproject.repository.rental;
 
-import com.example.libraryproject.model.dao.Book;
-import com.example.libraryproject.model.dao.Rental;
-import com.example.libraryproject.model.dao.Reservation;
-import org.springframework.cglib.core.Local;
+import com.example.libraryproject.model.dao.entity.Book;
+import com.example.libraryproject.model.dao.entity.Rental;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

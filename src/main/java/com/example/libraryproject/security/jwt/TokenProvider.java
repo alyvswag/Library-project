@@ -1,7 +1,7 @@
 package com.example.libraryproject.security.jwt;
 
 
-import com.example.libraryproject.model.dao.User;
+import com.example.libraryproject.model.dao.entity.User;
 import com.example.libraryproject.security.SecurityProperties;
 import com.example.libraryproject.utils.PublicPrivateKeyUtils;
 import io.jsonwebtoken.Claims;

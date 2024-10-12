@@ -2,8 +2,8 @@ package com.example.libraryproject.service.author;
 
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.book.BookMapper;
-import com.example.libraryproject.model.dao.Author;
-import com.example.libraryproject.model.dao.Book;
+import com.example.libraryproject.model.dao.entity.Author;
+import com.example.libraryproject.model.dao.entity.Book;
 import com.example.libraryproject.model.dto.response.payload.BookResponse;
 import com.example.libraryproject.repository.author.AuthorRepository;
 import com.example.libraryproject.repository.book.BookRepository;

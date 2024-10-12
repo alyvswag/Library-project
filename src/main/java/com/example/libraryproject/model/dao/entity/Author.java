@@ -1,6 +1,6 @@
-package com.example.libraryproject.model.dao;
+package com.example.libraryproject.model.dao.entity;
 
-import com.example.libraryproject.model.dao.entity.Base;
+import com.example.libraryproject.model.dao.Base;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

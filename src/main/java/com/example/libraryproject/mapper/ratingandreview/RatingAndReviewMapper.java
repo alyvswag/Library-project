@@ -1,6 +1,8 @@
 package com.example.libraryproject.mapper.ratingandreview;
 
-import com.example.libraryproject.model.dao.*;
+import com.example.libraryproject.model.dao.entity.Book;
+import com.example.libraryproject.model.dao.entity.RatingAndReview;
+import com.example.libraryproject.model.dao.entity.User;
 import com.example.libraryproject.model.dto.request.create.RatAndRevRequestCreate;
 import com.example.libraryproject.model.dto.request.update.RatAndRevRequestUpdate;
 import com.example.libraryproject.model.dto.response.payload.RatAndRevResponse;

@@ -1,8 +1,8 @@
 package com.example.libraryproject.mapper.notification;
 
 
-import com.example.libraryproject.model.dao.Notification;
-import com.example.libraryproject.model.dao.User;
+import com.example.libraryproject.model.dao.entity.Notification;
+import com.example.libraryproject.model.dao.entity.User;
 import com.example.libraryproject.model.dto.request.create.NotificationRequestCreate;
 import com.example.libraryproject.model.dto.response.payload.NotificationResponse;
 import com.example.libraryproject.service.user.UserService;

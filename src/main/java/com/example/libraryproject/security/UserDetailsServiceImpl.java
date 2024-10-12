@@ -1,8 +1,8 @@
 package com.example.libraryproject.security;
 
 import com.example.libraryproject.exception.BaseException;
-import com.example.libraryproject.model.dao.User;
-import com.example.libraryproject.model.dao.UserRole;
+import com.example.libraryproject.model.dao.entity.User;
+import com.example.libraryproject.model.dao.entity.UserRole;
 import com.example.libraryproject.repository.user.UserRepository;
 import com.example.libraryproject.repository.user.UserRoleRepository;
 import lombok.AccessLevel;

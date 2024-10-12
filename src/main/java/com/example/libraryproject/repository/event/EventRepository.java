@@ -1,7 +1,6 @@
 package com.example.libraryproject.repository.event;
 
-import com.example.libraryproject.model.dao.Event;
-import com.example.libraryproject.model.dao.Publisher;
+import com.example.libraryproject.model.dao.entity.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

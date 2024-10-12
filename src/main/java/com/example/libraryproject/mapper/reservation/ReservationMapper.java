@@ -1,8 +1,8 @@
 package com.example.libraryproject.mapper.reservation;
 
-import com.example.libraryproject.model.dao.Book;
-import com.example.libraryproject.model.dao.Reservation;
-import com.example.libraryproject.model.dao.User;
+import com.example.libraryproject.model.dao.entity.Book;
+import com.example.libraryproject.model.dao.entity.Reservation;
+import com.example.libraryproject.model.dao.entity.User;
 import com.example.libraryproject.model.dto.request.create.ReservationRequestCreate;
 import com.example.libraryproject.model.dto.request.update.ReservationRequestUpdate;
 import com.example.libraryproject.model.dto.response.payload.ReservationResponse;

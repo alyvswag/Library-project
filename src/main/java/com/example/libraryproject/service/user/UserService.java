@@ -1,6 +1,6 @@
 package com.example.libraryproject.service.user;
 
-import com.example.libraryproject.model.dao.User;
+import com.example.libraryproject.model.dao.entity.User;
 import com.example.libraryproject.model.dto.request.create.AdminRequestCreate;
 import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
 import com.example.libraryproject.model.dto.response.payload.UserResponse;

@@ -1,7 +1,6 @@
 package com.example.libraryproject.repository.author;
 
-import com.example.libraryproject.model.dao.Author;
-import com.example.libraryproject.model.dao.Book;
+import com.example.libraryproject.model.dao.entity.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

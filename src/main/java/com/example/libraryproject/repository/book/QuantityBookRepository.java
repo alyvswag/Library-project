@@ -1,6 +1,6 @@
 package com.example.libraryproject.repository.book;
 
-import com.example.libraryproject.model.dao.QuantityBook;
+import com.example.libraryproject.model.dao.entity.QuantityBook;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

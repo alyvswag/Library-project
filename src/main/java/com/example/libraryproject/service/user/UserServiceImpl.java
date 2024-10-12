@@ -2,7 +2,9 @@ package com.example.libraryproject.service.user;
 
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.user.UserMapper;
-import com.example.libraryproject.model.dao.*;
+import com.example.libraryproject.model.dao.entity.Role;
+import com.example.libraryproject.model.dao.entity.User;
+import com.example.libraryproject.model.dao.entity.UserRole;
 import com.example.libraryproject.model.dto.request.create.AdminRequestCreate;
 import com.example.libraryproject.model.dto.request.update.UserRequestUpdate;
 import com.example.libraryproject.model.dto.response.payload.UserResponse;

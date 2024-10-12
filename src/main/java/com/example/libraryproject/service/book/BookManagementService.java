@@ -1,6 +1,6 @@
 package com.example.libraryproject.service.book;
 
-import com.example.libraryproject.model.dao.Book;
+import com.example.libraryproject.model.dao.entity.Book;
 import com.example.libraryproject.model.dto.request.filter.BookRequestFilter;
 import com.example.libraryproject.model.dto.response.payload.BookResponse;
 import com.example.libraryproject.model.dto.response.payload.QuantityBookResponse;

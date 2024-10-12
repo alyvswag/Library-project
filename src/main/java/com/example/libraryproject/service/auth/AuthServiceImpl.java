@@ -2,8 +2,8 @@ package com.example.libraryproject.service.auth;
 
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.user.UserMapper;
-import com.example.libraryproject.model.dao.Role;
-import com.example.libraryproject.model.dao.User;
+import com.example.libraryproject.model.dao.entity.Role;
+import com.example.libraryproject.model.dao.entity.User;
 import com.example.libraryproject.model.dto.request.create.UserRequestCreate;
 import com.example.libraryproject.service.redis.RedisService;
 import com.example.libraryproject.repository.user.RoleRepository;

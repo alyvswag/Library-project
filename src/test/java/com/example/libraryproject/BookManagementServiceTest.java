@@ -2,16 +2,13 @@ package com.example.libraryproject;
 
 import com.example.libraryproject.mapper.book.BookMapper;
 import com.example.libraryproject.mapper.book.QuantityBookMapper;
-import com.example.libraryproject.model.dao.Book;
-import com.example.libraryproject.model.dao.QuantityBook;
+import com.example.libraryproject.model.dao.entity.Book;
+import com.example.libraryproject.model.dao.entity.QuantityBook;
 import com.example.libraryproject.model.dto.request.filter.BookRequestFilter;
 import com.example.libraryproject.model.dto.response.payload.BookResponse;
 import com.example.libraryproject.model.dto.response.payload.QuantityBookResponse;
-import com.example.libraryproject.model.enums.book.Genre;
-import com.example.libraryproject.model.enums.book.Language;
 import com.example.libraryproject.repository.book.BookRepository;
 import com.example.libraryproject.repository.book.QuantityBookRepository;
-import com.example.libraryproject.service.book.BookManagementService;
 import com.example.libraryproject.service.book.BookManagementServiceImpl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -28,7 +25,6 @@ import org.mockito.MockitoAnnotations;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static com.example.libraryproject.model.enums.book.Genre.QORXU;
 import static com.example.libraryproject.model.enums.book.Language.AZ;

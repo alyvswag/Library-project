@@ -2,10 +2,10 @@ package com.example.libraryproject.service.book;
 
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.book.BookMapper;
-import com.example.libraryproject.model.dao.Author;
-import com.example.libraryproject.model.dao.Book;
-import com.example.libraryproject.model.dao.Publisher;
-import com.example.libraryproject.model.dao.QuantityBook;
+import com.example.libraryproject.model.dao.entity.Author;
+import com.example.libraryproject.model.dao.entity.Book;
+import com.example.libraryproject.model.dao.entity.Publisher;
+import com.example.libraryproject.model.dao.entity.QuantityBook;
 import com.example.libraryproject.model.dto.request.create.BookRequestCreate;
 import com.example.libraryproject.model.dto.request.update.BookRequestUpdate;
 import com.example.libraryproject.model.dto.response.payload.BookResponse;

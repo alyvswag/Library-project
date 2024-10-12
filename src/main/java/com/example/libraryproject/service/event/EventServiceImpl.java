@@ -2,7 +2,7 @@ package com.example.libraryproject.service.event;
 
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.event.EventMapper;
-import com.example.libraryproject.model.dao.Event;
+import com.example.libraryproject.model.dao.entity.Event;
 import com.example.libraryproject.model.dto.request.create.EventRequestCreate;
 import com.example.libraryproject.model.dto.request.update.EventRequestUpdate;
 import com.example.libraryproject.model.dto.response.payload.EventResponse;

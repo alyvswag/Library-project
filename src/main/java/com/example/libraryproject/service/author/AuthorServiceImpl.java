@@ -2,7 +2,7 @@ package com.example.libraryproject.service.author;
 
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.author.AuthorMapper;
-import com.example.libraryproject.model.dao.Author;
+import com.example.libraryproject.model.dao.entity.Author;
 import com.example.libraryproject.model.dto.request.create.AuthorRequestCreate;
 import com.example.libraryproject.model.dto.request.update.AuthorRequestUpdate;
 import com.example.libraryproject.model.dto.response.payload.AuthorResponse;

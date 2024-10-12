@@ -2,7 +2,7 @@ package com.example.libraryproject.service.notification;
 
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.notification.NotificationMapper;
-import com.example.libraryproject.model.dao.*;
+import com.example.libraryproject.model.dao.entity.*;
 import com.example.libraryproject.model.dto.request.create.NotificationRequestCreate;
 import com.example.libraryproject.model.dto.response.payload.NotificationResponse;
 import com.example.libraryproject.model.enums.notification.DataType;
@@ -12,7 +12,6 @@ import com.example.libraryproject.repository.notification.NotificationRepository
 import com.example.libraryproject.repository.reminder.ReminderRepository;
 import com.example.libraryproject.repository.user.UserRepository;
 import com.example.libraryproject.service.email.EmailProducer;
-import com.example.libraryproject.service.email.EmailService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

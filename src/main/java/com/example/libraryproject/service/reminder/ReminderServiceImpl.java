@@ -2,8 +2,8 @@ package com.example.libraryproject.service.reminder;
 
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.reminder.ReminderMapper;
-import com.example.libraryproject.model.dao.Reminder;
-import com.example.libraryproject.model.dao.Rental;
+import com.example.libraryproject.model.dao.entity.Reminder;
+import com.example.libraryproject.model.dao.entity.Rental;
 import com.example.libraryproject.model.dto.request.create.ReminderRequestCreate;
 import com.example.libraryproject.model.dto.response.payload.ReminderResponse;
 import com.example.libraryproject.repository.reminder.ReminderRepository;

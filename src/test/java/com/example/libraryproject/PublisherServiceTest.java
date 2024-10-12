@@ -1,8 +1,7 @@
 package com.example.libraryproject;
 
-import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.publisher.PublisherMapper;
-import com.example.libraryproject.model.dao.Publisher;
+import com.example.libraryproject.model.dao.entity.Publisher;
 import com.example.libraryproject.model.dto.request.create.PublisherRequestCreate;
 import com.example.libraryproject.model.dto.request.update.PublisherRequestUpdate;
 import com.example.libraryproject.model.dto.response.payload.PublisherResponse;

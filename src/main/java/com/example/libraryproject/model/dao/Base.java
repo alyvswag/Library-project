@@ -1,4 +1,4 @@
-package com.example.libraryproject.model.dao.entity;
+package com.example.libraryproject.model.dao;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;

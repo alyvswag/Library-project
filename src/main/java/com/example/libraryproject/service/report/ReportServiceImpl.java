@@ -2,7 +2,7 @@ package com.example.libraryproject.service.report;
 
 import com.example.libraryproject.mapper.book.BookMapper;
 import com.example.libraryproject.mapper.rental.RentalMapper;
-import com.example.libraryproject.model.dao.Book;
+import com.example.libraryproject.model.dao.entity.Book;
 import com.example.libraryproject.model.dto.response.payload.BookResponse;
 import com.example.libraryproject.model.dto.response.payload.RentalResponse;
 import com.example.libraryproject.repository.rental.RentalRepository;

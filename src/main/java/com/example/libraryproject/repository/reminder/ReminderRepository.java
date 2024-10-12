@@ -1,7 +1,6 @@
 package com.example.libraryproject.repository.reminder;
 
-import com.example.libraryproject.model.dao.Event;
-import com.example.libraryproject.model.dao.Reminder;
+import com.example.libraryproject.model.dao.entity.Reminder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

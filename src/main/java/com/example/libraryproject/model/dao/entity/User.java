@@ -1,15 +1,12 @@
-package com.example.libraryproject.model.dao;
+package com.example.libraryproject.model.dao.entity;
 
-import com.example.libraryproject.model.dao.entity.Base;
+import com.example.libraryproject.model.dao.Base;
 import com.example.libraryproject.model.enums.base.Status;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.sql.Timestamp;
 import java.util.List;
-import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Getter

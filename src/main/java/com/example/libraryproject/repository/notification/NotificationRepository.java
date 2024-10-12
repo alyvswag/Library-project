@@ -1,6 +1,6 @@
 package com.example.libraryproject.repository.notification;
 
-import com.example.libraryproject.model.dao.Notification;
+import com.example.libraryproject.model.dao.entity.Notification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

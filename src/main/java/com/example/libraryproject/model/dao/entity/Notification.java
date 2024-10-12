@@ -1,6 +1,6 @@
-package com.example.libraryproject.model.dao;
+package com.example.libraryproject.model.dao.entity;
 
-import com.example.libraryproject.model.dao.entity.Base;
+import com.example.libraryproject.model.dao.Base;
 import com.example.libraryproject.model.enums.notification.DataType;
 import com.example.libraryproject.model.enums.notification.NotificationStatus;
 import jakarta.persistence.*;

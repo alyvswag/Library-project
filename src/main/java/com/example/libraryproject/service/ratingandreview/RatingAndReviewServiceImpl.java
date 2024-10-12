@@ -2,7 +2,7 @@ package com.example.libraryproject.service.ratingandreview;
 
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.ratingandreview.RatingAndReviewMapper;
-import com.example.libraryproject.model.dao.RatingAndReview;
+import com.example.libraryproject.model.dao.entity.RatingAndReview;
 import com.example.libraryproject.model.dto.request.create.RatAndRevRequestCreate;
 import com.example.libraryproject.model.dto.request.update.RatAndRevRequestUpdate;
 import com.example.libraryproject.model.dto.response.payload.RatAndRevResponse;

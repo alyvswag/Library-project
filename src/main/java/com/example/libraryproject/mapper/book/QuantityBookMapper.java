@@ -1,7 +1,7 @@
 package com.example.libraryproject.mapper.book;
 
-import com.example.libraryproject.model.dao.Book;
-import com.example.libraryproject.model.dao.QuantityBook;
+import com.example.libraryproject.model.dao.entity.Book;
+import com.example.libraryproject.model.dao.entity.QuantityBook;
 import com.example.libraryproject.model.dto.response.payload.BookResponse;
 import com.example.libraryproject.model.dto.response.payload.QuantityBookResponse;
 import org.mapstruct.Mapper;

@@ -1,7 +1,7 @@
 package com.example.libraryproject.mapper.rental;
 
-import com.example.libraryproject.model.dao.Rental;
-import com.example.libraryproject.model.dao.Reservation;
+import com.example.libraryproject.model.dao.entity.Rental;
+import com.example.libraryproject.model.dao.entity.Reservation;
 import com.example.libraryproject.model.dto.request.create.RentalRequestCreate;
 import com.example.libraryproject.model.dto.request.update.RentalRequestUpdate;
 import com.example.libraryproject.model.dto.response.payload.RentalResponse;

@@ -3,7 +3,7 @@ package com.example.libraryproject.service.management;
 import com.example.libraryproject.exception.BaseException;
 import com.example.libraryproject.mapper.notification.NotificationMapper;
 import com.example.libraryproject.mapper.rental.RentalMapper;
-import com.example.libraryproject.model.dao.Rental;
+import com.example.libraryproject.model.dao.entity.Rental;
 import com.example.libraryproject.model.dto.request.create.NotificationRequestCreate;
 import com.example.libraryproject.model.dto.response.payload.RentalResponse;
 import com.example.libraryproject.model.enums.rental.RentalStatus;

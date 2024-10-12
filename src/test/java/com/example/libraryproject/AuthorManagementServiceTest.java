@@ -2,12 +2,11 @@ package com.example.libraryproject;
 
 
 import com.example.libraryproject.mapper.book.BookMapper;
-import com.example.libraryproject.model.dao.Author;
-import com.example.libraryproject.model.dao.Book;
+import com.example.libraryproject.model.dao.entity.Author;
+import com.example.libraryproject.model.dao.entity.Book;
 import com.example.libraryproject.model.dto.response.payload.BookResponse;
 import com.example.libraryproject.repository.author.AuthorRepository;
 import com.example.libraryproject.repository.book.BookRepository;
-import com.example.libraryproject.service.author.AuthorManagementService;
 import com.example.libraryproject.service.author.AuthorManagementServiceImpl;
 import com.example.libraryproject.service.author.AuthorService;
 import org.junit.jupiter.api.BeforeEach;
