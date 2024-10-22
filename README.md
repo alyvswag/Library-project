@@ -198,27 +198,5 @@ Roles and permission
 
 -----------------------------------------------------------------------------------------------------------------------------
 
-Requirements for the project
--------
-➔ Exception Handling:
-
-◆ Error management and creation of custom exception classes in the management of book, user and author data.
-
-➔  Unit Testing with JUnit:
-
-◆ Write unit tests using JUnit for project testing.
-
-◆ Create tests for each method and make sure it works correctly.
-
-➔ Security:
-
-◆ Use Spring Security to ensure the security of your project.
-
-◆ Apply role-based authentication and authorization.
-
-➔ Spring AOP : 
-
-◆ Build log mechanism using Aspect Oriented Programming.
-
 
 
